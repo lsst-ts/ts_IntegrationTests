@@ -34,28 +34,41 @@ class BaseScript:
         self.script = script
         self.isStandard = isStandard
         self.queue_placement = queue_placement
+        self.start_remote(self.index)
 
-    async def run(self):
-        """Run the specified standard or external script."""
+    async def start_remote(self, index=index):
+        """Start the ScriptQueue remote and define the domain.
+
+        Parameters
+        ----------
+        index : integer
+            Taking the index as an argument allows this to be called
+            with more flexibility.
+
+        """
         async with salobj.Domain() as domain, salobj.Remote(
             domain=domain, name="ScriptQueue", index=self.index
         ) as remote:
             # note: use index=1 for MT, 2 for AuxTel;
             # also since `async with` is used,
             # you do NOT have to wait for the remote to start
-            print("Test configuration:\n" + self.config)
-            queue_placement = getattr(
-                ScriptQueue.Location, self.queue_placement.upper()
-            )
             await remote.evt_heartbeat.next(flush=True, timeout=30)
-            await remote.cmd_pause.start(timeout=10)
-            await remote.cmd_add.set_start(
-                timeout=10,
-                isStandard=self.isStandard,
-                path=self.script,
-                config=self.config,
-                logLevel=10,
-                location=queue_placement,
-            )
-            await remote.cmd_resume.set_start(timeout=10)
-            print("You have executed the " + self.script + "script.")
+
+    async def pause_queue(self):
+        await remote.cmd_pause.start(timeout=10)
+
+    async def run(self):
+        """Run the specified standard or external script."""
+        queue_placement = getattr(
+            ScriptQueue.Location, self.queue_placement.upper()
+        )
+        await remote.cmd_add.set_start(
+            timeout=10,
+            isStandard=self.isStandard,
+            path=self.script,
+            config=self.config,
+            logLevel=10,
+            location=queue_placement,
+        )
+        await remote.cmd_resume.set_start(timeout=10)
+        print("You have executed the " + self.script + "script.")
