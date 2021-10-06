@@ -43,6 +43,7 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
 
     async def test_auxtel_visit(self):
         # Execute the AuxTelVisit script class.
+        print("Got here")
         script_class = AuxTelVisit(
             config=configs.auxtel_visit_config(),
             script="auxtel/take_image_latiss.py",
@@ -52,6 +53,9 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
 
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), 1)
+
+        # Close the script_class object.
+        script_class.close_tasks()
 
     async def asyncTearDown(self):
         await self.controller.close()

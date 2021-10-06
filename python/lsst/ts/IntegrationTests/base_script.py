@@ -49,10 +49,9 @@ class BaseScript:
         self.queue_placement = queue_placement
         self.startup()
 
-    @classmethod
-    async def startup(cls):
-        async with self.domain, self.remote:
-            await self.remote.evt_heartbeat.next(flush=True, timeout=30)
+    async def startup(self):
+        await self.remote.start_task()
+        await self.remote.evt_heartbeat.next(flush=True, timeout=30)
 
     async def pause_queue(self):
         await self.remote.cmd_pause.start(timeout=10)
