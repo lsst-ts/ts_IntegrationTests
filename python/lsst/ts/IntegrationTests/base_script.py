@@ -47,10 +47,9 @@ class BaseScript:
         self.script = script
         self.isStandard = isStandard
         self.queue_placement = queue_placement
-        self.startup()
 
     async def startup(self):
-        await self.remote.start_task()
+        await self.remote.start_task
         await self.remote.evt_heartbeat.next(flush=True, timeout=30)
 
     async def pause_queue(self):
@@ -58,6 +57,8 @@ class BaseScript:
 
     async def run(self):
         """Run the specified standard or external script."""
+        await self.startup()
+        await self.pause_queue()
         queue_placement = getattr(
             ScriptQueue.Location, self.queue_placement.upper()
         )

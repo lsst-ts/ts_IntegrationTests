@@ -48,7 +48,6 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
             config=configs.auxtel_visit_config(),
             script="auxtel/take_image_latiss.py",
         )
-        await script_class.pause_queue()
         await script_class.run()
 
         # Assert script was added to ScriptQueue.
