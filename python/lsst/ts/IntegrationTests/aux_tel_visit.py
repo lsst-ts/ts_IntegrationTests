@@ -33,12 +33,12 @@ class AuxTelVisit(BaseScript):
 
     index = 2
     configs = (
-        configs.auxtel_visit_config1(),
-        configs.auxtel_visit_config2(),
-        configs.auxtel_visit_config3(),
-        configs.auxtel_visit_config4(),
-        configs.auxtel_visit_config5(),
-        configs.auxtel_visit_config6(),
+        configs.auxtel_visit_config1,
+        configs.auxtel_visit_config2,
+        configs.auxtel_visit_config3,
+        configs.auxtel_visit_config4,
+        configs.auxtel_visit_config5,
+        configs.auxtel_visit_config6,
     )
     scripts = (
         "auxtel/take_image_latiss.py",
