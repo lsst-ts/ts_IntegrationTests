@@ -24,10 +24,10 @@ __all__ = ["registry"]
 
 
 class ConfigRegistry(UserDict):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-    def __setitem__(self, name, config_yaml):
+    def __setitem__(self, name: str, config_yaml: str) -> None:
         """Add the given named configuration to the registry dictionary.
 
         Notes

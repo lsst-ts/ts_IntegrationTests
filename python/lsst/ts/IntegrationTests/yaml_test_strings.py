@@ -22,7 +22,7 @@
 import yaml
 
 
-def yaml_test_string1():
+def yaml_test_string1() -> None:
     """Return a properly formatted YAML test string.
 
     To call this from a unit test (see ``tests/test_yaml.py``)::
@@ -45,7 +45,7 @@ def yaml_test_string1():
     return yaml.safe_dump(yaml_string, explicit_start=True, canonical=True)
 
 
-def bad_yaml():
+def bad_yaml() -> str:
     """Return an improperly formatted YAML string.
 
     To call this from a unit test (see ``tests/test_yaml.py``)::

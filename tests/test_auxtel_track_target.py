@@ -25,11 +25,11 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelVisit
+from lsst.ts.IntegrationTests import AuxTelTrackTarget
 
 
-class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the AuxTel Visit integration test script."""
+class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the AuxTel Track Target integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
@@ -41,19 +41,25 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_visit(self) -> None:
-        """Execute the AuxTelVisit integration test script, which runs the
-        ts_standardscripts/auxtel/take_image_latiss.py script.
-        Use the configuration stored in the take_image_latiss_configs module.
+    async def test_auxtel_track_target(self) -> None:
+        """Execute the AuxTelTrackTarget integration test script,
+        which runs the ts_standardscripts/auxtel/track_target.py script.
+        Use the configuration stored in the track_target_configs.py module.
 
         """
-        # Instantiate the AuxTelVisit integration tests object and
+        # Mock the command-line argument that the aux_tel_track_target.py
+        # script expects.
+        test_target = "test"
+        # Instantiate the AuxTelTrackTarget integration tests object and
         # execute the scripts.
-        script_class = AuxTelVisit()
+        script_class = AuxTelTrackTarget(target=test_target)
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"AuxTel Visit; running {num_scripts} scripts")
+        self.assertEqual(script_class.target_config["target_name"], test_target)
+        print(
+            f"AuxTel Track Target; running {num_scripts} scripts for target {test_target}"
+        )
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

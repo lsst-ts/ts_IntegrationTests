@@ -18,21 +18,22 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelVisit"]
+__all__ = ["AuxTelVisit", "run_auxtel_visit"]
 
+import asyncio
 from lsst.ts.IntegrationTests import BaseScript
-from .config_registry import registry
+from .configs.config_registry import registry
 
 
 class AuxTelVisit(BaseScript):
-    """Execute the given Auxilliary Telescope Standard or External
-    script, with the given Yaml configuration, placed in the
-    given ScriptQueue location.
+    """Execute the given Standard or External script,
+    with the given Yaml configuration,
+    placed in the given ScriptQueue location.
 
     """
 
-    index = 2
-    configs = (
+    index: int = 2
+    configs: tuple = (
         registry["auxtel_visit_config1"],
         registry["auxtel_visit_config2"],
         registry["auxtel_visit_config3"],
@@ -40,17 +41,21 @@ class AuxTelVisit(BaseScript):
         registry["auxtel_visit_config5"],
         registry["auxtel_visit_config6"],
     )
-    scripts = (
-        "auxtel/take_image_latiss.py",
-        "auxtel/take_image_latiss.py",
-        "auxtel/take_image_latiss.py",
-        "auxtel/take_image_latiss.py",
-        "auxtel/take_image_latiss.py",
-        "auxtel/take_image_latiss.py",
-    )
+    scripts: list = [
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+        ("auxtel/take_image_latiss.py", BaseScript.is_standard),
+    ]
 
-    def __init__(self, isStandard=True, queue_placement="after"):
-        super().__init__(
-            isStandard=isStandard,
-            queue_placement=queue_placement,
-        )
+    def __init__(self) -> None:
+        super().__init__()
+
+
+def run_auxtel_visit() -> None:
+    script_class = AuxTelVisit()
+    num_scripts = len(script_class.scripts)
+    print(f"\nAuxTel Visit; running {num_scripts} scripts")
+    asyncio.run(script_class.run())

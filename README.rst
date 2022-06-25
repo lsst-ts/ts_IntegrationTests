@@ -18,7 +18,7 @@ TBD - Conda installation and package execution instructions.
 To properly install and setup this package, start by issuing
 
 ```
-pip install -r test_requirements.txt -e .
+pip install -r tests/requirements.txt -e .
 ```
 
 This will install the pytest, pytest-flake8, black and yamllint modules used to verify the integration test scrips and Yaml-formatted configurations are correct. It also loads the bin/ scripts as command-line executable processes. To test, execute:

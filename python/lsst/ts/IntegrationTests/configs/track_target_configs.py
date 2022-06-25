@@ -19,16 +19,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-import pathlib
-
-from lsst.ts import salobj
+import yaml
+from .config_registry import registry
 
 
-class BlackTestCase(unittest.TestCase):
-    def test_black_formatted(self):
-        salobj.assert_black_formatted(pathlib.Path(__file__).parents[1])
+# Add the script configurations to the configuration registry.
 
-
-if __name__ == "__main__":
-    unittest.main()
+registry["track_target"] = yaml.safe_dump(
+    {
+        "target_name": "replace_me",
+        "rot_value": 80.0,
+        "rot_type": "PhysicalSky",
+    },
+    explicit_start=True,
+    canonical=True,
+)

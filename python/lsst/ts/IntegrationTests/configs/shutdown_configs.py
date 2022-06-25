@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-#
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera Rubin Observatory Telescope and Site Systems.
+# Developed for the Rubin Observatory Telescope and Site System.
 # This product includes software developed by the LSST Project
 # (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
@@ -21,8 +19,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from setuptools import setup
-import setuptools_scm
+import yaml
+from .config_registry import registry
 
 
-setup(version=setuptools_scm.get_version())
+# Add the script configurations to the configuration registry.
+
+registry["enable1"] = yaml.safe_dump(
+    {
+        "athexapod": "ncsa",
+        "atdome": "current",
+        "ataos": "current",
+    },
+    explicit_start=True,
+    canonical=True,
+)

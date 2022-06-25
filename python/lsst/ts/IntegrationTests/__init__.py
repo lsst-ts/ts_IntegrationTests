@@ -24,9 +24,25 @@ try:
 except ImportError:
     __version__ = "?"
 
+from .base_script import *
 from .testutils import *
 from .yaml_test_strings import *
-from .take_image_latiss_configs import *
-from .base_script import *
-from .aux_tel_visit import *
+from .auxtel_prepare_for_flatfield import *
+from .auxtel_prepare_for_onsky import *
+from .auxtel_visit import *
+from .auxtel_shutdown import *
+from .auxtel_stop import *
+from .auxtel_track_target import *
+from .auxtel_offline_standby import *
+from .auxtel_standby_disabled import *
+from .auxtel_disabled_enabled import *
+from .maintel_offline_standby import *
+from .maintel_standby_disabled import *
+from .maintel_disabled_enabled import *
+from .obssys2_standby_disabled import *
+from .obssys2_disabled_enabled import *
+from .eas_standby_disabled import *
+from .eas_disabled_enabled import *
+from .enabled_offline import *
+from .run_camera_playlist import *
 from .script_queue_controller import *

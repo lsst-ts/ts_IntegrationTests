@@ -22,8 +22,8 @@
 import unittest
 import subprocess
 
-from inspect import getmembers, isfunction
 from lsst.ts import IntegrationTests
+from lsst.ts.IntegrationTests.configs.config_registry import registry
 
 
 class YamlTestCase(unittest.TestCase):
@@ -32,15 +32,15 @@ class YamlTestCase(unittest.TestCase):
 
     """
 
-    def test_yaml_formatted(self):
+    def test_yaml_formatted(self) -> None:
         """Use the IntegrationTests.yaml_test_string1() configuration to test
         a well-formatted Yaml string.
 
         """
         yaml_string = IntegrationTests.yaml_test_string1()
-        IntegrationTests.assert_yaml_formatted(yaml_string)
+        IntegrationTests.assert_yaml_formatted("test", yaml_string)
 
-    def test_bad_yaml(self):
+    def test_bad_yaml(self) -> None:
         """Use the IntegrationTests.bad_yaml() configuration to test
         a non-Yaml-formatted string.
 
@@ -51,24 +51,26 @@ class YamlTestCase(unittest.TestCase):
         child_proccess = subprocess.Popen(
             args, stdin=subprocess.PIPE, stdout=subprocess.PIPE
         )
-        child_proccess.stdin.write(byte_string)
-        result = child_proccess.communicate()[0]
-        result = result.decode("utf-8")
-        child_proccess.stdin.close()
-        if any(exception in result for exception in ("warning", "error")):
+        child_proccess.stdin.write(byte_string)  # type: ignore
+        result = child_proccess.communicate()[0]  # type: bytes
+        result_str = result.decode("utf-8")  # type: str
+        child_proccess.stdin.close()  # type: ignore
+        if any(exception in result_str for exception in ("warning", "error")):
             assert True
         else:
             assert False
 
-    def test_auxtel_visit_config(self):
-        """Test the IntegrationTests.auxtel_visit_config() is
+    def test_script_configs(self) -> None:
+        """Test the IntegrationTests.configs are
         well-formatted Yaml.
 
         """
-        length = len(getmembers(IntegrationTests.take_image_latiss_configs, isfunction))
-        for i in range(length):
-            config = getattr(
-                IntegrationTests, getmembers(IntegrationTests.configs, isfunction)[i][0]
-            )
-            yaml_string = config()
-            IntegrationTests.assert_yaml_formatted(yaml_string)
+        # Get the keys from the configuration registry (dict).
+        registry_keys = list(registry.keys())
+        # Ensure the registry contains the configurations.
+        length = len(registry_keys)
+        assert length > 0
+        # Verify the configurations are properly YAML-formatted.
+        for key in registry_keys:
+            yaml_string = registry[key]
+            IntegrationTests.assert_yaml_formatted(key, yaml_string)

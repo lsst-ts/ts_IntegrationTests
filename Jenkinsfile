@@ -14,10 +14,10 @@ pipeline{
     stages{
         stage("Run the Unit Tests") {
             steps {
-                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                 withEnv(["HOME=/home/saluser"]) {
                     sh """
-                    source /home/saluser/.setup_dev.sh
-                    pip install -r tests/test_requirements.txt -e . 
+                    source $HOME/.setup_dev.sh
+                    pip install . 
                     pytest -ra -o junit_family=xunit2 --junitxml=tests/results/results.xml
                     echo "====== Unit testing complete ======"
                     """ 
@@ -26,9 +26,9 @@ pipeline{
         }
         stage('Build and Upload Documentation') {
             steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
+                withEnv(["HOME=/home/saluser"]) {
                     sh """
-                    source /home/saluser/.setup_dev.sh
+                    source $HOME/.setup_dev.sh
                     pip install -r doc/requirements.txt
                     package-docs build
                     ltd upload --product ts-integrationtests --git-ref ${GIT_BRANCH} --dir doc/_build/html

@@ -33,7 +33,7 @@ class ScriptQueueController(salobj.Controller):
 
     """
 
-    def __init__(self, index):
+    def __init__(self, index: int) -> None:
         """Initialize the ScriptQueue Controller.
 
         Parameters
@@ -43,37 +43,37 @@ class ScriptQueueController(salobj.Controller):
         or an AuxTel (index=2) controller.
         """
         super().__init__("ScriptQueue", index=index)
-        self.index = index
-        self.queue_list = []
+        self.index: int = index
+        self.queue_list: list = []
         self.cmd_pause.callback = self.do_pause
         self.cmd_add.callback = self.do_add
         self.cmd_resume.callback = self.do_resume
 
-    async def pub_hb(self):
+    async def pub_hb(self) -> None:
         """Publish the heartbeat. This ensures the controller is running.
         The test scripts check for the heartbeat before proceeding.
 
         """
         try:
             while True:
-                self.evt_heartbeat.put()
+                await self.evt_heartbeat.write()
                 await asyncio.sleep(1.0)
         except asyncio.CancelledError:
             self.log.debug("Heartbeat ended normally")
         except Exception:
             self.log.exception("Heartbeat failed!")
 
-    async def start(self):
+    async def start(self) -> None:
         """Start the Controller and the hertbeat."""
         await super().start()
         self.hb_task = asyncio.create_task(self.pub_hb())
 
-    async def do_pause(self, data):
+    async def do_pause(self, data: tuple) -> None:
         """Pause the ScriptQueue to add scripts to the queue."""
         # self.log.info("ScriptQueue paused\n")
         pass
 
-    async def do_add(self, data):
+    async def do_add(self, data: tuple) -> None:
         """Add scripts to the ScriptQueue queue.
         This mock function uses a simple array to mimic the queue.
         It simply appends the script path to the array.
@@ -88,9 +88,9 @@ class ScriptQueueController(salobj.Controller):
         """
         # self.log.info("Script: " + data.path)
         # self.log.info("Location: " + data.location)
-        self.queue_list.append(data.path)
+        self.queue_list.append(data.path)  # type: ignore
 
-    async def do_resume(self, data):
+    async def do_resume(self, data: tuple) -> None:
         """Resume the ScriptQueue after adding the scripts
         to the queue. The ScriptQueue will then execute
         the scripts.
@@ -99,7 +99,7 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("ScriptQueue resumed\n")
         pass
 
-    async def close_tasks(self):
+    async def close_tasks(self) -> None:
         """This closes the resources for the controller,
         and terminates the heartbeat loop.
 
@@ -107,29 +107,29 @@ class ScriptQueueController(salobj.Controller):
         self.hb_task.cancel()
         await super().close_tasks()
 
-    async def do_move(self):
+    async def do_move(self) -> None:
         pass
 
-    async def do_requeue(self):
+    async def do_requeue(self) -> None:
         pass
 
-    async def do_showAvailableScripts(self):
+    async def do_showAvailableScripts(self) -> None:
         pass
 
-    async def do_showQueue(self):
+    async def do_showQueue(self) -> None:
         """Show the queue via the output from the queue event."""
         pass
 
-    async def do_showSchema(self):
+    async def do_showSchema(self) -> None:
         pass
 
-    async def do_showScript(self):
+    async def do_showScript(self) -> None:
         pass
 
-    async def do_stopScripts(self):
+    async def do_stopScripts(self) -> None:
         pass
 
     @classmethod
-    async def amain(cls) -> None:
-        csc = cls()
+    async def amain(cls, index: int) -> None:
+        csc = cls(index)
         await csc.done_task

@@ -25,11 +25,11 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelVisit
+from lsst.ts.IntegrationTests import AuxTelStop
 
 
-class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the AuxTel Visit integration test script."""
+class AuxTelStopTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the AuxTel Stop integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
@@ -41,19 +41,18 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_visit(self) -> None:
-        """Execute the AuxTelVisit integration test script, which runs the
-        ts_standardscripts/auxtel/take_image_latiss.py script.
-        Use the configuration stored in the take_image_latiss_configs module.
+    async def test_auxtel_stop(self) -> None:
+        """Execute the AuxTelStop integration test script,
+        which runs the ts_standardscripts/auxtel/stop.py script.
 
         """
-        # Instantiate the AuxTelVisit integration tests object and
+        # Instantiate the AuxTelStop integration tests object and
         # execute the scripts.
-        script_class = AuxTelVisit()
+        script_class = AuxTelStop()
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"AuxTel Visit; running {num_scripts} scripts")
+        print(f"AuxTel Stop; running {num_scripts} scripts")
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

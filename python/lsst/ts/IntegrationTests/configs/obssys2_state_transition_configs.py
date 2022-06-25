@@ -1,4 +1,3 @@
-#!/usr/local/bin/python
 # This file is part of ts_IntegrationTests.
 #
 # Developed for the Rubin Observatory Telescope and Site System.
@@ -20,6 +19,39 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from lsst.ts import IntegrationTests
+import yaml
 
-IntegrationTests.logging_statement("You have just run a test.")
+from .config_registry import registry
+
+
+# Add the State Transition script configurations to the registry.
+
+# obssys2_standby_disabled
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [Scheduler:1, DISABLED, standstill.yaml]
+    - [Scheduler:2, DISABLED, standstill.yaml]
+    - [OCPS:1, DISABLED]
+    - [OCPS:2, DISABLED]
+    """
+)
+
+registry["obssys2_standby_disabled"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
+# obssys2_disabled_enabled
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [Scheduler:1, ENABLED]
+    - [Scheduler:2, ENABLED]
+    - [OCPS:1, ENABLED]
+    - [OCPS:2, ENABLED]
+    """
+)
+
+registry["obssys2_disabled_enabled"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
