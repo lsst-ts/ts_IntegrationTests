@@ -10,6 +10,16 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.2.1
+------
+* Fixed the order of scripts in enabled_offline.py so the ScriptQueue is shutoff last.
+
+v.0.2.0
+-------
+* Added the standalone tests for the MTAirCompressor.
+* Switched to pyproject.toml.
+* Added many new integration test scripts.
+
 v0.1.1
 ------
 * Changed queue placement from AFTER to LAST.

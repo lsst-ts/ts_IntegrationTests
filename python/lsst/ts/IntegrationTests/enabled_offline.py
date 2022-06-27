@@ -40,8 +40,9 @@ class EnabledOffline(BaseScript):
         [],
         [],
         registry["eas_enabled_offline"],
-        registry["watcher_sq_enabled_offline"],
         registry["mtaircomp_enabled_offline"],
+        # The Watcher-ScriptQueue script must run last.
+        registry["watcher_sq_enabled_offline"],
     )
     scripts: list = [
         ("set_summary_state.py", BaseScript.is_standard),
