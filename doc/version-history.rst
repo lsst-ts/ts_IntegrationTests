@@ -10,6 +10,25 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.4.0
+------
+* Various miscellaneous tasks
+   * Added the track-for argument to auxtel_track_target.py.
+   * Added the --no-repeat flag to run_camera_playlist.py.
+   * Renamed run_camera_playlist to load_camera_playlist.
+   * Renamed auxtel_prepare_for_flatfield to auxtel_prepare_for_flat.
+   * Removed standstill.yaml from configs/obssys2_state_transition_configs.py.
+* Added the AuxTel and ComCam Image Taking Verification tests.
+* Added the get_current_date classmethod to python/lsst/ts/IntegrationTests/base_script.py.
+* Added the AuxTel and ComCam calibrations tests.
+* Added the AuxTel Night Operations tests.
+* Added the parameterized module to the install list.
+
+v0.3.0
+------
+* Added the AuxTel and MainTel housekeeping tasks. These set the system to the desired state after the initial set of integration tests are complete.
+* Added the Authorize CSC.
+
 v0.2.1
 ------
 * Fixed the order of scripts in enabled_offline.py so the ScriptQueue is shutoff last.

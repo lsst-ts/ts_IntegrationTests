@@ -13,15 +13,27 @@ This repository contains the infrastucture necessary to automate the integration
 
 TBD - Conda installation and package execution instructions.
 
-### Testing
-
 To properly install and setup this package, start by issuing
 
 ```
-pip install -r tests/requirements.txt -e .
+pip install .
 ```
 
-This will install the pytest, pytest-flake8, black and yamllint modules used to verify the integration test scrips and Yaml-formatted configurations are correct. It also loads the bin/ scripts as command-line executable processes. To test, execute:
+This will minimally install the package and the required dependencies. It also loads the scripts as command-line executable processes.
+
+### Testing
+
+To install and setup this package for testing and development, start by issuing
+
+```
+pip install .[test]
+```
+
+This will install the parameterized and yamllint modules used to verify the integration test scrips and Yaml-formatted configurations are correct. It also loads the scripts as command-line executable processes.
+
+NOTE: This installation requires a TSSW environment (ts_salobj, ts_ddsconfig, etc). Most likely, this comes from using one of the TSSW-supplied Docker images, e.g. lsstts/develop-env:develop.
+
+To test, execute:
 
 ```
 pytest -ra

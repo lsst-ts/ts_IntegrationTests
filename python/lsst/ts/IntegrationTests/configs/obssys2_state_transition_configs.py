@@ -30,8 +30,8 @@ from .config_registry import registry
 yaml_string = yaml.safe_load(
     """
     data:
-    - [Scheduler:1, DISABLED, standstill.yaml]
-    - [Scheduler:2, DISABLED, standstill.yaml]
+    - [Scheduler:1, DISABLED]
+    - [Scheduler:2, DISABLED]
     - [OCPS:1, DISABLED]
     - [OCPS:2, DISABLED]
     """

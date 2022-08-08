@@ -18,7 +18,7 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["RunCameraPlaylist", "run_camera_playlist"]
+__all__ = ["LoadCameraPlaylist", "load_camera_playlist"]
 
 import yaml
 import os
@@ -35,7 +35,7 @@ from lsst.ts.IntegrationTests.configs.camera_playlist_configs import (
 )
 
 
-class RunCameraPlaylist(BaseScript):
+class LoadCameraPlaylist(BaseScript):
     """Execute the run_command script for the given Playlist,
     for the given Camera, with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -48,7 +48,9 @@ class RunCameraPlaylist(BaseScript):
         ("run_command.py", BaseScript.is_standard),
     ]
 
-    def __init__(self, camera: str, playlist_shortname: str) -> None:
+    def __init__(
+        self, camera: str, playlist_shortname: str, repeat: bool = True
+    ) -> None:
         super().__init__()
         self.camera = camera
         self.camera_full = camera.upper() + "Camera"
@@ -64,10 +66,11 @@ class RunCameraPlaylist(BaseScript):
         self.playlist_config = yaml.safe_load(registry["camera_playlist"])
         self.playlist_config["component"] = self.camera_full
         self.playlist_config["parameters"]["playlist"] = self.playlist
+        self.playlist_config["parameters"]["repeat"] = repeat
         self.configs = (yaml.safe_dump(self.playlist_config),)
 
 
-def run_camera_playlist() -> None:
+def load_camera_playlist() -> None:
     # Define the script arguments.
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -85,6 +88,11 @@ def run_camera_playlist() -> None:
         type=str.lower,
         choices=playlists,
         help="Specify the playlist short name.",
+    )
+    parser.add_argument(
+        "--no-repeat",
+        action="store_true",
+        help="Disable playlist repeat.",
     )
     parser.add_argument(
         "-i",
@@ -107,12 +115,18 @@ def run_camera_playlist() -> None:
 
 
 def main(opts: argparse.Namespace) -> None:
+    # Set the playlist repeat config value
+    repeat = True
+    if opts.no_repeat:
+        repeat = False
     # Ensure the invocation is correct.
     # If not, raise KeyError.
     # If it is correct, execute the camera playlist.
     try:
-        script_class = RunCameraPlaylist(
-            camera=opts.camera, playlist_shortname=opts.playlist_shortname
+        script_class = LoadCameraPlaylist(
+            camera=opts.camera,
+            playlist_shortname=opts.playlist_shortname,
+            repeat=repeat,
         )
     except KeyError as ke:
         print(repr(ke))
@@ -120,5 +134,6 @@ def main(opts: argparse.Namespace) -> None:
         print(
             f"\nExecuting the {opts.camera.upper()}Camera "
             f"'{opts.playlist_shortname}' playlist."
+            f" Playlist repeat is {repeat}."
         )
         asyncio.run(script_class.run())

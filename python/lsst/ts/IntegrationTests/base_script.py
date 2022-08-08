@@ -23,6 +23,8 @@ __all__ = ["BaseScript"]
 from lsst.ts import salobj
 from lsst.ts.idl.enums import ScriptQueue
 
+from datetime import date
+
 
 class BaseScript:
     """Defines the common attributes and functions for an
@@ -77,6 +79,19 @@ class BaseScript:
 
         """
         self.queue_placement = queue_placement
+
+    @classmethod
+    def get_current_date(cls, date_format: str = "%Y-%m-%d") -> str:
+        """Returns the current date, in the given format.
+           This is used in the Calibration tests, to assign the storage
+           directory.
+
+        Parameters
+        ----------
+        format : `str`
+            The format for the date string. Default is "%Y-%m-%d."
+        """
+        return date.today().strftime(date_format)
 
     @classmethod
     def add_arguments(cls, **kwargs: str) -> None:

@@ -18,9 +18,11 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelTrackTarget", "run_auxtel_track_target"]
+__all__ = [
+    "AuxTelLatissAcquireTakeSequence",
+    "run_auxtel_latiss_acquire_and_take_sequence",
+]
 
-import yaml
 import asyncio
 import argparse
 
@@ -28,48 +30,46 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class AuxTelTrackTarget(BaseScript):
+class AuxTelLatissAcquireTakeSequence(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
 
     Parameters
     ----------
-    target : `str`
-        The target to track.
-    track_for : `int`
-        Specifies for how long to track the target.
+    sequence : `str`
+        Defines which sequence to run.
+        Choices are ["pointing", "verify", "nominal", "test"].
     """
 
     index: int = 2
-    configs: tuple = ()
+    configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/track_target.py", BaseScript.is_standard),
+        ("auxtel/latiss_acquire_and_take_sequence.py", BaseScript.is_standard),
     ]
 
-    def __init__(self, target: str, track_for: int = 0) -> None:
+    def __init__(self, sequence: str) -> None:
         super().__init__()
-        self.target_config = yaml.safe_load(registry["track_target"])
-        self.target_config["target_name"] = target
-        self.target_config["track_for"] = track_for
-        self.configs = (yaml.safe_dump(self.target_config),)
+        self.sequence = sequence
+        self.configs = (registry[f"auxtel_acquire_and_take_sequence_{sequence}"],)
 
 
-def run_auxtel_track_target() -> None:
+def run_auxtel_latiss_acquire_and_take_sequence() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("target", type=str, help="Specify the target to track.")
     parser.add_argument(
-        "--track-for",
-        type=int,
-        default=0,
-        help="Specify for how long to track the target"
-        " (Default is 0, meaning finish script as soon as in position.",
+        "--sequence",
+        "-s",
+        type=str,
+        choices=["pointing", "verify", "nominal", "test"],
+        required=True,
+        help="Specify which sequence to run.",
     )
     args = parser.parse_args()
-    script_class = AuxTelTrackTarget(target=args.target, track_for=args.track_for)
-    num_scripts = len(script_class.scripts)
+    script_class = AuxTelLatissAcquireTakeSequence(sequence=args.sequence)
     print(
-        f"\nAuxTel Track Target; running {num_scripts} scripts "
-        f"for target configuration:\n{script_class.configs[0]}"
+        f"\nAuxTel Latiss Acquire and Take Sequence; "
+        f"running the {script_class.scripts[0][0]} script, "
+        f"for the {script_class.sequence} sequence, "
+        f"with configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

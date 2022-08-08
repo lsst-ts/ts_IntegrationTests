@@ -25,13 +25,33 @@ from .config_registry import registry
 
 # Add the script configurations to the configuration registry.
 
-registry["track_target"] = yaml.safe_dump(
-    {
-        "target_name": "replace_me",
-        "track_for": 0,
-        "rot_value": 80.0,
-        "rot_type": "PhysicalSky",
-    },
+# CCCamera Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "CCCamera"
+    cmd: "setFilter"
+    parameters:
+        name: "r_03"
+        timeout: 45
+    """
+)
+
+registry["cccamera_housekeeping"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+# MTMount Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "MTMount"
+    cmd: "homeBothAxes"
+    """
+)
+
+registry["mtmount_housekeeping"] = yaml.safe_dump(
+    yaml_string,
     explicit_start=True,
     canonical=True,
 )

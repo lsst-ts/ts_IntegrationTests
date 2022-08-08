@@ -18,31 +18,34 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelPrepareFlatField", "run_auxtel_prepare_for_flatfield"]
+__all__ = ["AuxTelLatissCWFSAlign", "run_auxtel_latiss_cwfs_align"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+from .configs.config_registry import registry
 
 
-class AuxTelPrepareFlatField(BaseScript):
+class AuxTelLatissCWFSAlign(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = (registry["auxtel_cwfs_align"],)
     scripts: list = [
-        ("auxtel/prepare_for_flatfield.py", BaseScript.is_standard),
+        ("auxtel/make_latiss_cwfs_align.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_auxtel_prepare_for_flatfield() -> None:
-    script_class = AuxTelPrepareFlatField()
-    num_scripts = len(script_class.scripts)
-    print(f"\nAuxTel Prepare for FlatField; running {num_scripts} scripts")
+def run_auxtel_latiss_cwfs_align() -> None:
+    script_class = AuxTelLatissCWFSAlign()
+    print(
+        f"\nAuxTel Latiss CWFS Align; running the {script_class.scripts[0][0]} script,"
+        f"\nwith configuration;\n{script_class.configs}"
+    )
     asyncio.run(script_class.run())

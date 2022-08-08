@@ -17,7 +17,7 @@ pipeline{
                  withEnv(["HOME=/home/saluser"]) {
                     sh """
                     source $HOME/.setup_dev.sh
-                    pip install . 
+                    pip install .[test]
                     pytest -ra -o junit_family=xunit2 --junitxml=tests/results/results.xml
                     echo "====== Unit testing complete ======"
                     """ 
@@ -29,7 +29,7 @@ pipeline{
                 withEnv(["HOME=/home/saluser"]) {
                     sh """
                     source $HOME/.setup_dev.sh
-                    pip install -r doc/requirements.txt
+                    pip install .[doc]
                     package-docs build
                     ltd upload --product ts-integrationtests --git-ref ${GIT_BRANCH} --dir doc/_build/html
                     """

@@ -25,13 +25,34 @@ from .config_registry import registry
 
 # Add the script configurations to the configuration registry.
 
-registry["track_target"] = yaml.safe_dump(
-    {
-        "target_name": "replace_me",
-        "track_for": 0,
-        "rot_value": 80.0,
-        "rot_type": "PhysicalSky",
-    },
+# ATMCS Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "ATMCS"
+    cmd: "setInstrumentPort"
+    parameters:
+        port: 7
+    """
+)
+
+registry["atmcs_housekeeping"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+# ATSpectrograph Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "ATSpectrograph"
+    cmd: "changeDisperser"
+    parameters:
+        name: "empty_1"
+    """
+)
+
+registry["atspectrograph_housekeeping"] = yaml.safe_dump(
+    yaml_string,
     explicit_start=True,
     canonical=True,
 )

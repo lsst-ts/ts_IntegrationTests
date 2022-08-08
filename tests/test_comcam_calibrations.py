@@ -22,50 +22,54 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import unittest
+from datetime import date
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelTrackTarget
+from lsst.ts.IntegrationTests import ComCamCalibrations
 
 
-class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the AuxTel Track Target integration test script."""
+class ComCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
+    """
+    Test the Make Latiss Configurations integration test scripts.
+    """
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
         salobj.set_random_lsst_dds_partition_prefix()
 
         # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
+        self.controller = ScriptQueueController(index=1)
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_track_target(self) -> None:
-        """Execute the AuxTelTrackTarget integration test script,
-        which runs the ts_standardscripts/auxtel/track_target.py script.
-        Use the configuration stored in the track_target_configs.py module.
-
+    async def test_comcam_calibrations_flat(self) -> None:
+        """Execute the ComCamCalibrations integration test script,
+        which runs the ts_standardscripts/maintel/make_comcam_calibratons.py
+        script.
+        Use the configuration stored in the image_taking_configs.py module.
         """
-        # Mock the command-line argument that the aux_tel_track_target.py
-        # script expects.
-        test_target = "TEST"
-        test_track_for = 99
-        # Instantiate the AuxTelTrackTarget integration tests object and
+        # Instantiate the ComCamCalibrations integration tests object and
         # execute the scripts.
-        script_class = AuxTelTrackTarget(target=test_target, track_for=test_track_for)
+        calib_type = "flat"
+        script_class = ComCamCalibrations(calib_type=calib_type)
         await script_class.run()
+        # Assert configurations were updated with current date.
+        self.assertEqual(
+            script_class.calib_configs["certify_calib_begin_date"],
+            date.today().strftime("%Y-%m-%d"),
+        )
+        self.assertEqual(
+            script_class.calib_configs["calib_collection"],
+            f"LSSTComCam/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
+        )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        self.assertEqual(script_class.target_config["target_name"], test_target)
-        self.assertEqual(script_class.target_config["track_for"], test_track_for)
         print(
-            f"AuxTel Track Target; running {num_scripts} script for target {test_target}"
-            f" and tracking for {test_track_for} seconds."
+            f"AuxTel Make Latiss Configurations. "
+            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
+            f"\nwith configuration;\n{script_class.configs}"
         )
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task

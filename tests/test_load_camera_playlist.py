@@ -27,14 +27,14 @@ import subprocess
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import RunCameraPlaylist
+from lsst.ts.IntegrationTests import LoadCameraPlaylist
 from lsst.ts.IntegrationTests.configs.camera_playlist_configs import (
     atcamera_playlists,
     playlist_options,
 )
 
 
-class RunCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
+class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the Run Camera Playlist integration test script."""
 
     async def asyncSetUp(self) -> None:
@@ -48,55 +48,76 @@ class RunCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         await self.controller.start_task
 
     async def test_camera_playlist(self) -> None:
-        """Execute the RunCameraPlaylist integration test script,
+        """Execute the LoadCameraPlaylist integration test script,
         which runs the ts_standardscripts/run_command.py script.
         Use the configuration stored in the camera_playlist_configs.py module.
         """
-        # Mock the command-line arguments that the run_camera_playlist.py
+        # Mock the command-line arguments that the load_camera_playlist.py
         # script expects.
         test_camera = "at"
         test_playlist = "test"
         sys.argv[1:] = [test_camera, test_playlist]
-        # Instantiate the RunCameraPlaylist integration tests object and
+        # Instantiate the LoadCameraPlaylist integration tests object and
         # execute the scripts.
-        script_class = RunCameraPlaylist(
+        script_class = LoadCameraPlaylist(
             camera=test_camera, playlist_shortname=test_playlist
         )
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
+        # Assert the correct playlist.
         self.assertEqual(
             script_class.playlist_config["parameters"]["playlist"],
             atcamera_playlists[test_playlist],
         )
+        # Assert playlist repeat is set to True.
+        self.assertEqual(script_class.playlist_config["parameters"]["repeat"], True)
         print(
             f"Running the {script_class.camera} "
             f"{script_class.playlist_config['parameters']['playlist']}."
+            f" Playist repeat is set to {script_class.playlist_config['parameters']['repeat']}."
         )
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
     async def test_bad_inputs(self) -> None:
-        """Attempt to execute the RunCameraPlaylist integration test script,
+        """Attempt to execute the LoadCameraPlaylist integration test script,
         but use a bad set of command-line arguments; i.e. there is no
         playlist for the given Camera.
         """
-        # Mock the command-line arguments that the run_camera_playlist.py
+        # Mock the command-line arguments that the load_camera_playlist.py
         # script expects.
         test_camera = "cc"
         test_playlist = "test"
-        # Instantiate the RunCameraPlaylist integration tests object and
+        # Instantiate the LoadCameraPlaylist integration tests object and
         # execute the scripts.
         with self.assertRaises(KeyError):
-            RunCameraPlaylist(camera=test_camera, playlist_shortname=test_playlist)
+            LoadCameraPlaylist(camera=test_camera, playlist_shortname=test_playlist)
+
+    async def test_no_repeat(self) -> None:
+        """Execute the LoadCameraPlaylist integration test script,
+        but set playlist repeat config to False.
+        """
+        # Mock the command-line arguments that the load_camera_playlist.py
+        # script expects.
+        test_camera = "at"
+        test_playlist = "test"
+        test_no_repeat = False
+        # Instantiate the LoadCameraPlaylist integration tests object and
+        # execute the scripts.
+        script_class = LoadCameraPlaylist(
+            camera=test_camera, playlist_shortname=test_playlist, repeat=test_no_repeat
+        )
+        # Assert playlist repeat is set to False.
+        self.assertEqual(script_class.playlist_config["parameters"]["repeat"], False)
 
     async def test_no_inputs(self) -> None:
-        """Attempt to execute the RunCameraPlaylist integration test script,
-        but use not command-line arguments.  This should display the help/
+        """Attempt to execute the LoadCameraPlaylist integration test script,
+        but not use command-line arguments.  This should display the help/
         usage message.
         """
-        # Execute the run_camera_playlist.py script.
-        args = ["run_camera_playlist"]
+        # Execute the load_camera_playlist.py script.
+        args = ["load_camera_playlist"]
         child_process = subprocess.Popen(
             args, stdin=subprocess.PIPE, stdout=subprocess.PIPE
         )
@@ -109,11 +130,11 @@ class RunCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
             assert False
 
     async def test_info(self) -> None:
-        """Execute the RunCameraPlaylist integration test script,
+        """Execute the LoadCameraPlaylist integration test script,
         but use the --info flag to print out the allowed option pairs.
         """
-        # Execute the run_camera_playlist.py script and capture the output.
-        args = ["run_camera_playlist", "--info"]
+        # Execute the load_camera_playlist.py script and capture the output.
+        args = ["load_camera_playlist", "--info"]
         child_process = subprocess.Popen(
             args, stdin=subprocess.PIPE, stdout=subprocess.PIPE
         )
