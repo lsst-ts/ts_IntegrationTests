@@ -35,7 +35,7 @@ class AuxTelLatissCWFSAlign(BaseScript):
     index: int = 2
     configs: tuple = (registry["auxtel_cwfs_align"],)
     scripts: list = [
-        ("auxtel/make_latiss_cwfs_align.py", BaseScript.is_standard),
+        ("auxtel/latiss_cwfs_align.py", BaseScript.is_external),
     ]
 
     def __init__(self) -> None:

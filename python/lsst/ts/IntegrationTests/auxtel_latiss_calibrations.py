@@ -43,7 +43,7 @@ class AuxTelLatissCalibrations(BaseScript):
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/make_latiss_calibrations.py", BaseScript.is_standard),
+        ("auxtel/make_latiss_calibrations.py", BaseScript.is_external),
     ]
 
     def __init__(self, calib_type: str) -> None:
