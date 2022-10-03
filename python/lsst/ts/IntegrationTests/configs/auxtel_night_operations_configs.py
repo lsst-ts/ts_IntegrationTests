@@ -31,6 +31,7 @@ from .config_registry import registry
 registry["auxtel_cwfs_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
+        "rot_type": "PhysicalSky",
         "filter": "SDSSr",
         "grating": "empty_1",
         "exposure_time": 5,
