@@ -26,6 +26,7 @@ from parameterized import parameterized
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
+from lsst.ts.IntegrationTests import AuxTelResetOffsets
 from lsst.ts.IntegrationTests import AuxTelLatissCWFSAlign
 from lsst.ts.IntegrationTests import AuxTelLatissAcquireTakeSequence
 
@@ -44,6 +45,25 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
+
+    async def test_auxtel_reset_offsets(self) -> None:
+        """Execute the AuxTelResetOffsets integration test script,
+        which runs the run_command.py script four times, each with a
+        different configuration. The first enables all corrections,
+        for which the second needs to reset all the offsets. The third
+        disables all the corrections and the fourth enables corrections for
+        the  M1, ATHexapod and ATSpectrograph, which is needed for the
+        CWFS_Align test.
+        """
+        # Instantiate the AuxTelResetOffsets integration tests object and
+        # execute the scripts.
+        script_class = AuxTelResetOffsets()
+        await script_class.run()
+        # Get number of scripts
+        num_scripts = len(script_class.scripts)
+        print(f"AuxTel Reset Offsets. Running {num_scripts} scripts.")
+        # Assert scripts were added to ScriptQueue.
+        self.assertEqual(len(self.controller.queue_list), num_scripts)
 
     async def test_auxtel_latiss_cwfs_align(self) -> None:
         """Execute the AuxTelLatissCWFSAlign integration test script,
