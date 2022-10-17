@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.4.2
+------
+* The load_camera_playlist.py script now correctly sets the index based on the Camera.
+
 v0.4.1
 ------
 * Fixed a script name.
