@@ -27,11 +27,71 @@ from .config_registry import registry
 # Add the AuxTel Night Operations
 # script configurations to the registry.
 
+# auxtel_reset_offsets
+yaml_string = yaml.safe_load(
+    """
+    component: "ATAOS"
+    cmd: "enableCorrection"
+    parameters:
+      enableAll: True
+    """
+)
+registry["auxtel_enable_all_corrections"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+yaml_string = yaml.safe_load(
+    """
+    component: "ATAOS"
+    cmd: "resetOffset"
+    parameters:
+      axis: "all"
+    """
+)
+registry["auxtel_reset_offsets"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+yaml_string = yaml.safe_load(
+    """
+    component: "ATAOS"
+    cmd: "disableCorrection"
+    parameters:
+      disableAll: True
+    """
+)
+registry["auxtel_disable_all_corrections"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+yaml_string = yaml.safe_load(
+    """
+    component: "ATAOS"
+    cmd: "enableCorrection"
+    parameters:
+      m1: True,
+      hexapod: True,
+      atspectrograph: True
+    """
+)
+registry["auxtel_enable_m1_hex_atspect_corrections"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
 # auxtel_latiss_cwfs_align
 registry["auxtel_cwfs_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
-        "filter": "SDSSg",
+        "rot_type": "PhysicalSky",
+        "filter": "SDSSr",
         "grating": "empty_1",
         "exposure_time": 5,
         "reason": "IntegrationTesting",
@@ -64,7 +124,7 @@ registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "acq_filter": "SDSSg",
+        "acq_filter": "SDSSr",
         "acq_grating": "empty_1",
         "acq_exposure_time": 0.4,
         "target_pointing_tolerance": 6,
@@ -84,10 +144,10 @@ registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "acq_filter": "SDSSg",
+        "acq_filter": "SDSSr",
         "acq_grating": "empty_1",
         "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "empty_1"],
-        "filter_sequence": ["empty_1", "SDSSg", "SDSSg"],
+        "filter_sequence": ["empty_1", "SDSSr", "SDSSr"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "target_pointing_tolerance": 5,
         "target_pointing_verification": False,
@@ -105,7 +165,7 @@ registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "ronchi90lpmm"],
-        "filter_sequence": ["FELH0600", "SDSSg", "SDSSg"],
+        "filter_sequence": ["FELH0600", "SDSSr", "SDSSr"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "do_acquire": False,
         "do_take_sequence": True,

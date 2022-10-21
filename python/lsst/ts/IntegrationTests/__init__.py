@@ -33,6 +33,7 @@ from .auxtel_latiss_calibrations import *
 from .auxtel_latiss_cwfs_align import *
 from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
+from .auxtel_reset_offsets import *
 from .auxtel_visit import *
 from .auxtel_shutdown import *
 from .auxtel_stop import *

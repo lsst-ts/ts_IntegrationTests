@@ -42,7 +42,6 @@ class LoadCameraPlaylist(BaseScript):
 
     """
 
-    index: int = 2
     configs: tuple = ()
     scripts: list = [
         ("run_command.py", BaseScript.is_standard),
@@ -52,6 +51,11 @@ class LoadCameraPlaylist(BaseScript):
         self, camera: str, playlist_shortname: str, repeat: bool = True
     ) -> None:
         super().__init__()
+        # Set the ScriptQueue index based on which camera.
+        if camera.lower() == "at":
+            self.index = 2
+        else:
+            self.index = 1
         self.camera = camera
         self.camera_full = camera.upper() + "Camera"
         playlist_dictionary = getattr(
