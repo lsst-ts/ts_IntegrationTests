@@ -43,7 +43,7 @@ class ComCamCalibrations(BaseScript):
     index: int = 1
     configs: tuple = ([],)
     scripts: list = [
-        ("maintel/make_comcam_calibratons.py", BaseScript.is_standard),
+        ("maintel/make_comcam_calibrations.py", BaseScript.is_external),
     ]
 
     def __init__(self, calib_type: str) -> None:
@@ -75,7 +75,7 @@ def run_comcam_calibrations() -> None:
     args = parser.parse_args()
     script_class = ComCamCalibrations(calib_type=args.calib_type)
     print(
-        f"\nAuxTel Make Latiss Calibrations; running the master_{script_class.calib_type} calibrations"
+        f"\nComCam Calibrations; running the master_{script_class.calib_type} calibrations"
         f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())
