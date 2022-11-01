@@ -10,9 +10,12 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
-v0.4.2
+v0.5.0
 ------
-* The load_camera_playlist.py now sets the ScriptQueue index based on the Camera.
+* Added the reset_offsets.py test, which is part of the AuxTel Night Operations integration test.
+* Fixed some typos in comcam_calibrations.py.
+* The load_camera_playlist.py script now correctly sets the index based on the Camera.
+* Various minor configuration updates and improvements.
 
 v0.4.1
 ------

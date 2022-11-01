@@ -77,8 +77,9 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
             f"{script_class.playlist_config['parameters']['playlist']}."
             f" Playist repeat is set to {script_class.playlist_config['parameters']['repeat']}."
         )
-        # Assert script was added to ScriptQueue.
+        # Assert script was added to correct ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        self.assertEqual(script_class.index, 2)
 
     async def test_bad_inputs(self) -> None:
         """Attempt to execute the LoadCameraPlaylist integration test script,
@@ -100,8 +101,8 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         """
         # Mock the command-line arguments that the load_camera_playlist.py
         # script expects.
-        test_camera = "at"
-        test_playlist = "test"
+        test_camera = "cc"
+        test_playlist = "master_flat"
         test_no_repeat = False
         # Instantiate the LoadCameraPlaylist integration tests object and
         # execute the scripts.
@@ -110,6 +111,8 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         )
         # Assert playlist repeat is set to False.
         self.assertEqual(script_class.playlist_config["parameters"]["repeat"], False)
+        # Assert script would be added to correct ScriptQueue.
+        self.assertEqual(script_class.index, 1)
 
     async def test_no_inputs(self) -> None:
         """Attempt to execute the LoadCameraPlaylist integration test script,
