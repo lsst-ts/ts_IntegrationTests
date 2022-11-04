@@ -62,7 +62,7 @@ yaml_string = yaml.safe_load(
     """
     data:
     - [Authorize, OFFLINE]
-    - [Test42, OFFLINE]
+    - [Test:42, OFFLINE]
     - [Watcher, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:2, OFFLINE]
