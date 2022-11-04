@@ -31,7 +31,7 @@ yaml_string = yaml.safe_load(
     component: "ATMCS"
     cmd: "setInstrumentPort"
     parameters:
-        port: 7
+        port: 2
     """
 )
 
