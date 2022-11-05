@@ -65,7 +65,7 @@ registry["latiss_calibrations_ptc"] = yaml.safe_dump(
         "n_dark": 10,
         "exp_times_dark": 10,
         "n_flat": 40,
-        "filter": "BG40",
+        "filter": "SDSSg_65mm",
         "exp_times_flat": [
             0.2,
             0.2,
