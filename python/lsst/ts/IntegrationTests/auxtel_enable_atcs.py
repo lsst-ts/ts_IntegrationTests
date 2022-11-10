@@ -18,13 +18,13 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelShutdown", "run_auxtel_shutdown"]
+__all__ = ["AuxTelEnableATCS", "run_auxtel_enable_atcs"]
 
 import asyncio
 from lsst.ts.IntegrationTests import BaseScript
 
 
-class AuxTelShutdown(BaseScript):
+class AuxTelEnableATCS(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -34,15 +34,15 @@ class AuxTelShutdown(BaseScript):
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/shutdown.py", BaseScript.is_standard),
+        ("auxtel/enable_atcs.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_auxtel_shutdown() -> None:
-    script_class = AuxTelShutdown()
+def run_auxtel_enable_atcs() -> None:
+    script_class = AuxTelEnableATCS()
     num_scripts = len(script_class.scripts)
-    print(f"\nAuxTel Shutdown; running {num_scripts} scripts")
+    print(f"\nAuxTel Enable ATCS; running {num_scripts} scripts")
     asyncio.run(script_class.run())
