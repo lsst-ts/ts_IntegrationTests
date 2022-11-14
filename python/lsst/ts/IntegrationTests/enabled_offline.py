@@ -41,6 +41,7 @@ class EnabledOffline(BaseScript):
         [],
         registry["eas_enabled_offline"],
         registry["mtaircomp_enabled_offline"],
+        registry["mtalign_enabled_offline"],
         # The Watcher-ScriptQueue script must run last.
         registry["watcher_sq_enabled_offline"],
     )
@@ -50,6 +51,7 @@ class EnabledOffline(BaseScript):
         ("auxtel/offline_latiss.py", BaseScript.is_standard),
         ("maintel/offline_mtcs.py", BaseScript.is_standard),
         ("maintel/offline_comcam.py", BaseScript.is_standard),
+        ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
