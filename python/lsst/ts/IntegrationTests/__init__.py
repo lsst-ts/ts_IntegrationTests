@@ -52,6 +52,8 @@ from .obssys2_standby_disabled import *
 from .obssys2_disabled_enabled import *
 from .eas_standby_disabled import *
 from .eas_disabled_enabled import *
+from .gencam_standby_disabled import *
+from .gencam_disabled_enabled import *
 from .enabled_offline import *
 from .load_camera_playlist import *
 from .script_queue_controller import *
