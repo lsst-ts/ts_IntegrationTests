@@ -47,7 +47,7 @@ registry["latiss_calibrations_flat"] = yaml.safe_dump(
         "exp_times_dark": 10,
         "n_flat": 10,
         "exp_times_flat": 2,
-        "filter": "SDSSr",
+        "filter": "SDSSr_65mm",
         "calib_collection": "LATISS/calib/u/integrationtester/daily.replace_me.calib_type",
         "generate_calibrations": True,
         "do_verify": True,
@@ -65,7 +65,7 @@ registry["latiss_calibrations_ptc"] = yaml.safe_dump(
         "n_dark": 10,
         "exp_times_dark": 10,
         "n_flat": 40,
-        "filter": "BG40",
+        "filter": "SDSSg_65mm",
         "exp_times_flat": [
             0.2,
             0.2,

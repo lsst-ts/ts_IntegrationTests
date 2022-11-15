@@ -27,6 +27,7 @@ except ImportError:
 from .base_script import *
 from .testutils import *
 from .yaml_test_strings import *
+from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
