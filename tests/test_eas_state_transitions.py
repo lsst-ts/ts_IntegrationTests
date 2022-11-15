@@ -42,7 +42,7 @@ class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_obssys2_standby_disabled(self) -> None:
+    async def test_eas_standby_disabled(self) -> None:
         """Execute the EasStandbyDisabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
         Use the configuration stored in the eas_state_transition_configs.py
@@ -59,7 +59,7 @@ class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
-    async def test_obssys2_disabled_enabled(self) -> None:
+    async def test_eas_disabled_enabled(self) -> None:
         """Execute the EasDisabledEnabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
         Use the configuration stored in the eas_state_transition_configs.py
