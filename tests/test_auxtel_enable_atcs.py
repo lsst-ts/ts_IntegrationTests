@@ -25,54 +25,37 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import EasStandbyDisabled
-from lsst.ts.IntegrationTests import EasDisabledEnabled
+from lsst.ts.IntegrationTests import AuxTelEnableATCS
 
 
-class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the EAS Standby to Disabled integration test script."""
+class AuxTelEnableATCSTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the AuxTel EnableATCS integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
         salobj.set_random_lsst_dds_partition_prefix()
 
         # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=1)
+        self.controller = ScriptQueueController(index=2)
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_eas_standby_disabled(self) -> None:
-        """Execute the EasStandbyDisabled integration test script,
-        which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the eas_state_transition_configs.py
-        module.
+    async def test_auxtel_enable_atcs(self) -> None:
+        """Execute the AuxTelEnableATCS integration test script,
+        which runs the ts_standardscripts/auxtel/enable_atcs.py script,
+        followed by the ts_standardscripts/auxtel/enable_atcs.py script.
+        Use the configuration stored in the shutdown_configs.py module;
+        note that only the enable_atcs.py script requires a configuration.
 
         """
-        # Instantiate the EasStandbyDisabled integration tests object and
+        # Instantiate the AuxTelEnableATCS integration tests object and
         # execute the scripts.
-        script_class = EasStandbyDisabled()
+        script_class = AuxTelEnableATCS()
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"EAS Standby to Disabled; running {num_scripts} scripts")
-        # Assert script was added to ScriptQueue.
-        self.assertEqual(len(self.controller.queue_list), num_scripts)
-
-    async def test_eas_disabled_enabled(self) -> None:
-        """Execute the EasDisabledEnabled integration test script,
-        which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the eas_state_transition_configs.py
-        module.
-
-        """
-        # Instantiate the EasDisabledEnabled integration tests object and
-        # execute the scripts.
-        script_class = EasDisabledEnabled()
-        await script_class.run()
-        # Get number of scripts
-        num_scripts = len(script_class.scripts)
-        print(f"EAS Disabled to Enabled; running {num_scripts} scripts")
+        print(f"AuxTel Enable ATCS; running {num_scripts} scripts")
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

@@ -27,6 +27,7 @@ except ImportError:
 from .base_script import *
 from .testutils import *
 from .yaml_test_strings import *
+from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
@@ -51,6 +52,8 @@ from .obssys2_standby_disabled import *
 from .obssys2_disabled_enabled import *
 from .eas_standby_disabled import *
 from .eas_disabled_enabled import *
+from .gencam_standby_disabled import *
+from .gencam_disabled_enabled import *
 from .enabled_offline import *
 from .load_camera_playlist import *
 from .script_queue_controller import *

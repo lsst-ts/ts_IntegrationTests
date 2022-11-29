@@ -32,10 +32,9 @@ class AuxTelShutdown(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([], [])
+    configs: tuple = ([],)
     scripts: list = [
         ("auxtel/shutdown.py", BaseScript.is_standard),
-        ("auxtel/enable_atcs.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:

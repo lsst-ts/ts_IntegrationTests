@@ -33,7 +33,7 @@ atcamera_playlists = {
     "master_flat": "bias_dark_flat.playlist",
     "master_ptc": "bias_dark_ptc.playlist",
     "cwfs": "cwfs-test_take_sequence.playlist",
-    "standard_visit": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal.playlist",
+    "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal.playlist",
     "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing.playlist",
     "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification.playlist",
     "test": "latiss_acquire_and_take_sequence-test_take_sequence.playlist",

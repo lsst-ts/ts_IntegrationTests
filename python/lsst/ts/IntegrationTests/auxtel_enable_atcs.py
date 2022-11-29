@@ -18,36 +18,31 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelDisabledEnabled", "run_maintel_disabled_enabled"]
+__all__ = ["AuxTelEnableATCS", "run_auxtel_enable_atcs"]
 
 import asyncio
 from lsst.ts.IntegrationTests import BaseScript
-from .configs.config_registry import registry
 
 
-class MainTelDisabledEnabled(BaseScript):
+class AuxTelEnableATCS(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
 
     """
 
-    index: int = 1
-    configs: tuple = (
-        registry["maintel_disabled_enabled"],
-        registry["maintel_camera_disabled_enabled"],
-    )
+    index: int = 2
+    configs: tuple = ([],)
     scripts: list = [
-        ("set_summary_state.py", BaseScript.is_standard),
-        ("set_summary_state.py", BaseScript.is_standard),
+        ("auxtel/enable_atcs.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_maintel_disabled_enabled() -> None:
-    script_class = MainTelDisabledEnabled()
+def run_auxtel_enable_atcs() -> None:
+    script_class = AuxTelEnableATCS()
     num_scripts = len(script_class.scripts)
-    print(f"\nMainTel Disabled to Enabled; running {num_scripts} scripts")
+    print(f"\nAuxTel Enable ATCS; running {num_scripts} scripts")
     asyncio.run(script_class.run())

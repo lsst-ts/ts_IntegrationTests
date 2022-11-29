@@ -20,39 +20,34 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
+
 from .config_registry import registry
 
 
-# Add the script configurations to the configuration registry.
+# Add the State Transition script configurations to the registry.
 
-# ATMCS Housekeeping configs
+# gencam_standby_disabled
 yaml_string = yaml.safe_load(
     """
-    component: "ATMCS"
-    cmd: "setInstrumentPort"
-    parameters:
-        port: 2
+    data:
+    - [GenericCamera:1, DISABLED]
+    - [GCHeaderService:1, DISABLED]
     """
 )
 
-registry["atmcs_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
+registry["gencam_standby_disabled"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
 )
 
-# ATSpectrograph Housekeeping configs
+# gencam_disabled_enabled
 yaml_string = yaml.safe_load(
     """
-    component: "ATSpectrograph"
-    cmd: "changeDisperser"
-    parameters:
-        name: "empty_1"
+    data:
+    - [GenericCamera:1, ENABLED]
+    - [GCHeaderService:1, ENABLED]
     """
 )
 
-registry["atspectrograph_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
+registry["gencam_disabled_enabled"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
 )

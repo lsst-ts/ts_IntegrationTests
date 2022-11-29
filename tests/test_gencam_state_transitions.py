@@ -25,12 +25,12 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import EasStandbyDisabled
-from lsst.ts.IntegrationTests import EasDisabledEnabled
+from lsst.ts.IntegrationTests import GenCamStandbyDisabled
+from lsst.ts.IntegrationTests import GenCamDisabledEnabled
 
 
-class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the EAS Standby to Disabled integration test script."""
+class GenCamStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the GenCam Standby to Disabled integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
@@ -42,37 +42,37 @@ class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_eas_standby_disabled(self) -> None:
-        """Execute the EasStandbyDisabled integration test script,
+    async def test_gencam_standby_disabled(self) -> None:
+        """Execute the GenCamStandbyDisabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the eas_state_transition_configs.py
+        Use the configuration stored in the gencam_state_transition_configs.py
         module.
 
         """
-        # Instantiate the EasStandbyDisabled integration tests object and
+        # Instantiate the GenCamStandbyDisabled integration tests object and
         # execute the scripts.
-        script_class = EasStandbyDisabled()
+        script_class = GenCamStandbyDisabled()
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"EAS Standby to Disabled; running {num_scripts} scripts")
+        print(f"GenCam Standby to Disabled; running {num_scripts} scripts")
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
-    async def test_eas_disabled_enabled(self) -> None:
-        """Execute the EasDisabledEnabled integration test script,
+    async def test_gencam_disabled_enabled(self) -> None:
+        """Execute the GenCamDisabledEnabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the eas_state_transition_configs.py
+        Use the configuration stored in the gencam_state_transition_configs.py
         module.
 
         """
-        # Instantiate the EasDisabledEnabled integration tests object and
+        # Instantiate the GenCamDisabledEnabled integration tests object and
         # execute the scripts.
-        script_class = EasDisabledEnabled()
+        script_class = GenCamDisabledEnabled()
         await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"EAS Disabled to Enabled; running {num_scripts} scripts")
+        print(f"GenCam Disabled to Enabled; running {num_scripts} scripts")
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

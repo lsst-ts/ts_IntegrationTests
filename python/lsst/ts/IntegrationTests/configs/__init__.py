@@ -30,4 +30,5 @@ from .maintel_housekeeping_configs import *
 from .maintel_state_transition_configs import *
 from .obssys2_state_transition_configs import *
 from .eas_state_transition_configs import *
+from .gencam_state_transition_configs import *
 from .enabled_offline_state_transition_configs import *
