@@ -30,6 +30,8 @@ build:
     - comcam_image_taking = lsst.ts.IntegrationTests.image_taking_verification:run_comcam_image_taking
     - eas_disabled_enabled = lsst.ts.IntegrationTests.eas_disabled_enabled:run_eas_disabled_enabled
     - eas_standby_disabled = lsst.ts.IntegrationTests.eas_standby_disabled:run_eas_standby_disabled
+    - gencam_disabled_enabled = lsst.ts.IntegrationTests.gencam_disabled_enabled:run_gencam_disabled_enabled
+    - gencam_standby_disabled = lsst.ts.IntegrationTests.gencam_standby_disabled:run_gencam_standby_disabled
     - enabled_offline = lsst.ts.IntegrationTests.enabled_offline:run_enabled_offline
     - maintel_disabled_enabled = lsst.ts.IntegrationTests.maintel_disabled_enabled:run_maintel_disabled_enabled
     - maintel_housekeeping = lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping

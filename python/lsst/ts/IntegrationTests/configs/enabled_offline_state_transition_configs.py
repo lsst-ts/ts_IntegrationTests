@@ -73,15 +73,29 @@ registry["watcher_sq_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
-# MTAirCompressor enabled_offline
+# MainTel enabled_offline
 yaml_string = yaml.safe_load(
     """
     data:
     - [MTAirCompressor:1, OFFLINE]
     - [MTAirCompressor:2, OFFLINE]
+    - [MTAlignment, OFFLINE]
     """
 )
 
-registry["mtaircomp_enabled_offline"] = yaml.safe_dump(
+registry["maintel_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
+# GenCam enabled_offline
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [GenericCamera:1, OFFLINE]
+    - [GCHeaderService:1, OFFLINE]
+    """
+)
+
+registry["gencam_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )

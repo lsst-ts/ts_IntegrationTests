@@ -18,14 +18,14 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelDisabledEnabled", "run_maintel_disabled_enabled"]
+__all__ = ["GenCamStandbyDisabled", "run_gencam_standby_disabled"]
 
 import asyncio
 from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class MainTelDisabledEnabled(BaseScript):
+class GenCamStandbyDisabled(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -33,12 +33,8 @@ class MainTelDisabledEnabled(BaseScript):
     """
 
     index: int = 1
-    configs: tuple = (
-        registry["maintel_disabled_enabled"],
-        registry["maintel_camera_disabled_enabled"],
-    )
+    configs: tuple = (registry["gencam_standby_disabled"],)
     scripts: list = [
-        ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
     ]
 
@@ -46,8 +42,8 @@ class MainTelDisabledEnabled(BaseScript):
         super().__init__()
 
 
-def run_maintel_disabled_enabled() -> None:
-    script_class = MainTelDisabledEnabled()
+def run_gencam_standby_disabled() -> None:
+    script_class = GenCamStandbyDisabled()
     num_scripts = len(script_class.scripts)
-    print(f"\nMainTel Disabled to Enabled; running {num_scripts} scripts")
+    print(f"\nGenCam Standby to Disabled; running {num_scripts} scripts")
     asyncio.run(script_class.run())

@@ -42,6 +42,7 @@ registry["maintel_offline_standby"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
+    - [MTAlignment, DISABLED]
     - [MTMount, DISABLED]
     - [MTRotator, DISABLED]
     - [MTHexapod:1, DISABLED]
@@ -77,6 +78,9 @@ registry["maintel_camera_standby_disabled"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
+    - [MTAirCompressor:1, ENABLED]
+    - [MTAirCompressor:2, ENABLED]
+    - [MTAlignment, ENABLED]
     - [MTMount, ENABLED]
     - [MTRotator, ENABLED]
     - [MTHexapod:1, ENABLED]
@@ -105,18 +109,5 @@ yaml_string = yaml.safe_load(
 )
 
 registry["maintel_camera_disabled_enabled"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)
-
-# MT AirCompressor configs (separate for now)
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [MTAirCompressor:1, ENABLED]
-    - [MTAirCompressor:2, ENABLED]
-    """
-)
-
-registry["mtaircomp_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
