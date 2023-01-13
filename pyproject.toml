@@ -50,6 +50,7 @@ maintel_standby_disabled = "lsst.ts.IntegrationTests.maintel_standby_disabled:ru
 obssys2_disabled_enabled = "lsst.ts.IntegrationTests.obssys2_disabled_enabled:run_obssys2_disabled_enabled"
 obssys2_standby_disabled = "lsst.ts.IntegrationTests.obssys2_standby_disabled:run_obssys2_standby_disabled"
 load_camera_playlist = "lsst.ts.IntegrationTests.load_camera_playlist:load_camera_playlist"
+love_stress_test = "lsst.ts.IntegrationTests.love_stress_test:run_love_stress_test"
  
 [tool.setuptools_scm]
 write_to = "python/lsst/ts/IntegrationTests/version.py"
