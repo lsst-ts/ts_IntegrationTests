@@ -22,6 +22,7 @@ __all__ = ["LoveStressTest", "run_love_stress_test"]
 
 import asyncio
 from lsst.ts.IntegrationTests import BaseScript
+from .configs.config_registry import registry
 
 
 class LoveStressTest(BaseScript):
@@ -32,7 +33,7 @@ class LoveStressTest(BaseScript):
     """
 
     index: int = 1
-    configs: tuple = ([],)
+    configs: tuple = (registry["love_stress"],)
     scripts: list = [
         ("make_love_stress_tests.py", BaseScript.is_external),
     ]
