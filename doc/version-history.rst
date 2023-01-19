@@ -13,6 +13,7 @@ Version History
 v0.7.0
 ------
 * Added the LOVE Stress Test integration test.
+* Updated the path to the prepare_for (OnSky, Flat) Standard scripts.
 
 v0.6.0
 ------
