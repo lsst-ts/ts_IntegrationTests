@@ -34,7 +34,7 @@ class AuxTelPrepareOnSky(BaseScript):
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/prepare_for_onsky.py", BaseScript.is_standard),
+        ("auxtel/prepare_for/onsky.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
