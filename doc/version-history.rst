@@ -15,6 +15,7 @@ v0.7.0
 * Added the LOVE Stress Test integration test.
 * Updated the path to the prepare_for (OnSky, Flat) Standard scripts.
 * Switched MTAlignment to LaserTracker:1, since it was renamed.
+* Added an Auxtel Housekeeping task, to homeAzimuth for the ATDome.
 
 v0.6.0
 ------

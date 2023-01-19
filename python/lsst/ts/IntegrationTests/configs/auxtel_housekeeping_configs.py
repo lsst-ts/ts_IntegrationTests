@@ -25,6 +25,20 @@ from .config_registry import registry
 
 # Add the script configurations to the configuration registry.
 
+# ATDome config
+yaml_string = yaml.safe_load(
+    """
+    component: "ATDome"
+    cmd: "homeAzimuth"
+    """
+)
+
+registry["atdome_housekeeping"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
 # ATMCS Housekeeping configs
 yaml_string = yaml.safe_load(
     """
