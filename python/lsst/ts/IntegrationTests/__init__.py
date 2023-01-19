@@ -56,4 +56,5 @@ from .gencam_standby_disabled import *
 from .gencam_disabled_enabled import *
 from .enabled_offline import *
 from .load_camera_playlist import *
+from .love_stress_test import *
 from .script_queue_controller import *

@@ -18,31 +18,32 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelPrepareOnSky", "run_auxtel_prepare_for_onsky"]
+__all__ = ["LoveStressTest", "run_love_stress_test"]
 
 import asyncio
 from lsst.ts.IntegrationTests import BaseScript
+from .configs.config_registry import registry
 
 
-class AuxTelPrepareOnSky(BaseScript):
+class LoveStressTest(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
 
     """
 
-    index: int = 2
-    configs: tuple = ([],)
+    index: int = 1
+    configs: tuple = (registry["love_stress"],)
     scripts: list = [
-        ("auxtel/prepare_for/onsky.py", BaseScript.is_standard),
+        ("make_love_stress_tests.py", BaseScript.is_external),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_auxtel_prepare_for_onsky() -> None:
-    script_class = AuxTelPrepareOnSky()
+def run_love_stress_test() -> None:
+    script_class = LoveStressTest()
     num_scripts = len(script_class.scripts)
-    print(f"\nAuxTel Prepare for OnSky; running {num_scripts} scripts")
+    print(f"\nLOVE Stress Test; running {num_scripts} scripts")
     asyncio.run(script_class.run())

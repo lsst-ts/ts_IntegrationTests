@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from .love_stress_test_configs import *
 from .shutdown_configs import *
 from .take_image_latiss_configs import *
 from .track_target_configs import *

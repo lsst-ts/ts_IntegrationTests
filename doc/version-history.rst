@@ -10,13 +10,19 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.7.0
+------
+* Added the LOVE Stress Test integration test.
+* Updated the path to the prepare_for (OnSky, Flat) Standard scripts.
+* Switched MTAlignment to LaserTracker:1, since it was renamed.
+* Added an Auxtel Housekeeping task, to homeAzimuth for the ATDome.
+
 v0.6.0
 ------
 * Test:42 is indexed, not the name.
 * Updated instrument port and filter names.
 * Added auxtel_enable_atcs.
 * AuxTelShutdown now ONLY shuts down the AuxTel.
-
 
 v0.5.0
 ------

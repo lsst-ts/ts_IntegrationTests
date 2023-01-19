@@ -20,53 +20,43 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
+
 from .config_registry import registry
 
 
-# Add the script configurations to the configuration registry.
+# Add the LOVE Stress Test script
+# configurations to the registry.
 
-# ATDome config
-yaml_string = yaml.safe_load(
-    """
-    component: "ATDome"
-    cmd: "homeAzimuth"
-    """
-)
-
-registry["atdome_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# ATMCS Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "ATMCS"
-    cmd: "setInstrumentPort"
-    parameters:
-        port: 2
-    """
-)
-
-registry["atmcs_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# ATSpectrograph Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "ATSpectrograph"
-    cmd: "changeDisperser"
-    parameters:
-        name: "empty_1"
-    """
-)
-
-registry["atspectrograph_housekeeping"] = yaml.safe_dump(
-    yaml_string,
+registry["love_stress"] = yaml.safe_dump(
+    {
+        "location": "love.tu.lsst.org",
+        "number_of_clients": 50,
+        "number_of_messages": 5000,
+        "data": [
+            "ATAOS:0",
+            "ATCamera:0",
+            "ATDome:0",
+            "ATDomeTrajectory:0",
+            "ATMCS:0",
+            "ATHexapod:0",
+            "ATPneumatics:0",
+            "ATPtg:0",
+            "ATSpectrograph:0",
+            "LaserTracker:1",
+            "MTAirCompressor:1",
+            "MTAirCompressor:2",
+            "MTMount:0",
+            "MTPtg:0",
+            "MTDome:0",
+            "MTDomeTrajectory:0",
+            "MTAOS:0",
+            "MTHexapod:1",
+            "MTHexapod:2",
+            "MTRotator:0",
+            "MTM1M3:0",
+            "MTM2:0",
+        ],
+    },
     explicit_start=True,
     canonical=True,
 )

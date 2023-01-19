@@ -79,7 +79,7 @@ yaml_string = yaml.safe_load(
     data:
     - [MTAirCompressor:1, OFFLINE]
     - [MTAirCompressor:2, OFFLINE]
-    - [MTAlignment, OFFLINE]
+    - [LaserTracker:1, OFFLINE]
     """
 )
 

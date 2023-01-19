@@ -42,7 +42,7 @@ registry["maintel_offline_standby"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [MTAlignment, DISABLED]
+    - [LaserTracker:1, DISABLED]
     - [MTMount, DISABLED]
     - [MTRotator, DISABLED]
     - [MTHexapod:1, DISABLED]
@@ -80,7 +80,7 @@ yaml_string = yaml.safe_load(
     data:
     - [MTAirCompressor:1, ENABLED]
     - [MTAirCompressor:2, ENABLED]
-    - [MTAlignment, ENABLED]
+    - [LaserTracker:1, ENABLED]
     - [MTMount, ENABLED]
     - [MTRotator, ENABLED]
     - [MTHexapod:1, ENABLED]
