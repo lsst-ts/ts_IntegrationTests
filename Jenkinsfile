@@ -3,7 +3,7 @@ pipeline{
         docker {
             alwaysPull true
             image 'lsstts/develop-env:develop'
-            args "-u root --entrypoint=''"
+            args "--entrypoint=''"
         }
     }
     environment {
@@ -38,11 +38,6 @@ pipeline{
         }
     }
     post{
-       always {
-            withEnv(["HOME=${env.WORKSPACE}"]) {
-                sh 'chown -R 1003:1003 ${HOME}/'
-            }
-       }
        cleanup {
             deleteDir()
         }
