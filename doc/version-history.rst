@@ -10,6 +10,11 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.8.0
+------
+* Added the WeatherForecast CSC.
+* Removed root user workaround from Jenkinsfile.
+
 v0.7.0
 ------
 * Added the LOVE Stress Test integration test.
