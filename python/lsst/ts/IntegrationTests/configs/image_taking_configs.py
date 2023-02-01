@@ -42,10 +42,13 @@ registry["image_taking"] = yaml.safe_dump(
 # auxtel_latiss_calibrations
 registry["latiss_calibrations_flat"] = yaml.safe_dump(
     {
+        "n_discard_bias": 0,
+        "n_discard_dark": 0,
+        "n_discard_flat": 0,
         "n_bias": 10,
         "n_dark": 10,
-        "exp_times_dark": 10,
         "n_flat": 10,
+        "exp_times_dark": 10,
         "exp_times_flat": 2,
         "filter": "SDSSr_65mm",
         "calib_collection": "LATISS/calib/u/integrationtester/daily.replace_me.calib_type",
@@ -61,10 +64,13 @@ registry["latiss_calibrations_flat"] = yaml.safe_dump(
 
 registry["latiss_calibrations_ptc"] = yaml.safe_dump(
     {
+        "n_discard_bias": 0,
+        "n_discard_dark": 0,
+        "n_discard_flat": 0,
         "n_bias": 10,
         "n_dark": 10,
-        "exp_times_dark": 10,
         "n_flat": 40,
+        "exp_times_dark": 10,
         "filter": "SDSSg_65mm",
         "exp_times_flat": [
             0.2,
@@ -123,10 +129,13 @@ registry["latiss_calibrations_ptc"] = yaml.safe_dump(
 # comcam_calibrations
 registry["comcam_calibrations_flat"] = yaml.safe_dump(
     {
+        "n_discard_bias": 0,
+        "n_discard_dark": 0,
+        "n_discard_flat": 0,
         "n_bias": 10,
         "n_dark": 10,
-        "exp_times_dark": 20,
         "n_flat": 10,
+        "exp_times_dark": 20,
         "exp_times_flat": 5,
         "detectors": [0, 1, 2, 3, 4, 5, 6, 7, 8],
         "filter": "r_03",
