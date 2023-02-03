@@ -165,7 +165,7 @@ registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "ronchi90lpmm"],
-        "filter_sequence": ["SDSSi_65mm", "SDSSr_65mm", "SDSSr_65mm"],
+        "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "do_acquire": False,
         "do_take_sequence": True,
