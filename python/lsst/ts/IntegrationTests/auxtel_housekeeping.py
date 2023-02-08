@@ -35,6 +35,7 @@ class AuxTelHousekeeping(BaseScript):
 
     index: int = 2
     configs: tuple = (
+        registry["atdome_housekeeping"],
         [],
         [],
         registry["atdome_housekeeping"],
@@ -42,6 +43,7 @@ class AuxTelHousekeeping(BaseScript):
         registry["atspectrograph_housekeeping"],
     )
     scripts: list = [
+        ("run_command.py", BaseScript.is_standard),
         ("auxtel/shutdown.py", BaseScript.is_standard),
         ("auxtel/enable_atcs.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
