@@ -29,7 +29,7 @@ from .config_registry import registry
 
 registry["love_stress"] = yaml.safe_dump(
     {
-        "location": "love.tu.lsst.org",
+        "location": "love1.tu.lsst.org",
         "number_of_clients": 50,
         "number_of_messages": 5000,
         "data": [
@@ -55,6 +55,10 @@ registry["love_stress"] = yaml.safe_dump(
             "MTRotator:0",
             "MTM1M3:0",
             "MTM2:0",
+            "Scheduler:1",
+            "Scheduler:2",
+            "Watcher:0",
+            "WeatherStation:1",
         ],
     },
     explicit_start=True,
