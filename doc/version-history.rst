@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.9.0
+------
+* Converted WeatherForecast CSC to Auto-Enabled.
+
 v0.8.0
 ------
 * Added the WeatherForecast CSC.
