@@ -66,6 +66,8 @@ requirements:
     - setuptools
   run:
     - python
+    - ts-salobj
+    - ts-idl
 
 about:
   home: https://github.com/lsst-ts/ts_IntegrationTests
