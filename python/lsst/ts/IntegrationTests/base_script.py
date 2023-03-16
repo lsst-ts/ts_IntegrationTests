@@ -64,6 +64,16 @@ class BaseScript:
     configs: tuple = ()
     scripts: list = []
 
+    # Define the set of script states that indicate the script is complete.
+    terminal_states = frozenset(
+        (
+            ScriptState.DONE,
+            ScriptState.STOPPED,
+            ScriptState.FAILED,
+            ScriptState.CONFIGURE_FAILED,
+        )
+    )
+
     def __init__(self, queue_placement: str = "LAST") -> None:
         """Initialize the given Standard or External
            script, with the given Yaml configuration, placed in the
@@ -106,7 +116,37 @@ class BaseScript:
         """
         pass
 
-    async def run(self) -> None:
+    async def wait_for_script_done(
+        self, scriptqueue_remote: salobj.Remote, sal_index: int, timeout: int = 60
+    ) -> int:
+        """Wait for a script to finish and return the final state.
+
+        Warning: this ignores messages for all other scripts.
+
+        Parameters
+        ----------
+        scriptqueue_remote : `salobj.Remote`
+            The ScriptQueue Remote object from SalObj.
+        sal_index : `int`
+            The SAL index value of the script.
+        timeout : `float`
+            How long to wait for the script to complete. Default is 60s.
+
+        Returns
+        -------
+        scriptState : `int`
+            The state of the script.
+        """
+        while True:
+            data = await scriptqueue_remote.evt_script.next(
+                flush=False, timeout=timeout
+            )
+            if data.scriptSalIndex != sal_index:
+                continue
+            if data.scriptState in self.terminal_states:
+                return data.scriptState
+
+    async def run(self) -> tuple[list, list]:
         """Run the specified standard or external script."""
         async with salobj.Domain() as domain, salobj.Remote(
             domain=domain, name="ScriptQueue", index=self.index
@@ -125,8 +165,9 @@ class BaseScript:
             # Pause the ScriptQueue to load the scripts into the queue.
             await remote.cmd_pause.start(timeout=10)
             # Add scripts to the queue.
+            script_indicies = []
             for script, config in zip(self.scripts, self.configs):
-                await remote.cmd_add.set_start(
+                ack = await remote.cmd_add.set_start(
                     timeout=10,
                     isStandard=script[1],
                     path=script[0],
@@ -134,5 +175,23 @@ class BaseScript:
                     logLevel=10,
                     location=queue_placement,
                 )
+                try:
+                    script_indicies.append(int(ack.result))
+                except:
+                    print(f"Something went wrong: {ack.result}")
+            # Print script indicies
+            print(f"Script indices: \n{script_indicies}")
             # Resume the ScriptQueue to begin script execution.
             await remote.cmd_resume.set_start(timeout=10)
+            print(f"Wait for scripts {script_indicies} to finish.")
+            # Wait for the scripts to complete
+            for script in script_indicies:
+                print(f"Wait for script {script} to complete")
+                state = await self.wait_for_script_done(remote, script)
+                print("Script completed.")
+                try:
+                    script_states.append(int(state))
+                except Exception:
+                    print("Something went wrong.")
+            # Print script indicies
+            return script_indicies, script_states
