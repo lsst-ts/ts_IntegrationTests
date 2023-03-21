@@ -21,11 +21,10 @@
 import asyncio
 from lsst.ts import salobj
 
+
 # Create an inherited class from the controller,
 # so that you can add logic when commands are received.
 # You can also output events and telemetry from there.
-
-
 class ScriptQueueController(salobj.Controller):
     """Define a ScriptQueue controller. This is used by the unit tests to
     mimic the functions of the real ScriptQueue. The integration test
@@ -89,6 +88,11 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("Script: " + data.path)
         # self.log.info("Location: " + data.location)
         self.queue_list.append(data.path)  # type: ignore
+        return self.salinfo.make_ackcmd(
+            result=str(len(self.queue_list)),
+            ack=salobj.SalRetCode.CMD_COMPLETE,
+            private_seqNum=1001,
+        )
 
     async def do_resume(self, data: tuple) -> None:
         """Resume the ScriptQueue after adding the scripts
@@ -97,7 +101,8 @@ class ScriptQueueController(salobj.Controller):
 
         """
         # self.log.info("ScriptQueue resumed\n")
-        pass
+        for script, _ in enumerate(self.queue_list, start=1):
+            await self.evt_script.set_write(scriptSalIndex=script, scriptState=8)
 
     async def close_tasks(self) -> None:
         """This closes the resources for the controller,

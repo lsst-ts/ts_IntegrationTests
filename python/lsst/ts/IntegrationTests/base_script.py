@@ -22,6 +22,7 @@ __all__ = ["BaseScript"]
 
 from lsst.ts import salobj
 from lsst.ts.idl.enums import ScriptQueue
+from lsst.ts.idl.enums.Script import ScriptState
 
 from datetime import date
 
@@ -166,6 +167,7 @@ class BaseScript:
             await remote.cmd_pause.start(timeout=10)
             # Add scripts to the queue.
             script_indicies = []
+            script_states = []
             for script, config in zip(self.scripts, self.configs):
                 ack = await remote.cmd_add.set_start(
                     timeout=10,
@@ -177,18 +179,13 @@ class BaseScript:
                 )
                 try:
                     script_indicies.append(int(ack.result))
-                except:
+                except Exception:
                     print(f"Something went wrong: {ack.result}")
-            # Print script indicies
-            print(f"Script indices: \n{script_indicies}")
             # Resume the ScriptQueue to begin script execution.
             await remote.cmd_resume.set_start(timeout=10)
-            print(f"Wait for scripts {script_indicies} to finish.")
             # Wait for the scripts to complete
             for script in script_indicies:
-                print(f"Wait for script {script} to complete")
                 state = await self.wait_for_script_done(remote, script)
-                print("Script completed.")
                 try:
                     script_states.append(int(state))
                 except Exception:
