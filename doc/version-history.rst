@@ -13,7 +13,7 @@ Version History
 v0.9.0
 ------
 * Converted WeatherForecast CSC to Auto-Enabled.
-* Base class now waits for the scripts to complete and returns the script_indicie and script_states.
+* Base class now waits for the scripts to complete and returns the script_indexes and script_states.
 * ScriptQueue Controller now mocks the ScriptQueue script event to indicate the script is complete.
 
 v0.8.0
