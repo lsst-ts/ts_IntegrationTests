@@ -147,8 +147,11 @@ class BaseScript:
             if data.scriptState in self.terminal_states:
                 return data.scriptState
 
-    async def run(self) -> tuple[list, list]:
-        """Run the specified standard or external script."""
+    async def run(self) -> None:
+        """Run the specified standard or external scripts.
+        Wait for the scripts to finish and print the lists of
+        script indexes and script states.
+        """
         async with salobj.Domain() as domain, salobj.Remote(
             domain=domain, name="ScriptQueue", index=self.index
         ) as remote:
@@ -192,4 +195,6 @@ class BaseScript:
                 except Exception:
                     print("Something went wrong.")
             # Print script indexes
-            print(f"Scripts complete.\nScript Indexes ; Script States:\n{script_indexes}\n{script_states}")
+            print(
+                f"Scripts complete.\nScript Indexes ; Script States:\n{script_indexes}\n{script_states}"
+            )
