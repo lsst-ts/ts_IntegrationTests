@@ -46,13 +46,13 @@ class AuxTelStopTestCase(unittest.IsolatedAsyncioTestCase):
         which runs the ts_standardscripts/auxtel/stop.py script.
 
         """
-        # Instantiate the AuxTelStop integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelStop integration tests.
         script_class = AuxTelStop()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Stop; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

@@ -48,15 +48,15 @@ class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
         which runs the ts_standardscripts/take_image_latiss.py script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the AuxTelImageTaking integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelImageTaking integration tests.
         script_class = AuxTelImageTaking()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
             f"AuxTel Image Taking verification. "
             f"Running the {script_class.scripts[0][0]} script."
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
