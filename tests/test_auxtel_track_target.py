@@ -51,10 +51,8 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         # script expects.
         test_target = "TEST"
         test_track_for = 99
-        # Instantiate the AuxTelTrackTarget integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelTrackTarget integration tests.
         script_class = AuxTelTrackTarget(target=test_target, track_for=test_track_for)
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         self.assertEqual(script_class.target_config["target_name"], test_target)
@@ -63,6 +61,8 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
             f"AuxTel Track Target; running {num_scripts} script for target {test_target}"
             f" and tracking for {test_track_for} seconds."
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

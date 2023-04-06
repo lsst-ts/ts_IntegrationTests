@@ -48,13 +48,13 @@ class AuxTelPrepareFlatTestCase(unittest.IsolatedAsyncioTestCase):
         This test requires no configuration.
 
         """
-        # Instantiate the AuxTelPrepareFlat integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelPrepareFlat integration tests.
         script_class = AuxTelPrepareFlat()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Prepare for Flat; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

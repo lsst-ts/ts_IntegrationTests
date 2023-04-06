@@ -46,13 +46,13 @@ class MainTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
         which runs the ts_standardscripts/run_command.py script.
 
         """
-        # Instantiate the MainTelHousekeeping integration tests object and
-        # execute the scripts.
+        # Instantiate the MainTelHousekeeping integration tests.
         script_class = MainTelHousekeeping()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Housekeeping; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

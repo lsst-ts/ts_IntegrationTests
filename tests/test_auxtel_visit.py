@@ -47,13 +47,13 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
         Use the configuration stored in the take_image_latiss_configs module.
 
         """
-        # Instantiate the AuxTelVisit integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelVisit integration tests.
         script_class = AuxTelVisit()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Visit; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

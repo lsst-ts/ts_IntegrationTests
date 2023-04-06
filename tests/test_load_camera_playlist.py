@@ -57,12 +57,10 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         test_camera = "at"
         test_playlist = "test"
         sys.argv[1:] = [test_camera, test_playlist]
-        # Instantiate the LoadCameraPlaylist integration tests object and
-        # execute the scripts.
+        # Instantiate the LoadCameraPlaylist integration tests.
         script_class = LoadCameraPlaylist(
             camera=test_camera, playlist_shortname=test_playlist
         )
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         # Assert the correct playlist.
@@ -77,6 +75,8 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
             f"{script_class.playlist_config['parameters']['playlist']}."
             f" Playist repeat is set to {script_class.playlist_config['parameters']['repeat']}."
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to correct ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         self.assertEqual(script_class.index, 2)

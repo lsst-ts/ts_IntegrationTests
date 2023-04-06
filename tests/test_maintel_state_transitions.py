@@ -50,13 +50,13 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the MainTelOfflineStandby integration tests object and
-        # execute the scripts.
+        # Instantiate the MainTelOfflineStandby integration tests.
         script_class = MainTelOfflineStandby()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Offline to Standby; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -67,13 +67,13 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the MainTelStandbyDisabled integration tests object and
-        # execute the scripts.
+        # Instantiate the MainTelStandbyDisabled integration tests.
         script_class = MainTelStandbyDisabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Standby to Disabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -84,13 +84,13 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the MainTelDisabledEnabled integration tests object and
-        # execute the scripts.
+        # Instantiate the MainTelDisabledEnabled integration tests.
         script_class = MainTelDisabledEnabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Disabled to Enabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

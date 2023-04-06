@@ -49,13 +49,13 @@ class AuxTelShutdownTestCase(unittest.IsolatedAsyncioTestCase):
         note that only the enable_atcs.py script requires a configuration.
 
         """
-        # Instantiate the AuxTelShutdown integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelShutdown integration tests.
         script_class = AuxTelShutdown()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Shutdown; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

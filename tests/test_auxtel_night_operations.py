@@ -55,13 +55,13 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         the  M1, ATHexapod and ATSpectrograph, which is needed for the
         CWFS_Align test.
         """
-        # Instantiate the AuxTelResetOffsets integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelResetOffsets integration tests.
         script_class = AuxTelResetOffsets()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Reset Offsets. Running {num_scripts} scripts.")
+        # Execute the scripts.
+        await script_class.run()
         # Assert scripts were added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -72,10 +72,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         Use the configuration stored in the auxtel_night_operations_configs.py
         module.
         """
-        # Instantiate the AuxTelLatissCWFSAlign integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelLatissCWFSAlign integration tests.
         script_class = AuxTelLatissCWFSAlign()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
@@ -83,6 +81,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
             f"Running the {script_class.scripts[0][0]} script,"
             f"\nwith configuration;\n{script_class.configs}"
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -95,10 +95,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         Use the configurations stored in the auxtel_night_operations_configs.py
         module.
         """
-        # Instantiate the AuxTelLatissAcquireTakeSequence integration tests
-        # objectand execute the scripts.
+        # Instantiate the AuxTelLatissAcquireTakeSequence integration tests.
         script_class = AuxTelLatissAcquireTakeSequence(sequence=sequence)
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
@@ -107,5 +105,7 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
             f"for the {script_class.sequence} sequence, "
             f"\nwith configuration;\n{script_class.configs}"
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
