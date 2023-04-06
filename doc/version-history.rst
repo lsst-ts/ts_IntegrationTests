@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.9.1
+-------
+* The Base Class now uses a callback to wait for each script to complete. 
+
 v0.9.0
 ------
 * Converted WeatherForecast CSC to Auto-Enabled.

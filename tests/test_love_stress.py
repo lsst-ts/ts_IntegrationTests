@@ -47,13 +47,13 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
         Use the configuration stored in the love_stress_configs.py module.
 
         """
-        # Instantiate the LoveStress integration tests object and
-        # execute the scripts.
+        # Instantiate the LoveStress integration tests.
         script_class = LoveStressTest()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"LOVE Stress Test; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

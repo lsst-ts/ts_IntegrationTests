@@ -50,13 +50,13 @@ class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
         enabled_offline_state_transition_configs.py module.
 
         """
-        # Instantiate the EnabledOffline integration tests object and
-        # execute the scripts.
+        # Instantiate the EnabledOffline integration tests.
         script_class = EnabledOffline()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"Enabled to Offline; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

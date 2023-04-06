@@ -25,6 +25,7 @@ from lsst.ts.idl.enums import ScriptQueue
 from lsst.ts.idl.enums.Script import ScriptState
 
 from datetime import date
+import copy
 
 
 class BaseScript:
@@ -87,9 +88,22 @@ class BaseScript:
             case insensistive ("FIRST" is the default, for convenience).
             The BaseScript Class will convert to the appropriate
             ScriptQueue.Location enum object.
-
+        script_states : `list`
+            The list of script states as integers. This list is used by
+            both the run() and wait_for_done() functions, so must be
+            defined as an instance variable.
+        temp_script_indexes : `list`
+            A temporary copy of the script_indexes list. This list is reduced
+            by the wait_for_done() function until all the scripts are complete.
+            This maintains the integrity of the real script_indexes list.
+        all_scripts_done : `bool`
+            A simple boolean variable, defaulting to False, that is set to
+            True once all the scripts are complete.
         """
-        self.queue_placement = queue_placement
+        self.queue_placement: str = queue_placement
+        self.script_states: list[int] = []
+        self.temp_script_indexes: list[int] = []
+        self.all_scripts_done: bool = False
 
     @classmethod
     def get_current_date(cls, date_format: str = "%Y-%m-%d") -> str:
@@ -117,44 +131,40 @@ class BaseScript:
         """
         pass
 
-    async def wait_for_script_done(
-        self, scriptqueue_remote: salobj.Remote, sal_index: int, timeout: int = 60
-    ) -> int:
-        """Wait for a script to finish and return the final state.
-
-        Warning: this ignores messages for all other scripts.
+    async def wait_for_done(self, data: salobj.BaseMsgType) -> None:
+        """Wait for the scripts to be in one of defined terminal states.
 
         Parameters
         ----------
-        scriptqueue_remote : `salobj.Remote`
-            The ScriptQueue Remote object from SalObj.
-        sal_index : `int`
-            The SAL index value of the script.
-        timeout : `float`
-            How long to wait for the script to complete. Default is 60s.
-
-        Returns
-        -------
-        scriptState : `int`
-            The state of the script.
+        data : ``lsst.ts.salobj.BaseMsgType``
+            The object returned by the ScriptQueue Script Event (evt_script).
         """
-        while True:
-            data = await scriptqueue_remote.evt_script.next(
-                flush=False, timeout=timeout
-            )
-            if data.scriptSalIndex != sal_index:
-                continue
-            if data.scriptState in self.terminal_states:
-                return data.scriptState
+        print(f"Waiting for script ID {self.temp_script_indexes[0]}...")
+        if data.scriptState in self.terminal_states:
+            print("Script done.")
+            # Store the final script state in the script_states list.
+            self.script_states.append(int(data.scriptState))
+            # Scripts run sequentially and FIFO.
+            # When done, remove the leading script.
+            self.temp_script_indexes.pop(0)
+            # Set the all_scripts_done flag to True when all the
+            # scripts are complete.
+            self.all_scripts_done = len(self.temp_script_indexes) == 0
 
-    async def run(self) -> tuple[list, list]:
-        """Run the specified standard or external script."""
+    async def run(self) -> None:
+        """Run the specified standard or external scripts.
+        Wait for the scripts to finish and print the lists of
+        script indexes and script states.
+        """
         async with salobj.Domain() as domain, salobj.Remote(
             domain=domain, name="ScriptQueue", index=self.index
         ) as remote:
             # Since `async with` is used,
             # you do NOT have to wait for the remote to start
 
+            # Create the callback to the ScriptQueue Script Event that
+            # will wait for all the scripts to complete.
+            remote.evt_script.callback = self.wait_for_done
             # Convert the queue_placement parameter to the approprirate
             # ScriptQueue.Location Enum object.
             queue_placement = getattr(
@@ -166,8 +176,7 @@ class BaseScript:
             # Pause the ScriptQueue to load the scripts into the queue.
             await remote.cmd_pause.start(timeout=10)
             # Add scripts to the queue.
-            script_indicies = []
-            script_states = []
+            script_indexes = []
             for script, config in zip(self.scripts, self.configs):
                 ack = await remote.cmd_add.set_start(
                     timeout=10,
@@ -178,17 +187,19 @@ class BaseScript:
                     location=queue_placement,
                 )
                 try:
-                    script_indicies.append(int(ack.result))
+                    script_indexes.append(int(ack.result))
                 except Exception:
                     print(f"Something went wrong: {ack.result}")
+            # Copy the script_indexes list to use in the Script Event callback.
+            # This maintains the integrity of the real script_indexes list.
+            self.temp_script_indexes = copy.deepcopy(script_indexes)
             # Resume the ScriptQueue to begin script execution.
             await remote.cmd_resume.set_start(timeout=10)
-            # Wait for the scripts to complete
-            for script in script_indicies:
-                state = await self.wait_for_script_done(remote, script)
-                try:
-                    script_states.append(int(state))
-                except Exception:
-                    print("Something went wrong.")
-            # Print script indicies
-            return script_indicies, script_states
+            # Wait for the scripts to complete.
+            while not self.all_scripts_done:
+                pass
+            # Print the script indexes and states.
+            print(
+                f"All scripts complete."
+                f"Script Indexes ; Script States:\n{script_indexes}\n{self.script_states}"
+            )

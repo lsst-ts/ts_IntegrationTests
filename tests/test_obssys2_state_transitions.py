@@ -49,13 +49,13 @@ class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the ObsSys2StandbyDisabled integration tests object and
-        # execute the scripts.
+        # Instantiate the ObsSys2StandbyDisabled integration tests.
         script_class = ObsSys2StandbyDisabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"ObsSys2 Standby to Disabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -66,13 +66,13 @@ class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the ObsSys2DisabledEnabled integration tests object and
-        # execute the scripts.
+        # Instantiate the ObsSys2DisabledEnabled integration tests.
         script_class = ObsSys2DisabledEnabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"ObsSys2 Disabled to Enabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 

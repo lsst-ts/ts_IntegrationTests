@@ -50,11 +50,9 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the AuxTelLatissCalibrations integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelLatissCalibrations integration tests.
         calib_type = "flat"
         script_class = AuxTelLatissCalibrations(calib_type=calib_type)
-        await script_class.run()
         # Assert configurations were updated with current date.
         self.assertEqual(
             script_class.calib_configs["certify_calib_begin_date"],
@@ -71,6 +69,8 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
             f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -80,11 +80,9 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the AuxTelLatissCalibrations integration tests object and
-        # execute the scripts.
+        # Instantiate the AuxTelLatissCalibrations integration tests.
         calib_type = "ptc"
         script_class = AuxTelLatissCalibrations(calib_type=calib_type)
-        await script_class.run()
         # Assert configurations were updated with current date.
         self.assertEqual(
             script_class.calib_configs["certify_calib_begin_date"],
@@ -101,5 +99,7 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
             f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)

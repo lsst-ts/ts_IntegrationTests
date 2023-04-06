@@ -49,13 +49,13 @@ class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the EasStandbyDisabled integration tests object and
-        # execute the scripts.
+        # Instantiate the EasStandbyDisabled integration tests.
         script_class = EasStandbyDisabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"EAS Standby to Disabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
@@ -66,13 +66,13 @@ class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
-        # Instantiate the EasDisabledEnabled integration tests object and
-        # execute the scripts.
+        # Instantiate the EasDisabledEnabled integration tests.
         script_class = EasDisabledEnabled()
-        await script_class.run()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"EAS Disabled to Enabled; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
 
