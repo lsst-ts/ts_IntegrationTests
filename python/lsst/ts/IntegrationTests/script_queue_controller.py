@@ -20,6 +20,7 @@
 
 import asyncio
 from lsst.ts import salobj
+from lsst.ts.idl.enums.Script import ScriptState
 
 
 # Create an inherited class from the controller,
@@ -88,6 +89,21 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("Script: " + data.path)
         # self.log.info("Location: " + data.location)
         self.queue_list.append(data.path)  # type: ignore
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            scriptState=ScriptState.UNKNOWN,
+            force_output=True,
+        )
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            scriptState=ScriptState.UNCONFIGURED,
+            force_output=True,
+        )
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            scriptState=ScriptState.CONFIGURED,
+            force_output=True,
+        )
         return self.salinfo.make_ackcmd(
             result=str(len(self.queue_list)),
             ack=salobj.SalRetCode.CMD_COMPLETE,
@@ -102,7 +118,17 @@ class ScriptQueueController(salobj.Controller):
         """
         # self.log.info("ScriptQueue resumed\n")
         for script, _ in enumerate(self.queue_list, start=1):
-            await self.evt_script.set_write(scriptSalIndex=script, scriptState=8)
+            await self.evt_script.set_write(
+                scriptSalIndex=script, scriptState=ScriptState.RUNNING
+            )
+            await asyncio.sleep(0.1)
+            await self.evt_script.set_write(
+                scriptSalIndex=script, scriptState=ScriptState.STOPPING
+            )
+            await asyncio.sleep(0.1)
+            await self.evt_script.set_write(
+                scriptSalIndex=script, scriptState=ScriptState.DONE
+            )
 
     async def close_tasks(self) -> None:
         """This closes the resources for the controller,
