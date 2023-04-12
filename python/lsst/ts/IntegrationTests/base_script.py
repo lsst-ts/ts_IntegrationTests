@@ -20,12 +20,12 @@
 
 __all__ = ["BaseScript"]
 
+import asyncio
+import copy
 from lsst.ts import salobj
 from lsst.ts.idl.enums import ScriptQueue
 from lsst.ts.idl.enums.Script import ScriptState
-
 from datetime import date
-import copy
 
 
 class BaseScript:
@@ -66,6 +66,16 @@ class BaseScript:
     configs: tuple = ()
     scripts: list = []
 
+    # Define the set of script states that indicate the script is processing.
+    processing_states = frozenset(
+        (
+            ScriptState.UNKNOWN,
+            ScriptState.UNCONFIGURED,
+            ScriptState.CONFIGURED,
+            ScriptState.RUNNING,
+            ScriptState.STOPPING,
+        )
+    )
     # Define the set of script states that indicate the script is complete.
     terminal_states = frozenset(
         (
@@ -139,6 +149,9 @@ class BaseScript:
         data : ``lsst.ts.salobj.BaseMsgType``
             The object returned by the ScriptQueue Script Event (evt_script).
         """
+        if data.scriptState in self.processing_states:
+            # Script initial, configuration and running states.
+            return
         print(f"Waiting for script ID {self.temp_script_indexes[0]}...")
         if data.scriptState in self.terminal_states:
             print("Script done.")
@@ -197,9 +210,9 @@ class BaseScript:
             await remote.cmd_resume.set_start(timeout=10)
             # Wait for the scripts to complete.
             while not self.all_scripts_done:
-                pass
+                await asyncio.sleep(0.1)
             # Print the script indexes and states.
             print(
-                f"All scripts complete."
+                f"All scripts complete.\n"
                 f"Script Indexes ; Script States:\n{script_indexes}\n{self.script_states}"
             )
