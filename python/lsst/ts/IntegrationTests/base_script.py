@@ -66,6 +66,16 @@ class BaseScript:
     configs: tuple = ()
     scripts: list = []
 
+    # Define the set of script states that indicate the script is processing.
+    processing_states = frozenset(
+        (
+            ScriptState.UNKNOWN,
+            ScriptState.UNCONFIGURED,
+            ScriptState.CONFIGURED,
+            ScriptState.RUNNING,
+            ScriptState.STOPPING,
+        )
+    )
     # Define the set of script states that indicate the script is complete.
     terminal_states = frozenset(
         (
@@ -139,13 +149,7 @@ class BaseScript:
         data : ``lsst.ts.salobj.BaseMsgType``
             The object returned by the ScriptQueue Script Event (evt_script).
         """
-        if (
-            data.scriptState == ScriptState.UNKNOWN
-            or data.scriptState == ScriptState.UNCONFIGURED
-            or data.scriptState == ScriptState.CONFIGURED
-            or data.scriptState == ScriptState.RUNNING
-            or data.scriptState == ScriptState.STOPPING
-        ):
+        if data.scriptState in self.processing_states:
             # Script initial, configuration and running states.
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]}...")
