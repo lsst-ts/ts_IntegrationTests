@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.9.3
+------
+* Added the Ending state and the timestampProcessEnd value to the ScriptQueue Controller and Base Clase. 
+
 v0.9.2
 ------
 * The ScriptQueue Controller and Base Clase now handle the Unknown, Unconfigured, Configured, Running and Stopping states.
