@@ -50,7 +50,6 @@ yaml_string = yaml.safe_load(
     - [DIMM:1, OFFLINE]
     - [DIMM:2, OFFLINE]
     - [WeatherForecast, OFFLINE]
-    - [WeatherStation:1, OFFLINE]
     """
 )
 

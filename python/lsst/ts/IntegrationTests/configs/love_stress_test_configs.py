@@ -58,7 +58,6 @@ registry["love_stress"] = yaml.safe_dump(
             "Scheduler:1",
             "Scheduler:2",
             "Watcher:0",
-            "WeatherStation:1",
         ],
     },
     explicit_start=True,
