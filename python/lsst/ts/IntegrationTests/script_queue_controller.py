@@ -127,7 +127,9 @@ class ScriptQueueController(salobj.Controller):
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
-                scriptSalIndex=script, scriptState=ScriptState.DONE
+                scriptSalIndex=script,
+                scriptState=ScriptState.DONE,
+                timestampProcessEnd=99999,
             )
 
     async def close_tasks(self) -> None:
