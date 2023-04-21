@@ -73,6 +73,7 @@ class BaseScript:
             ScriptState.UNCONFIGURED,
             ScriptState.CONFIGURED,
             ScriptState.RUNNING,
+            ScriptState.ENDING,
             ScriptState.STOPPING,
         )
     )
@@ -153,7 +154,7 @@ class BaseScript:
             # Script initial, configuration and running states.
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]}...")
-        if data.scriptState in self.terminal_states:
+        if data.scriptState in self.terminal_states and data.timestampProcessEnd > 0:
             print("Script done.")
             # Store the final script state in the script_states list.
             self.script_states.append(int(data.scriptState))
