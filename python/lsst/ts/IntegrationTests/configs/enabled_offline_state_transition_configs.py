@@ -49,8 +49,18 @@ yaml_string = yaml.safe_load(
     - [DSM:1, OFFLINE]
     - [DIMM:1, OFFLINE]
     - [DIMM:2, OFFLINE]
+    - [ESS:1, OFFLINE]
+    - [ESS:101, OFFLINE]
+    - [ESS:102, OFFLINE]
+    - [ESS:103, OFFLINE]
+    - [ESS:104, OFFLINE]
+    - [ESS:105, OFFLINE]
+    - [ESS:201, OFFLINE]
+    - [ESS:202, OFFLINE]
+    - [ESS:203, OFFLINE]
+    - [ESS:204, OFFLINE]
+    - [ESS:301, OFFLINE]
     - [WeatherForecast, OFFLINE]
-    - [WeatherStation:1, OFFLINE]
     """
 )
 
