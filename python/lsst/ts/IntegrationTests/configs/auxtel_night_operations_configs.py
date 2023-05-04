@@ -86,8 +86,8 @@ registry["auxtel_enable_m1_hex_atspect_corrections"] = yaml.safe_dump(
     canonical=True,
 )
 
-# auxtel_latiss_cwfs_align
-registry["auxtel_cwfs_align"] = yaml.safe_dump(
+# auxtel_latiss_wep_align
+registry["auxtel_wep_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
         "rot_type": "PhysicalSky",
