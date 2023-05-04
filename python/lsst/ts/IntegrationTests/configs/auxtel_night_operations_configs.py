@@ -146,7 +146,7 @@ registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
         "object_name": "HD164461",
         "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
-        "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "empty_1"],
+        "grating_sequence": ["ronchi170lpmm", "ronchi170lpmm", "empty_1"],
         "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "target_pointing_tolerance": 5,
@@ -164,7 +164,7 @@ registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "ronchi90lpmm"],
+        "grating_sequence": ["ronchi170lpmm", "ronchi170lpmm", "ronchi170lpmm"],
         "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "do_acquire": False,
