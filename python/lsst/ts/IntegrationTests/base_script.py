@@ -24,7 +24,6 @@ import asyncio
 import copy
 from lsst.ts import salobj
 from lsst.ts.idl.enums import ScriptQueue
-from lsst.ts.idl.enums.Script import ScriptState
 from datetime import date
 
 
@@ -69,21 +68,19 @@ class BaseScript:
     # Define the set of script states that indicate the script is processing.
     processing_states = frozenset(
         (
-            ScriptState.UNKNOWN,
-            ScriptState.UNCONFIGURED,
-            ScriptState.CONFIGURED,
-            ScriptState.RUNNING,
-            ScriptState.ENDING,
-            ScriptState.STOPPING,
+            ScriptQueue.ScriptProcessState.UNKNOWN,
+            ScriptQueue.ScriptProcessState.LOADING,
+            ScriptQueue.ScriptProcessState.CONFIGURED,
+            ScriptQueue.ScriptProcessState.RUNNING,
         )
     )
     # Define the set of script states that indicate the script is complete.
     terminal_states = frozenset(
         (
-            ScriptState.DONE,
-            ScriptState.STOPPED,
-            ScriptState.FAILED,
-            ScriptState.CONFIGURE_FAILED,
+            ScriptQueue.ScriptProcessState.DONE,
+            ScriptQueue.ScriptProcessState.LOADFAILED,
+            ScriptQueue.ScriptProcessState.CONFIGURE_FAILED,
+            ScriptQueue.ScriptProcessState.TERMINATED,
         )
     )
 
@@ -150,14 +147,19 @@ class BaseScript:
         data : ``lsst.ts.salobj.BaseMsgType``
             The object returned by the ScriptQueue Script Event (evt_script).
         """
-        if data.scriptState in self.processing_states:
+        if data.processState in self.processing_states:
             # Script initial, configuration and running states.
+            print(
+                f"Script processing state: {ScriptQueue.ScriptProcessState(data.processState).name}"
+            )
             return
-        print(f"Waiting for script ID {self.temp_script_indexes[0]}...")
-        if data.scriptState in self.terminal_states and data.timestampProcessEnd > 0:
-            print("Script done.")
+        print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
+        if data.processState in self.terminal_states and data.timestampProcessEnd > 0:
+            print(
+                f"Script terminal state: {ScriptQueue.ScriptProcessState(data.processState).name}"
+            )
             # Store the final script state in the script_states list.
-            self.script_states.append(int(data.scriptState))
+            self.script_states.append(int(data.processState))
             # Scripts run sequentially and FIFO.
             # When done, remove the leading script.
             self.temp_script_indexes.pop(0)

@@ -20,7 +20,7 @@
 
 import asyncio
 from lsst.ts import salobj
-from lsst.ts.idl.enums.Script import ScriptState
+from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
 
 # Create an inherited class from the controller,
@@ -91,17 +91,17 @@ class ScriptQueueController(salobj.Controller):
         self.queue_list.append(data.path)  # type: ignore
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
-            scriptState=ScriptState.UNKNOWN,
+            processState=ScriptProcessState.UNKNOWN,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
-            scriptState=ScriptState.UNCONFIGURED,
+            processState=ScriptProcessState.LOADING,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
-            scriptState=ScriptState.CONFIGURED,
+            processState=ScriptProcessState.CONFIGURED,
             force_output=True,
         )
         return self.salinfo.make_ackcmd(
@@ -119,16 +119,12 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("ScriptQueue resumed\n")
         for script, _ in enumerate(self.queue_list, start=1):
             await self.evt_script.set_write(
-                scriptSalIndex=script, scriptState=ScriptState.RUNNING
-            )
-            await asyncio.sleep(0.1)
-            await self.evt_script.set_write(
-                scriptSalIndex=script, scriptState=ScriptState.STOPPING
+                scriptSalIndex=script, processState=ScriptProcessState.RUNNING
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
                 scriptSalIndex=script,
-                scriptState=ScriptState.DONE,
+                processState=ScriptProcessState.DONE,
                 timestampProcessEnd=99999,
             )
 
