@@ -23,7 +23,8 @@ __all__ = ["BaseScript"]
 import asyncio
 import copy
 from lsst.ts import salobj
-from lsst.ts.idl.enums import ScriptQueue
+from lsst.ts.idl.enums import Script
+from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
 from datetime import date
 
 
@@ -68,19 +69,19 @@ class BaseScript:
     # Define the set of script states that indicate the script is processing.
     processing_states = frozenset(
         (
-            ScriptQueue.ScriptProcessState.UNKNOWN,
-            ScriptQueue.ScriptProcessState.LOADING,
-            ScriptQueue.ScriptProcessState.CONFIGURED,
-            ScriptQueue.ScriptProcessState.RUNNING,
+            ScriptProcessState.UNKNOWN,
+            ScriptProcessState.LOADING,
+            ScriptProcessState.CONFIGURED,
+            ScriptProcessState.RUNNING,
         )
     )
     # Define the set of script states that indicate the script is complete.
     terminal_states = frozenset(
         (
-            ScriptQueue.ScriptProcessState.DONE,
-            ScriptQueue.ScriptProcessState.LOADFAILED,
-            ScriptQueue.ScriptProcessState.CONFIGURE_FAILED,
-            ScriptQueue.ScriptProcessState.TERMINATED,
+            ScriptProcessState.DONE,
+            ScriptProcessState.LOADFAILED,
+            ScriptProcessState.CONFIGURE_FAILED,
+            ScriptProcessState.TERMINATED,
         )
     )
 
@@ -91,6 +92,9 @@ class BaseScript:
 
         Parameters
         ----------
+        remote : `salobj.Remote`
+            A listener for the ScriptQueue CSC. Defined as an instance
+            variable, in order to call it from mulitple methods.
         queue_placement : `str`
             Options are "FIRST" "LAST" "BEFORE" or "AFTER" and are
             case insensistive ("FIRST" is the default, for convenience).
@@ -112,6 +116,7 @@ class BaseScript:
         self.script_states: list[int] = []
         self.temp_script_indexes: list[int] = []
         self.all_scripts_done: bool = False
+        self.remote: salobj.Remote
 
     @classmethod
     def get_current_date(cls, date_format: str = "%Y-%m-%d") -> str:
@@ -150,19 +155,27 @@ class BaseScript:
         if data.processState in self.processing_states:
             # Script initial, configuration and running states.
             print(
-                f"Script processing state: {ScriptQueue.ScriptProcessState(data.processState).name}"
+                f"Script {data.scriptSalIndex} processing state: {ScriptProcessState(data.processState).name}"
             )
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
         if data.processState in self.terminal_states and data.timestampProcessEnd > 0:
             print(
-                f"Script terminal state: {ScriptQueue.ScriptProcessState(data.processState).name}"
+                f"Script {data.scriptSalIndex} terminal processing state: "
+                f"{ScriptProcessState(data.processState).name}\n"
+                f"Final ScriptState: {Script.ScriptState(data.scriptState).name}"
             )
-            # Store the final script state in the script_states list.
-            self.script_states.append(int(data.processState))
+            # Store the final Script.ScriptState enum
+            # in the script_states list.
+            self.script_states.append(int(data.scriptState))
             # Scripts run sequentially and FIFO.
             # When done, remove the leading script.
             self.temp_script_indexes.pop(0)
+            if data.scriptState == 10:  # FAILED
+                # Resume the ScriptQueue, if a script failed,
+                # to continue processing any remaining scripts.
+                print("Resuming the ScriptQueue after a script FAILED.")
+                await self.remote.cmd_resume.set_start(timeout=10)
             # Set the all_scripts_done flag to True when all the
             # scripts are complete.
             self.all_scripts_done = len(self.temp_script_indexes) == 0
@@ -174,27 +187,25 @@ class BaseScript:
         """
         async with salobj.Domain() as domain, salobj.Remote(
             domain=domain, name="ScriptQueue", index=self.index
-        ) as remote:
+        ) as self.remote:
             # Since `async with` is used,
             # you do NOT have to wait for the remote to start
 
             # Create the callback to the ScriptQueue Script Event that
             # will wait for all the scripts to complete.
-            remote.evt_script.callback = self.wait_for_done
+            self.remote.evt_script.callback = self.wait_for_done
             # Convert the queue_placement parameter to the approprirate
             # ScriptQueue.Location Enum object.
-            queue_placement = getattr(
-                ScriptQueue.Location, self.queue_placement.upper()
-            )
+            queue_placement = getattr(Location, self.queue_placement.upper())
 
             # Wait for the next ScriptQueue heartbeat to ensure it is running.
-            await remote.evt_heartbeat.next(flush=True, timeout=30)
+            await self.remote.evt_heartbeat.next(flush=True, timeout=30)
             # Pause the ScriptQueue to load the scripts into the queue.
-            await remote.cmd_pause.start(timeout=10)
+            await self.remote.cmd_pause.start(timeout=10)
             # Add scripts to the queue.
             script_indexes = []
             for script, config in zip(self.scripts, self.configs):
-                ack = await remote.cmd_add.set_start(
+                ack = await self.remote.cmd_add.set_start(
                     timeout=10,
                     isStandard=script[1],
                     path=script[0],
@@ -210,7 +221,7 @@ class BaseScript:
             # This maintains the integrity of the real script_indexes list.
             self.temp_script_indexes = copy.deepcopy(script_indexes)
             # Resume the ScriptQueue to begin script execution.
-            await remote.cmd_resume.set_start(timeout=10)
+            await self.remote.cmd_resume.set_start(timeout=10)
             # Wait for the scripts to complete.
             while not self.all_scripts_done:
                 await asyncio.sleep(0.1)
