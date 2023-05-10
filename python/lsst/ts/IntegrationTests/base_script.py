@@ -57,6 +57,10 @@ class BaseScript:
         A list of tuples. The tuple is the script name and a boolean.
         The boolean specifies the script as Standard (True)
         or External (False).
+    processing_states : `frozenset`
+        An immutable set of the ScriptQueue processing states.
+    terminal_states : `frozenset`
+        An immutable set of the ScriptQueue terminal states.
     """
 
     # See Attributes for the definition.
@@ -112,11 +116,11 @@ class BaseScript:
             A simple boolean variable, defaulting to False, that is set to
             True once all the scripts are complete.
         """
+        self.remote: salobj.Remote
         self.queue_placement: str = queue_placement
         self.script_states: list[int] = []
         self.temp_script_indexes: list[int] = []
         self.all_scripts_done: bool = False
-        self.remote: salobj.Remote
 
     @classmethod
     def get_current_date(cls, date_format: str = "%Y-%m-%d") -> str:
