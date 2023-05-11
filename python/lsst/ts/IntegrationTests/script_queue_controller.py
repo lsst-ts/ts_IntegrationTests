@@ -20,6 +20,7 @@
 
 import asyncio
 from lsst.ts import salobj
+from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
 
@@ -92,19 +93,19 @@ class ScriptQueueController(salobj.Controller):
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.UNKNOWN,
-            scriptState=0,  # UNKNOWN
+            scriptState=ScriptState.UNKNOWN,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.LOADING,
-            scriptState=1,  # UNCONFIGURED
+            scriptState=ScriptState.UNCONFIGURED,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.CONFIGURED,
-            scriptState=2,  # CONFIGURED
+            scriptState=ScriptState.CONFIGURED,
             force_output=True,
         )
         return self.salinfo.make_ackcmd(
@@ -124,13 +125,13 @@ class ScriptQueueController(salobj.Controller):
             await self.evt_script.set_write(
                 scriptSalIndex=script,
                 processState=ScriptProcessState.RUNNING,
-                scriptState=3,  # RUNNING
+                scriptState=ScriptState.RUNNING,
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
                 scriptSalIndex=script,
                 processState=ScriptProcessState.DONE,
-                scriptState=8,  # DONE
+                scriptState=ScriptState.DONE,
                 timestampProcessEnd=99999,
             )
 

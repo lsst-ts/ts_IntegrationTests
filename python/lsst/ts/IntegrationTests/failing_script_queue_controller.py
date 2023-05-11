@@ -20,6 +20,7 @@
 
 import asyncio
 from .script_queue_controller import ScriptQueueController
+from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
 
@@ -74,12 +75,13 @@ class FailingScriptQueueController(ScriptQueueController):
                 await self.evt_script.set_write(
                     scriptSalIndex=script,
                     processState=ScriptProcessState.DONE,
-                    scriptState=10,  # FAILED
+                    scriptState=ScriptState.FAILED,
                     timestampProcessEnd=99999,
                 )
             else:
                 await self.evt_script.set_write(
                     scriptSalIndex=script,
                     processState=ScriptProcessState.DONE,
+                    scriptState=ScriptState.DONE,
                     timestampProcessEnd=99999,
                 )
