@@ -1,0 +1,189 @@
+# This file is part of ts_IntegrationTests
+#
+# Developed for the LSST Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
+# See the COPYRIGHT file at the top-level directory of this distribution
+# for details of code ownership.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+
+import asyncio
+from lsst.ts import salobj
+from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
+
+
+# Create an inherited class from the controller,
+# so that you can add logic when commands are received.
+# You can also output events and telemetry from there.
+class FailingScriptQueueController(salobj.Controller):
+    """Define a ScriptQueue controller to use for scripts going into
+    failed states. This is used by certain unit tests to
+    mimic the functions of the real ScriptQueue, to verify
+    integration test scripts that fail for various reasons.
+    """
+
+    def __init__(self, index: int, test_type: str) -> None:
+        """Initialize the ScriptQueue Controller.
+
+        Parameters
+        ----------
+        index : `int`
+            Defines whether this is a MainTel (index=1)
+        or an AuxTel (index=2) controller.
+        test_type : `str`
+            Defines what type of failing test to mimic.
+        """
+        super().__init__("ScriptQueue", index=index)
+        self.index: int = index
+        self.test_type: str = test_type
+        self.queue_list: list = []
+        self.cmd_pause.callback = self.do_pause
+        self.cmd_add.callback = self.do_add
+        self.cmd_resume.callback = self.do_resume
+
+    async def pub_hb(self) -> None:
+        """Publish the heartbeat. This ensures the controller is running.
+        The test scripts check for the heartbeat before proceeding.
+
+        """
+        try:
+            while True:
+                await self.evt_heartbeat.write()
+                await asyncio.sleep(1.0)
+        except asyncio.CancelledError:
+            self.log.debug("Heartbeat ended normally")
+        except Exception:
+            self.log.exception("Heartbeat failed!")
+
+    async def start(self) -> None:
+        """Start the Controller and the hertbeat."""
+        await super().start()
+        self.hb_task = asyncio.create_task(self.pub_hb())
+
+    async def do_pause(self, data: tuple) -> None:
+        """Pause the ScriptQueue to add scripts to the queue."""
+        # self.log.info("ScriptQueue paused\n")
+        pass
+
+    async def do_add(self, data: tuple) -> None:
+        """Add scripts to the ScriptQueue queue.
+        This mock function uses a simple array to mimic the queue.
+        It simply appends the script path to the array.
+
+        Parameters
+        ----------
+        data : ``cmd_add.DataType``
+            Data is an object that contains the configuration for the script.
+            This includes the path to the script and the Location in
+            queue.
+
+        """
+        # self.log.info("Script: " + data.path)
+        # self.log.info("Location: " + data.location)
+        self.queue_list.append(data.path)  # type: ignore
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.UNKNOWN,
+            scriptState=0,  # UNKNOWN
+            force_output=True,
+        )
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.LOADING,
+            scriptState=1,  # UNCONFIGURED
+            force_output=True,
+        )
+        await self.evt_script.set_write(
+            scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.CONFIGURED,
+            scriptState=2,  # CONFIGURED
+            force_output=True,
+        )
+        return self.salinfo.make_ackcmd(
+            result=str(len(self.queue_list)),
+            ack=salobj.SalRetCode.CMD_COMPLETE,
+            private_seqNum=1001,
+        )
+
+    async def do_resume(self, data: tuple) -> None:
+        """Resume the ScriptQueue after adding the scripts
+        to the queue. The ScriptQueue will then execute
+        the scripts.
+
+        """
+        # self.log.info("ScriptQueue resumed\n")
+        for script, _ in enumerate(self.queue_list, start=1):
+            await self.evt_script.set_write(
+                scriptSalIndex=script,
+                processState=ScriptProcessState.RUNNING,
+                scriptState=3,  # RUNNING
+            )
+            await asyncio.sleep(0.1)
+            if self.test_type.upper() == "TERMINATED":
+                await self.evt_script.set_write(
+                    scriptSalIndex=script,
+                    processState=ScriptProcessState.TERMINATED,
+                    # The next line is technically improper,
+                    # but for testing, it's fine.
+                    scriptState=ScriptProcessState.TERMINATED,
+                    timestampProcessEnd=99999,
+                )
+            elif self.test_type.upper() == "FAILED":
+                await self.evt_script.set_write(
+                    scriptSalIndex=script,
+                    processState=ScriptProcessState.DONE,
+                    scriptState=10,  # FAILED
+                    timestampProcessEnd=99999,
+                )
+            else:
+                await self.evt_script.set_write(
+                    scriptSalIndex=script,
+                    processState=ScriptProcessState.DONE,
+                    timestampProcessEnd=99999,
+                )
+
+    async def close_tasks(self) -> None:
+        """This closes the resources for the controller,
+        and terminates the heartbeat loop.
+
+        """
+        self.hb_task.cancel()
+        await super().close_tasks()
+
+    async def do_move(self) -> None:
+        pass
+
+    async def do_requeue(self) -> None:
+        pass
+
+    async def do_showAvailableScripts(self) -> None:
+        pass
+
+    async def do_showQueue(self) -> None:
+        """Show the queue via the output from the queue event."""
+        pass
+
+    async def do_showSchema(self) -> None:
+        pass
+
+    async def do_showScript(self) -> None:
+        pass
+
+    async def do_stopScripts(self) -> None:
+        pass
+
+    @classmethod
+    async def amain(cls, index: int, test_type: str) -> None:
+        csc = cls(index, test_type)
+        await csc.done_task

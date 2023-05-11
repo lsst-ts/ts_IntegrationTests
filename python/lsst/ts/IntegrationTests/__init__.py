@@ -58,3 +58,4 @@ from .enabled_offline import *
 from .load_camera_playlist import *
 from .love_stress_test import *
 from .script_queue_controller import *
+from .failing_script_queue_controller import *
