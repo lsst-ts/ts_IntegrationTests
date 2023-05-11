@@ -45,7 +45,6 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
         """Execute the AuxTelVisit integration test script, which runs the
         ts_standardscripts/auxtel/take_image_latiss.py script.
         Use the configuration stored in the take_image_latiss_configs module.
-
         """
         # Instantiate the AuxTelVisit integration tests.
         script_class = AuxTelVisit()
@@ -56,6 +55,8 @@ class AuxTelVisitTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

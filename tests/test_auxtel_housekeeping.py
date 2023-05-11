@@ -44,7 +44,6 @@ class AuxTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_auxtel_housekeeping(self) -> None:
         """Execute the AuxTelHousekeeping integration test script,
         which runs the ts_standardscripts/run_command.py script.
-
         """
         # Instantiate the AuxTelHousekeeping integration tests.
         script_class = AuxTelHousekeeping()
@@ -55,6 +54,8 @@ class AuxTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

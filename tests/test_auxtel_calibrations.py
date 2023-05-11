@@ -73,6 +73,8 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_auxtel_latiss_calibrations_ptc(self) -> None:
         """Execute the AuxTelLatissCalibrations integration test script,
@@ -103,3 +105,5 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])

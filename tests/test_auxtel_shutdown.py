@@ -44,10 +44,6 @@ class AuxTelShutdownTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_auxtel_shutdown(self) -> None:
         """Execute the AuxTelShutdown integration test script,
         which runs the ts_standardscripts/auxtel/shutdown.py script,
-        followed by the ts_standardscripts/auxtel/enable_atcs.py script.
-        Use the configuration stored in the shutdown_configs.py module;
-        note that only the enable_atcs.py script requires a configuration.
-
         """
         # Instantiate the AuxTelShutdown integration tests.
         script_class = AuxTelShutdown()
@@ -58,6 +54,8 @@ class AuxTelShutdownTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
