@@ -40,7 +40,7 @@ class ScriptQueueController(salobj.Controller):
         ----------
         index : `int`
             Defines whether this is a MainTel (index=1)
-        or an AuxTel (index=2) controller.
+            or an AuxTel (index=2) controller.
         """
         super().__init__("ScriptQueue", index=index)
         self.index: int = index
