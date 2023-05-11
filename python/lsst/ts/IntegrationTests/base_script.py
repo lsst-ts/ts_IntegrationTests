@@ -231,7 +231,7 @@ class BaseScript:
             await self.remote.cmd_resume.set_start(timeout=10)
             # Wait for the scripts to complete.
             while not self.all_scripts_done:
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(0)
             # Print the script indexes and states.
             print(
                 f"All scripts complete.\n"
