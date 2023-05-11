@@ -175,14 +175,17 @@ class BaseScript:
             # Scripts run sequentially and FIFO.
             # When done, remove the leading script.
             self.temp_script_indexes.pop(0)
-            if data.scriptState == 10:  # FAILED
-                # Resume the ScriptQueue, if a script failed,
-                # to continue processing any remaining scripts.
-                print("Resuming the ScriptQueue after a script FAILED.")
-                await self.remote.cmd_resume.set_start(timeout=10)
             # Set the all_scripts_done flag to True when all the
             # scripts are complete.
             self.all_scripts_done = len(self.temp_script_indexes) == 0
+            # Resume the ScriptQueue, if a script failed,
+            # to continue processing any remaining scripts.
+            # NOTE: This MUST be done LAST. Otherwise, the resume triggers an
+            # additional set of callbacks, but the self.temp_script_indexes
+            # list is empty and the .pop(0) method fails with an IndexError.
+            if data.scriptState == 10:  # FAILED
+                print("Resuming the ScriptQueue after a script FAILED.")
+                await self.remote.cmd_resume.set_start(timeout=10)
 
     async def run(self) -> None:
         """Run the specified standard or external scripts.
