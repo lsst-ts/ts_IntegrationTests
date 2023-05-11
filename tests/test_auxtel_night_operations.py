@@ -64,6 +64,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert scripts were added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8, 8, 8])
 
     async def test_auxtel_latiss_cwfs_align(self) -> None:
         """Execute the AuxTelLatissCWFSAlign integration test script,
@@ -85,6 +87,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     @parameterized.expand(["pointing", "verify", "nominal", "test"])
     async def test_auxtel_latiss_acquire_and_take_sequence(self, sequence: str) -> None:
@@ -109,3 +113,5 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])

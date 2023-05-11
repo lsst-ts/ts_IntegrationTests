@@ -59,6 +59,8 @@ class AuxTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_auxtel_standby_disabled(self) -> None:
         """Execute the AuxTelStandbyDisabled integration test script,
@@ -76,13 +78,14 @@ class AuxTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8])
 
     async def test_auxtel_disabled_enabled(self) -> None:
         """Execute the AuxTelDisabledEnabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
         Use the configuration stored in the at_state_transition_configs.py
         module.
-
         """
         # Instantiate the AuxTelDisabledEnabled integration tests.
         script_class = AuxTelDisabledEnabled()
@@ -93,6 +96,8 @@ class AuxTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

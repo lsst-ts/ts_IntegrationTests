@@ -20,6 +20,7 @@
 
 import asyncio
 from lsst.ts import salobj
+from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
 
@@ -40,7 +41,7 @@ class ScriptQueueController(salobj.Controller):
         ----------
         index : `int`
             Defines whether this is a MainTel (index=1)
-        or an AuxTel (index=2) controller.
+            or an AuxTel (index=2) controller.
         """
         super().__init__("ScriptQueue", index=index)
         self.index: int = index
@@ -92,16 +93,19 @@ class ScriptQueueController(salobj.Controller):
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.UNKNOWN,
+            scriptState=ScriptState.UNKNOWN,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.LOADING,
+            scriptState=ScriptState.UNCONFIGURED,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.CONFIGURED,
+            scriptState=ScriptState.CONFIGURED,
             force_output=True,
         )
         return self.salinfo.make_ackcmd(
@@ -119,12 +123,15 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("ScriptQueue resumed\n")
         for script, _ in enumerate(self.queue_list, start=1):
             await self.evt_script.set_write(
-                scriptSalIndex=script, processState=ScriptProcessState.RUNNING
+                scriptSalIndex=script,
+                processState=ScriptProcessState.RUNNING,
+                scriptState=ScriptState.RUNNING,
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
                 scriptSalIndex=script,
                 processState=ScriptProcessState.DONE,
+                scriptState=ScriptState.DONE,
                 timestampProcessEnd=99999,
             )
 

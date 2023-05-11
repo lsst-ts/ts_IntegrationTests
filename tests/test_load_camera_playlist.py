@@ -80,6 +80,8 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to correct ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         self.assertEqual(script_class.index, 2)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_bad_inputs(self) -> None:
         """Attempt to execute the LoadCameraPlaylist integration test script,
@@ -104,8 +106,7 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         test_camera = "cc"
         test_playlist = "master_flat"
         test_no_repeat = False
-        # Instantiate the LoadCameraPlaylist integration tests object and
-        # execute the scripts.
+        # Instantiate the LoadCameraPlaylist integration tests object.
         script_class = LoadCameraPlaylist(
             camera=test_camera, playlist_shortname=test_playlist, repeat=test_no_repeat
         )

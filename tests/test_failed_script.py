@@ -22,56 +22,46 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import unittest
-from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import ComCamCalibrations
+from lsst.ts.IntegrationTests import FailingScriptQueueController
+from lsst.ts.IntegrationTests import AuxTelHousekeeping
 
 
-class ComCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
-    """
-    Test the Make Latiss Configurations integration test scripts.
-    """
+class FailedScriptTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test when a script is FAILED."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
         salobj.set_random_lsst_dds_partition_prefix()
 
         # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=1)
+        self.controller = FailingScriptQueueController(index=2, test_type="FAILED")
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_comcam_calibrations_flat(self) -> None:
-        """Execute the ComCamCalibrations integration test script,
-        which runs the ts_standardscripts/maintel/make_comcam_calibratons.py
-        script.
-        Use the configuration stored in the image_taking_configs.py module.
+    async def test_failed_script(self) -> None:
+        """Execute the AuxTelHousekeeping integration test script,
+        but make the final states FAILED.
         """
-        # Instantiate the ComCamCalibrations integration tests.
-        calib_type = "flat"
-        script_class = ComCamCalibrations(calib_type=calib_type)
-        # Assert configurations were updated with current date.
-        self.assertEqual(
-            script_class.calib_configs["certify_calib_begin_date"],
-            date.today().strftime("%Y-%m-%d"),
-        )
-        self.assertEqual(
-            script_class.calib_configs["calib_collection"],
-            f"LSSTComCam/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
-        )
+        # Instantiate the AuxTelHousekeeping integration tests.
+        script_class = AuxTelHousekeeping()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(
-            f"AuxTel Make Latiss Configurations. "
-            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
-            f"\nwith configuration;\n{script_class.configs}"
-        )
+        print(f"AuxTel Housekeeping; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
-        # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8])
+        # Assert scripts are FAILED.
+        # When a script is FAILED, it pauses the ScriptQueue and keeps the
+        # failed script in the queue. The integration test script handles this
+        # by sending a resume command to the SQ. By verifying the final script
+        # states, this test ensures the test script doesn't hang and properly
+        # processes through the SQ.
+        self.assertEqual(script_class.script_states, [10, 10, 10, 10, 10, 10])
+
+    async def asyncTearDown(self) -> None:
+        await self.controller.close()
+        await self.controller.done_task

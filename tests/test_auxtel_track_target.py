@@ -45,7 +45,6 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         """Execute the AuxTelTrackTarget integration test script,
         which runs the ts_standardscripts/auxtel/track_target.py script.
         Use the configuration stored in the track_target_configs.py module.
-
         """
         # Mock the command-line argument that the aux_tel_track_target.py
         # script expects.
@@ -65,6 +64,8 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
