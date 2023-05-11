@@ -92,16 +92,19 @@ class ScriptQueueController(salobj.Controller):
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.UNKNOWN,
+            scriptState=0,  # UNKNOWN
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.LOADING,
+            scriptState=1,  # UNCONFIGURED
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
             processState=ScriptProcessState.CONFIGURED,
+            scriptState=2,  # CONFIGURED
             force_output=True,
         )
         return self.salinfo.make_ackcmd(
@@ -119,12 +122,15 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("ScriptQueue resumed\n")
         for script, _ in enumerate(self.queue_list, start=1):
             await self.evt_script.set_write(
-                scriptSalIndex=script, processState=ScriptProcessState.RUNNING
+                scriptSalIndex=script,
+                processState=ScriptProcessState.RUNNING,
+                scriptState=3,  # RUNNING
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
                 scriptSalIndex=script,
                 processState=ScriptProcessState.DONE,
+                scriptState=8,  # DONE
                 timestampProcessEnd=99999,
             )
 
