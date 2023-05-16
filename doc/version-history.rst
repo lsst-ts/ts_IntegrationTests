@@ -10,6 +10,12 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.11.0
+-------
+* Added the auxtel_telescope_dome_checkout.py integration test module.
+* Updated script names and configurations.
+* Fixed a bug in the wait_for_done function in base_script.py
+
 v0.10.0
 -------
 * Removed the WeatherStation CSC.
