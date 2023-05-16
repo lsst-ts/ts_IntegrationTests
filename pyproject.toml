@@ -30,6 +30,7 @@ auxtel_latiss_cwfs_align = "lsst.ts.IntegrationTests.auxtel_latiss_cwfs_align:ru
 auxtel_offline_standby = "lsst.ts.IntegrationTests.auxtel_offline_standby:run_auxtel_offline_standby"
 auxtel_prepare_for_flat = "lsst.ts.IntegrationTests.auxtel_prepare_for_flat:run_auxtel_prepare_for_flat"
 auxtel_prepare_for_onsky = "lsst.ts.IntegrationTests.auxtel_prepare_for_onsky:run_auxtel_prepare_for_onsky"
+auxtel_telescope_dome_checkout = "lsst.ts.IntegrationTests.auxtel_telescope_dome_checkout:run_at_telescope_and_dome_checkout"
 auxtel_reset_offsets = "lsst.ts.IntegrationTests.auxtel_reset_offsets:run_auxtel_reset_offsets"
 auxtel_shutdown = "lsst.ts.IntegrationTests.auxtel_shutdown:run_auxtel_shutdown"
 auxtel_standby_disabled = "lsst.ts.IntegrationTests.auxtel_standby_disabled:run_auxtel_standby_disabled"
