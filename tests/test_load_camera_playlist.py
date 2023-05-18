@@ -68,9 +68,7 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
             atcamera_playlists[test_playlist],
         )
         # Assert playlist repeat is set to True.
-        self.assertEqual(
-            script_class.playlist_config["parameters"]["repeat"], True
-        )
+        self.assertEqual(script_class.playlist_config["parameters"]["repeat"], True)
         print(
             f"Running the {script_class.camera} "
             f"{script_class.playlist_config['parameters']['playlist']}. "
@@ -118,9 +116,7 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
             repeat=test_no_repeat,
         )
         # Assert playlist repeat is set to False.
-        self.assertEqual(
-            script_class.playlist_config["parameters"]["repeat"], False
-        )
+        self.assertEqual(script_class.playlist_config["parameters"]["repeat"], False)
         # Assert script would be added to correct ScriptQueue.
         self.assertEqual(script_class.index, 1)
 

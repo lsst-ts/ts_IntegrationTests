@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import TelescopeAndDomeCheckout
+from lsst.ts.IntegrationTests import ScriptQueueController, TelescopeAndDomeCheckout
 
 
 class TelescopeAndDomeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):

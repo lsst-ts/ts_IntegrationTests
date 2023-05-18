@@ -24,10 +24,12 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelResetOffsets
-from lsst.ts.IntegrationTests import AuxTelLatissWEPAlign
-from lsst.ts.IntegrationTests import AuxTelLatissAcquireTakeSequence
+from lsst.ts.IntegrationTests import (
+    AuxTelLatissAcquireTakeSequence,
+    AuxTelLatissWEPAlign,
+    AuxTelResetOffsets,
+    ScriptQueueController,
+)
 from parameterized import parameterized
 
 

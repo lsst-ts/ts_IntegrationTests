@@ -161,7 +161,7 @@ class BaseScript:
             # Script initial, configuration and running states.
             print(
                 f"Script processing state: "
-                f"{ScriptQueue.ScriptProcessState(data.processState).name}"
+                f"{ScriptProcessState(data.processState).name}"
             )
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")

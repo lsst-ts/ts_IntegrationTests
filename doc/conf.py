@@ -2,7 +2,6 @@
 
 from documenteer.conf.pipelines import *  # type: ignore # noqa
 
-
 project = "ts-IntegrationTests"
 html_theme_options["logotext"] = project  # type: ignore # noqa
 html_title = project
