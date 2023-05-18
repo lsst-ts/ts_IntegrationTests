@@ -19,8 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
 import subprocess
+import unittest
 
 from lsst.ts import IntegrationTests
 from lsst.ts.IntegrationTests.configs.config_registry import registry

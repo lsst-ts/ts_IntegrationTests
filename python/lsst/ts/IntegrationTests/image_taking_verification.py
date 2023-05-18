@@ -26,7 +26,9 @@ __all__ = [
 ]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

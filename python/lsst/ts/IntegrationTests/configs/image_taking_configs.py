@@ -23,7 +23,6 @@ import yaml
 
 from .config_registry import registry
 
-
 # Add the AuxTel and ComCam image taking verification
 # script configurations to the registry.
 

@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import MainTelHousekeeping
+from lsst.ts.IntegrationTests import MainTelHousekeeping, ScriptQueueController
 
 
 class MainTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):

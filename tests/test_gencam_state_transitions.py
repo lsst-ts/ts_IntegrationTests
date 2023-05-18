@@ -24,9 +24,11 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import GenCamStandbyDisabled
-from lsst.ts.IntegrationTests import GenCamDisabledEnabled
+from lsst.ts.IntegrationTests import (
+    GenCamDisabledEnabled,
+    GenCamStandbyDisabled,
+    ScriptQueueController,
+)
 
 
 class GenCamStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):

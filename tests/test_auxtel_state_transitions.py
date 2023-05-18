@@ -24,10 +24,12 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelStandbyDisabled
-from lsst.ts.IntegrationTests import AuxTelOfflineStandby
-from lsst.ts.IntegrationTests import AuxTelDisabledEnabled
+from lsst.ts.IntegrationTests import (
+    AuxTelDisabledEnabled,
+    AuxTelOfflineStandby,
+    AuxTelStandbyDisabled,
+    ScriptQueueController,
+)
 
 
 class AuxTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):

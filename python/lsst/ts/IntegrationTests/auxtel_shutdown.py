@@ -21,6 +21,7 @@
 __all__ = ["AuxTelShutdown", "run_auxtel_shutdown"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

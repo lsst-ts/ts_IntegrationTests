@@ -25,8 +25,7 @@ import unittest
 from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelLatissCalibrations
+from lsst.ts.IntegrationTests import AuxTelLatissCalibrations, ScriptQueueController
 
 
 class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
@@ -60,13 +59,15 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(
             script_class.calib_configs["calib_collection"],
-            f"LATISS/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
+            f"LATISS/calib/u/integrationtester/daily."
+            f"{date.today().strftime('%Y%m%d')}.{calib_type}",
         )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
             f"AuxTel Make Latiss Configurations. "
-            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
+            f"Running the {script_class.scripts[0][0]} script "
+            f"for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
         # Execute the scripts.
@@ -92,13 +93,15 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(
             script_class.calib_configs["calib_collection"],
-            f"LATISS/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
+            f"LATISS/calib/u/integrationtester/daily."
+            f"{date.today().strftime('%Y%m%d')}.{calib_type}",
         )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
             f"AuxTel Make Latiss Configurations. "
-            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
+            f"Running the {script_class.scripts[0][0]} script "
+            f"for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
         # Execute the scripts.

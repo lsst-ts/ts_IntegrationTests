@@ -21,7 +21,9 @@
 __all__ = ["MainTelOfflineStandby", "run_maintel_offline_standby"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

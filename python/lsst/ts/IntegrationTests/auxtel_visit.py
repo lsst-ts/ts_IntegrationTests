@@ -21,7 +21,9 @@
 __all__ = ["AuxTelVisit", "run_auxtel_visit"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

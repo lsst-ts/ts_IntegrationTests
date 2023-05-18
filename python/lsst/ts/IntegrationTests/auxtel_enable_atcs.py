@@ -21,6 +21,7 @@
 __all__ = ["AuxTelEnableATCS", "run_auxtel_enable_atcs"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

@@ -24,9 +24,11 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import EasStandbyDisabled
-from lsst.ts.IntegrationTests import EasDisabledEnabled
+from lsst.ts.IntegrationTests import (
+    EasDisabledEnabled,
+    EasStandbyDisabled,
+    ScriptQueueController,
+)
 
 
 class EasStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):

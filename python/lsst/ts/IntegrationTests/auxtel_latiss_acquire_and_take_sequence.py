@@ -23,10 +23,11 @@ __all__ = [
     "run_auxtel_latiss_acquire_and_take_sequence",
 ]
 
-import asyncio
 import argparse
+import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

@@ -23,7 +23,6 @@ import yaml
 
 from .config_registry import registry
 
-
 # Add the LOVE Stress Test script
 # configurations to the registry.
 

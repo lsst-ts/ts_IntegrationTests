@@ -21,7 +21,9 @@
 __all__ = ["LoveStressTest", "run_love_stress_test"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

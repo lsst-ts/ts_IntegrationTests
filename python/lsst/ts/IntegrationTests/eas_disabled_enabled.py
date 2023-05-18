@@ -21,7 +21,9 @@
 __all__ = ["EasDisabledEnabled", "run_eas_disabled_enabled"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

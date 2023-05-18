@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelImageTaking
+from lsst.ts.IntegrationTests import AuxTelImageTaking, ScriptQueueController
 
 
 class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):

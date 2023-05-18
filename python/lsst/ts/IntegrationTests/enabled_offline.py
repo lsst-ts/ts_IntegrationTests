@@ -21,7 +21,9 @@
 __all__ = ["EnabledOffline", "run_enabled_offline"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

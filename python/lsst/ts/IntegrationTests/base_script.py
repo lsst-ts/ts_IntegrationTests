@@ -22,10 +22,11 @@ __all__ = ["BaseScript"]
 
 import asyncio
 import copy
+from datetime import date
+
 from lsst.ts import salobj
 from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
-from datetime import date
 
 
 class BaseScript:
@@ -159,7 +160,8 @@ class BaseScript:
         if data.processState in self.processing_states:
             # Script initial, configuration and running states.
             print(
-                f"Script {data.scriptSalIndex} processing state: {ScriptProcessState(data.processState).name}"
+                f"Script processing state: "
+                f"{ScriptQueue.ScriptProcessState(data.processState).name}"
             )
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
@@ -235,5 +237,6 @@ class BaseScript:
             # Print the script indexes and states.
             print(
                 f"All scripts complete.\n"
-                f"Script Indexes ; Script States:\n{script_indexes}\n{self.script_states}"
+                f"Script Indexes ; Script States:\n"
+                f"{script_indexes}\n{self.script_states}"
             )

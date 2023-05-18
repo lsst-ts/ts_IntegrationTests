@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelPrepareOnSky
+from lsst.ts.IntegrationTests import AuxTelPrepareOnSky, ScriptQueueController
 
 
 class AuxTelPrepareOnSkyTestCase(unittest.IsolatedAsyncioTestCase):
