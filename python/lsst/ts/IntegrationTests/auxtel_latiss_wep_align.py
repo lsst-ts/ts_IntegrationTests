@@ -18,7 +18,7 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["AuxTelLatissCWFSAlign", "run_auxtel_latiss_cwfs_align"]
+__all__ = ["AuxTelLatissWEPAlign", "run_auxtel_latiss_wep_align"]
 
 import asyncio
 
@@ -26,26 +26,26 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class AuxTelLatissCWFSAlign(BaseScript):
+class AuxTelLatissWEPAlign(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
     """
 
     index: int = 2
-    configs: tuple = (registry["auxtel_cwfs_align"],)
+    configs: tuple = (registry["auxtel_wep_align"],)
     scripts: list = [
-        ("auxtel/latiss_cwfs_align.py", BaseScript.is_external),
+        ("auxtel/latiss_wep_align.py", BaseScript.is_external),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_auxtel_latiss_cwfs_align() -> None:
-    script_class = AuxTelLatissCWFSAlign()
+def run_auxtel_latiss_wep_align() -> None:
+    script_class = AuxTelLatissWEPAlign()
     print(
-        f"\nAuxTel Latiss CWFS Align; running the {script_class.scripts[0][0]} script,"
+        f"\nAuxTel Latiss WEP Align; running the {script_class.scripts[0][0]} script,"
         f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

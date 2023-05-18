@@ -23,7 +23,7 @@ __all__ = ["BaseScript"]
 import asyncio
 import copy
 from lsst.ts import salobj
-from lsst.ts.idl.enums import Script, ScriptQueue
+from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
 from datetime import date
 
@@ -167,7 +167,7 @@ class BaseScript:
             print(
                 f"Script {data.scriptSalIndex} terminal processing state: "
                 f"{ScriptProcessState(data.processState).name}\n"
-                f"Final ScriptState: {Script.ScriptState(data.scriptState).name}"
+                f"Final ScriptState: {ScriptState(data.scriptState).name}"
             )
             # Store the final Script.ScriptState enum
             # in the script_states list.
@@ -183,7 +183,7 @@ class BaseScript:
             # NOTE: This MUST be done LAST. Otherwise, the resume triggers an
             # additional set of callbacks, but the self.temp_script_indexes
             # list is empty and the .pop(0) method fails with an IndexError.
-            if data.scriptState == ScriptQueue.ScriptState.FAILED:
+            if data.scriptState == ScriptState.FAILED:
                 print("Resuming the ScriptQueue after a script FAILED.")
                 await self.remote.cmd_resume.set_start(timeout=10)
 

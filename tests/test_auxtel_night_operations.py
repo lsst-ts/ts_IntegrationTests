@@ -27,7 +27,7 @@ from parameterized import parameterized
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import ScriptQueueController
 from lsst.ts.IntegrationTests import AuxTelResetOffsets
-from lsst.ts.IntegrationTests import AuxTelLatissCWFSAlign
+from lsst.ts.IntegrationTests import AuxTelLatissWEPAlign
 from lsst.ts.IntegrationTests import AuxTelLatissAcquireTakeSequence
 
 
@@ -53,7 +53,7 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         for which the second needs to reset all the offsets. The third
         disables all the corrections and the fourth enables corrections for
         the  M1, ATHexapod and ATSpectrograph, which is needed for the
-        CWFS_Align test.
+        WEP_Align test.
         """
         # Instantiate the AuxTelResetOffsets integration tests.
         script_class = AuxTelResetOffsets()
@@ -67,19 +67,19 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8, 8, 8, 8])
 
-    async def test_auxtel_latiss_cwfs_align(self) -> None:
-        """Execute the AuxTelLatissCWFSAlign integration test script,
-        which runs the ts_standardscripts/auxtel/make_latiss_cwfs_align.py
+    async def test_auxtel_latiss_wep_align(self) -> None:
+        """Execute the AuxTelLatissWEPAlign integration test script,
+        which runs the ts_externalscripts/auxtel/latiss_wep_align.py
         script.
         Use the configuration stored in the auxtel_night_operations_configs.py
         module.
         """
-        # Instantiate the AuxTelLatissCWFSAlign integration tests.
-        script_class = AuxTelLatissCWFSAlign()
+        # Instantiate the AuxTelLatissWEPAlign integration tests.
+        script_class = AuxTelLatissWEPAlign()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
-            f"AuxTel Latiss CWFS Align. "
+            f"AuxTel Latiss WEP Align. "
             f"Running the {script_class.scripts[0][0]} script,"
             f"\nwith configuration;\n{script_class.configs}"
         )

@@ -31,10 +31,11 @@ from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
-from .auxtel_latiss_cwfs_align import *
+from .auxtel_latiss_wep_align import *
 from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
 from .auxtel_reset_offsets import *
+from .auxtel_telescope_dome_checkout import *
 from .auxtel_visit import *
 from .auxtel_shutdown import *
 from .auxtel_stop import *
