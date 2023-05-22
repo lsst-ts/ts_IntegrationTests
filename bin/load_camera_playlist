@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# This file is part of ts_salobj.
+# This file is part of ts_IntegrationTests.
 #
 # Developed for the Rubin Observatory Telescope and Site System.
 # This product includes software developed by the LSST Project
@@ -20,7 +20,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see https://www.gnu.org/licenses/.
 
-"""An example of how to run a CSC"""
+"""
+A simple script to run the load_camera_playlist integration test.
+This makes the script available, via the command line, to the 
+appropriate unit test. 
+"""
 from lsst.ts.IntegrationTests import load_camera_playlist
 
 load_camera_playlist()
