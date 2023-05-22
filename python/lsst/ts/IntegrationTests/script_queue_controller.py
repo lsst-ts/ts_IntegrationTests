@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 
 import asyncio
+
 from lsst.ts import salobj
 from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState

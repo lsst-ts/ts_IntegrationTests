@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import EnabledOffline
+from lsst.ts.IntegrationTests import EnabledOffline, ScriptQueueController
 
 
 class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):

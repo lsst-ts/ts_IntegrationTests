@@ -23,6 +23,7 @@ __all__ = ["AuxTelLatissWEPAlign", "run_auxtel_latiss_wep_align"]
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

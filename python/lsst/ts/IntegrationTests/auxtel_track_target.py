@@ -20,11 +20,12 @@
 
 __all__ = ["AuxTelTrackTarget", "run_auxtel_track_target"]
 
-import yaml
-import asyncio
 import argparse
+import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

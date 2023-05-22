@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelShutdown
+from lsst.ts.IntegrationTests import AuxTelShutdown, ScriptQueueController
 
 
 class AuxTelShutdownTestCase(unittest.IsolatedAsyncioTestCase):

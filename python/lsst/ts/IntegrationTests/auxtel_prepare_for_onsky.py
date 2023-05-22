@@ -21,6 +21,7 @@
 __all__ = ["AuxTelPrepareOnSky", "run_auxtel_prepare_for_onsky"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

@@ -22,13 +22,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import unittest
-from parameterized import parameterized
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelResetOffsets
-from lsst.ts.IntegrationTests import AuxTelLatissWEPAlign
-from lsst.ts.IntegrationTests import AuxTelLatissAcquireTakeSequence
+from lsst.ts.IntegrationTests import (
+    AuxTelLatissAcquireTakeSequence,
+    AuxTelLatissWEPAlign,
+    AuxTelResetOffsets,
+    ScriptQueueController,
+)
+from parameterized import parameterized
 
 
 class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):

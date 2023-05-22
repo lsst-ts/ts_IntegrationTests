@@ -20,11 +20,12 @@
 
 __all__ = ["ComCamCalibrations", "run_comcam_calibrations"]
 
-import yaml
-import asyncio
 import argparse
+import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 
@@ -75,7 +76,8 @@ def run_comcam_calibrations() -> None:
     args = parser.parse_args()
     script_class = ComCamCalibrations(calib_type=args.calib_type)
     print(
-        f"\nComCam Calibrations; running the master_{script_class.calib_type} calibrations"
+        f"\nComCam Calibrations; running the "
+        f"master_{script_class.calib_type} calibrations"
         f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

@@ -24,9 +24,11 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import ObsSys2StandbyDisabled
-from lsst.ts.IntegrationTests import ObsSys2DisabledEnabled
+from lsst.ts.IntegrationTests import (
+    ObsSys2DisabledEnabled,
+    ObsSys2StandbyDisabled,
+    ScriptQueueController,
+)
 
 
 class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):

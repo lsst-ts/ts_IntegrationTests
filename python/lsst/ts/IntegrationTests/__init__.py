@@ -19,44 +19,45 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
 try:
     from .version import *
 except ImportError:
     __version__ = "?"
 
-from .base_script import *
-from .testutils import *
-from .yaml_test_strings import *
+from .base_script import *  # isort: skip
+from .auxtel_disabled_enabled import *
 from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
 from .auxtel_latiss_wep_align import *
+from .auxtel_offline_standby import *
 from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
 from .auxtel_reset_offsets import *
-from .auxtel_telescope_dome_checkout import *
-from .auxtel_visit import *
 from .auxtel_shutdown import *
-from .auxtel_stop import *
-from .auxtel_track_target import *
-from .auxtel_offline_standby import *
 from .auxtel_standby_disabled import *
-from .auxtel_disabled_enabled import *
+from .auxtel_stop import *
+from .auxtel_telescope_dome_checkout import *
+from .auxtel_track_target import *
+from .auxtel_visit import *
 from .comcam_calibrations import *
+from .eas_disabled_enabled import *
+from .eas_standby_disabled import *
+from .enabled_offline import *
+from .failing_script_queue_controller import *
+from .gencam_disabled_enabled import *
+from .gencam_standby_disabled import *
 from .image_taking_verification import *
+from .load_camera_playlist import *
+from .love_stress_test import *
+from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
 from .maintel_offline_standby import *
 from .maintel_standby_disabled import *
-from .maintel_disabled_enabled import *
-from .obssys2_standby_disabled import *
 from .obssys2_disabled_enabled import *
-from .eas_standby_disabled import *
-from .eas_disabled_enabled import *
-from .gencam_standby_disabled import *
-from .gencam_disabled_enabled import *
-from .enabled_offline import *
-from .load_camera_playlist import *
-from .love_stress_test import *
+from .obssys2_standby_disabled import *
 from .script_queue_controller import *
-from .failing_script_queue_controller import *
+from .testutils import *
+from .yaml_test_strings import *

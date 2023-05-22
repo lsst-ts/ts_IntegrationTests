@@ -21,6 +21,7 @@
 __all__ = ["AuxTelPrepareFlat", "run_auxtel_prepare_for_flat"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

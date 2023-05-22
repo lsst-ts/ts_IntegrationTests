@@ -23,7 +23,6 @@ import yaml
 
 from .config_registry import registry
 
-
 # Add the State Transition script configurations to the registry.
 
 # sched_ocps_enabled_offline

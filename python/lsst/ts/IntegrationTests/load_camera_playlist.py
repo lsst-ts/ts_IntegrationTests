@@ -20,19 +20,19 @@
 
 __all__ = ["LoadCameraPlaylist", "load_camera_playlist"]
 
-import yaml
-import os
 import argparse
 import asyncio
+import os
 
 import lsst.ts.IntegrationTests.configs.camera_playlist_configs as playlist_configs
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
-from lsst.ts.IntegrationTests.configs.config_registry import registry
 from lsst.ts.IntegrationTests.configs.camera_playlist_configs import (
     cameras,
-    playlists,
     playlist_options,
+    playlists,
 )
+from lsst.ts.IntegrationTests.configs.config_registry import registry
 
 
 class LoadCameraPlaylist(BaseScript):
@@ -65,7 +65,8 @@ class LoadCameraPlaylist(BaseScript):
             self.playlist = playlist_dictionary[playlist_shortname]
         except KeyError:
             raise KeyError(
-                f"The {self.camera_full} does not have a '{playlist_shortname}' playlist."
+                f"The {self.camera_full} does not have a "
+                f"'{playlist_shortname}' playlist."
             )
         self.playlist_config = yaml.safe_load(registry["camera_playlist"])
         self.playlist_config["component"] = self.camera_full

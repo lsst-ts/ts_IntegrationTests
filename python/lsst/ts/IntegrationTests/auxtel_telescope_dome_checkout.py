@@ -21,6 +21,7 @@
 __all__ = ["TelescopeAndDomeCheckout", "run_at_telescope_and_dome_checkout"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

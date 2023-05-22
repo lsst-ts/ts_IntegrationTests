@@ -21,7 +21,9 @@
 __all__ = ["MainTelDisabledEnabled", "run_maintel_disabled_enabled"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

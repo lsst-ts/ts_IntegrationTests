@@ -23,6 +23,7 @@ __all__ = ["AuxTelResetOffsets", "run_auxtel_reset_offsets"]
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

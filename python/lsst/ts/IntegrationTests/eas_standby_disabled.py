@@ -21,7 +21,9 @@
 __all__ = ["EasStandbyDisabled", "run_eas_standby_disabled"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

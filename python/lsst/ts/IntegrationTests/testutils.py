@@ -57,7 +57,9 @@ def assert_yaml_formatted(reference: str, yaml_string: str) -> None:
     result_str = result.decode("utf-8")  # type: str
     child_proccess.stdin.close()  # type: ignore
     if any(exception in result_str for exception in ("warning", "error")):
-        raise AssertionError(f"Bad YAML\n\n{reference}:\n'{yaml_string}'\n\n{result}")  # type: ignore
+        raise AssertionError(
+            f"Bad YAML\n\n{reference!r}:\n'{yaml_string!r}'\n\n{result!r}"
+        )  # type: ignore
 
 
 def logging_statement(statement: str) -> None:

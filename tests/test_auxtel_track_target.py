@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelTrackTarget
+from lsst.ts.IntegrationTests import AuxTelTrackTarget, ScriptQueueController
 
 
 class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
@@ -57,7 +56,8 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_class.target_config["target_name"], test_target)
         self.assertEqual(script_class.target_config["track_for"], test_track_for)
         print(
-            f"AuxTel Track Target; running {num_scripts} script for target {test_target}"
+            f"AuxTel Track Target; running {num_scripts} script "
+            f"for target {test_target}"
             f" and tracking for {test_track_for} seconds."
         )
         # Execute the scripts.

@@ -23,6 +23,7 @@ __all__ = ["MainTelHousekeeping", "run_maintel_housekeeping"]
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 

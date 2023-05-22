@@ -21,6 +21,7 @@
 __all__ = ["AuxTelStop", "run_auxtel_stop"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
 
 

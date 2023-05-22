@@ -20,11 +20,12 @@
 
 __all__ = ["AuxTelLatissCalibrations", "run_auxtel_latiss_calibrations"]
 
-import yaml
-import asyncio
 import argparse
+import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 
@@ -75,7 +76,8 @@ def run_auxtel_latiss_calibrations() -> None:
     args = parser.parse_args()
     script_class = AuxTelLatissCalibrations(calib_type=args.calib_type)
     print(
-        f"\nAuxTel Make Latiss Calibrations; running the master_{script_class.calib_type} calibrations,"
+        f"\nAuxTel Make Latiss Calibrations; running the "
+        f"master_{script_class.calib_type} calibrations,"
         f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

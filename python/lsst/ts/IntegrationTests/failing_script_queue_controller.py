@@ -19,9 +19,11 @@
 # You should have received a copy of the GNU General Public License
 
 import asyncio
-from .script_queue_controller import ScriptQueueController
+
 from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
+
+from .script_queue_controller import ScriptQueueController
 
 
 # Create an inherited class from the controller,
