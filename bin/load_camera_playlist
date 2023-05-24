@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Rubin Observatory Telescope and Site System.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -18,12 +18,12 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see https://www.gnu.org/licenses/.
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 A simple script to run the load_camera_playlist integration test.
-This makes the script available, via the command line, to the 
-appropriate unit test. 
+This makes the script available, via the command line, to the
+appropriate unit test.
 """
 from lsst.ts.IntegrationTests import load_camera_playlist
 
