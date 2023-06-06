@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelTrackTarget
+from lsst.ts.IntegrationTests import AuxTelTrackTarget, ScriptQueueController
 
 
 class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
@@ -45,7 +44,6 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         """Execute the AuxTelTrackTarget integration test script,
         which runs the ts_standardscripts/auxtel/track_target.py script.
         Use the configuration stored in the track_target_configs.py module.
-
         """
         # Mock the command-line argument that the aux_tel_track_target.py
         # script expects.
@@ -58,13 +56,16 @@ class AuxTelTrackTargetTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_class.target_config["target_name"], test_target)
         self.assertEqual(script_class.target_config["track_for"], test_track_for)
         print(
-            f"AuxTel Track Target; running {num_scripts} script for target {test_target}"
+            f"AuxTel Track Target; running {num_scripts} script "
+            f"for target {test_target}"
             f" and tracking for {test_track_for} seconds."
         )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

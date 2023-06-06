@@ -1,8 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Rubin Observatory Telescope and Site System.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -22,7 +24,6 @@
 import yaml
 
 from .config_registry import registry
-
 
 # Add the AuxTel Night Operations
 # script configurations to the registry.
@@ -86,8 +87,8 @@ registry["auxtel_enable_m1_hex_atspect_corrections"] = yaml.safe_dump(
     canonical=True,
 )
 
-# auxtel_latiss_cwfs_align
-registry["auxtel_cwfs_align"] = yaml.safe_dump(
+# auxtel_latiss_wep_align
+registry["auxtel_wep_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
         "rot_type": "PhysicalSky",
@@ -146,7 +147,7 @@ registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
         "object_name": "HD164461",
         "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
-        "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "empty_1"],
+        "grating_sequence": ["ronchi170lpmm", "ronchi170lpmm", "empty_1"],
         "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "target_pointing_tolerance": 5,
@@ -164,7 +165,7 @@ registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "grating_sequence": ["ronchi90lpmm", "ronchi90lpmm", "ronchi90lpmm"],
+        "grating_sequence": ["ronchi170lpmm", "ronchi170lpmm", "ronchi170lpmm"],
         "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "do_acquire": False,

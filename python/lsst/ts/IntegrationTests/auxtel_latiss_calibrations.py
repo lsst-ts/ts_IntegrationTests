@@ -1,8 +1,10 @@
-# This file is part of ts_IntegrationTests
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -20,11 +22,12 @@
 
 __all__ = ["AuxTelLatissCalibrations", "run_auxtel_latiss_calibrations"]
 
-import yaml
-import asyncio
 import argparse
+import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
+
 from .configs.config_registry import registry
 
 
@@ -75,7 +78,8 @@ def run_auxtel_latiss_calibrations() -> None:
     args = parser.parse_args()
     script_class = AuxTelLatissCalibrations(calib_type=args.calib_type)
     print(
-        f"\nAuxTel Make Latiss Calibrations; running the master_{script_class.calib_type} calibrations,"
+        f"\nAuxTel Make Latiss Calibrations; running the "
+        f"master_{script_class.calib_type} calibrations,"
         f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

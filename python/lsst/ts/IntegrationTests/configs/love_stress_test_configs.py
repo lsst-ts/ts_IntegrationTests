@@ -1,8 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Rubin Observatory Telescope and Site System.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -22,7 +24,6 @@
 import yaml
 
 from .config_registry import registry
-
 
 # Add the LOVE Stress Test script
 # configurations to the registry.

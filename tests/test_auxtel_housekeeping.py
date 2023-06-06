@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelHousekeeping
+from lsst.ts.IntegrationTests import AuxTelHousekeeping, ScriptQueueController
 
 
 class AuxTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
@@ -44,7 +43,6 @@ class AuxTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_auxtel_housekeeping(self) -> None:
         """Execute the AuxTelHousekeeping integration test script,
         which runs the ts_standardscripts/run_command.py script.
-
         """
         # Instantiate the AuxTelHousekeeping integration tests.
         script_class = AuxTelHousekeeping()
@@ -55,6 +53,8 @@ class AuxTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

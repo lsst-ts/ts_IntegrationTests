@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -24,8 +24,7 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelPrepareOnSky
+from lsst.ts.IntegrationTests import AuxTelPrepareOnSky, ScriptQueueController
 
 
 class AuxTelPrepareOnSkyTestCase(unittest.IsolatedAsyncioTestCase):
@@ -45,7 +44,6 @@ class AuxTelPrepareOnSkyTestCase(unittest.IsolatedAsyncioTestCase):
         """Execute the AuxTelPrepareOnSky integration test script,
         which runs the ts_standardscripts/auxtel/prepare_for_onsky.py script.
         This test requires no configuration.
-
         """
         # Instantiate the AuxTelPrepareOnSky integration tests.
         script_class = AuxTelPrepareOnSky()
@@ -56,6 +54,8 @@ class AuxTelPrepareOnSkyTestCase(unittest.IsolatedAsyncioTestCase):
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

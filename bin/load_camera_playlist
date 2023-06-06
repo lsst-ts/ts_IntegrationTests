@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
 # Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
@@ -21,54 +20,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import yaml
+"""
+A simple script to run the load_camera_playlist integration test.
+This makes the script available, via the command line, to the
+appropriate unit test.
+"""
+from lsst.ts.IntegrationTests import load_camera_playlist
 
-from .config_registry import registry
-
-# Add the script configurations to the configuration registry.
-
-# ATDome config
-yaml_string = yaml.safe_load(
-    """
-    component: "ATDome"
-    cmd: "homeAzimuth"
-    """
-)
-
-registry["atdome_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# ATMCS Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "ATMCS"
-    cmd: "setInstrumentPort"
-    parameters:
-        port: 2
-    """
-)
-
-registry["atmcs_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# ATSpectrograph Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "ATSpectrograph"
-    cmd: "changeDisperser"
-    parameters:
-        name: "empty_1"
-    """
-)
-
-registry["atspectrograph_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
+load_camera_playlist()

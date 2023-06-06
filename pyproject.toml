@@ -26,10 +26,11 @@ auxtel_housekeeping = "lsst.ts.IntegrationTests.auxtel_housekeeping:run_auxtel_h
 auxtel_image_taking = "lsst.ts.IntegrationTests.image_taking_verification:run_auxtel_image_taking"
 auxtel_latiss_acquire_and_take_sequence = "lsst.ts.IntegrationTests.auxtel_latiss_acquire_and_take_sequence:run_auxtel_latiss_acquire_and_take_sequence"
 auxtel_latiss_calibrations = "lsst.ts.IntegrationTests.auxtel_latiss_calibrations:run_auxtel_latiss_calibrations"
-auxtel_latiss_cwfs_align = "lsst.ts.IntegrationTests.auxtel_latiss_cwfs_align:run_auxtel_latiss_cwfs_align"
+auxtel_latiss_wep_align = "lsst.ts.IntegrationTests.auxtel_latiss_wep_align:run_auxtel_latiss_wep_align"
 auxtel_offline_standby = "lsst.ts.IntegrationTests.auxtel_offline_standby:run_auxtel_offline_standby"
 auxtel_prepare_for_flat = "lsst.ts.IntegrationTests.auxtel_prepare_for_flat:run_auxtel_prepare_for_flat"
 auxtel_prepare_for_onsky = "lsst.ts.IntegrationTests.auxtel_prepare_for_onsky:run_auxtel_prepare_for_onsky"
+auxtel_telescope_dome_checkout = "lsst.ts.IntegrationTests.auxtel_telescope_dome_checkout:run_at_telescope_and_dome_checkout"
 auxtel_reset_offsets = "lsst.ts.IntegrationTests.auxtel_reset_offsets:run_auxtel_reset_offsets"
 auxtel_shutdown = "lsst.ts.IntegrationTests.auxtel_shutdown:run_auxtel_shutdown"
 auxtel_standby_disabled = "lsst.ts.IntegrationTests.auxtel_standby_disabled:run_auxtel_standby_disabled"
@@ -61,10 +62,6 @@ __version__ = "{version}"
 """
  
 [tool.pytest.ini_options]
-addopts = "--black --flake8 --mypy --ignore-glob=*/version.py"
-flake8-ignore = ["E133", "E203", "E226", "E228", "N802", "N803", "N806", "N812", "N813", "N815", "N816", "W503"]
-flake8-max-line-length = 110
-flake8-max-doc-length = 79
 asyncio_mode = "auto"
  
 [tool.mypy]
@@ -80,5 +77,5 @@ doc = [
   "documenteer[pipelines]",
 ]
 test = [
-  "yamllint", "parameterized", "pytest-flake8", "pytest-black", "pytest-mypy"
+  "yamllint", "parameterized",
 ]

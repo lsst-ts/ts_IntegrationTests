@@ -1,8 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Rubin Observatory Telescope and Site System.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -57,7 +59,9 @@ def assert_yaml_formatted(reference: str, yaml_string: str) -> None:
     result_str = result.decode("utf-8")  # type: str
     child_proccess.stdin.close()  # type: ignore
     if any(exception in result_str for exception in ("warning", "error")):
-        raise AssertionError(f"Bad YAML\n\n{reference}:\n'{yaml_string}'\n\n{result}")  # type: ignore
+        raise AssertionError(
+            f"Bad YAML\n\n{reference!r}:\n'{yaml_string!r}'\n\n{result!r}"
+        )  # type: ignore
 
 
 def logging_statement(statement: str) -> None:

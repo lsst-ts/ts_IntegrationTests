@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -25,8 +25,7 @@ import unittest
 from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import AuxTelLatissCalibrations
+from lsst.ts.IntegrationTests import AuxTelLatissCalibrations, ScriptQueueController
 
 
 class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
@@ -60,19 +59,23 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(
             script_class.calib_configs["calib_collection"],
-            f"LATISS/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
+            f"LATISS/calib/u/integrationtester/daily."
+            f"{date.today().strftime('%Y%m%d')}.{calib_type}",
         )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
             f"AuxTel Make Latiss Configurations. "
-            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
+            f"Running the {script_class.scripts[0][0]} script "
+            f"for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_auxtel_latiss_calibrations_ptc(self) -> None:
         """Execute the AuxTelLatissCalibrations integration test script,
@@ -90,16 +93,20 @@ class AuxTelLatissCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(
             script_class.calib_configs["calib_collection"],
-            f"LATISS/calib/u/integrationtester/daily.{date.today().strftime('%Y%m%d')}.{calib_type}",
+            f"LATISS/calib/u/integrationtester/daily."
+            f"{date.today().strftime('%Y%m%d')}.{calib_type}",
         )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
             f"AuxTel Make Latiss Configurations. "
-            f"Running the {script_class.scripts[0][0]} script for the master_{calib_type} calibrations,"
+            f"Running the {script_class.scripts[0][0]} script "
+            f"for the master_{calib_type} calibrations,"
             f"\nwith configuration;\n{script_class.configs}"
         )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])

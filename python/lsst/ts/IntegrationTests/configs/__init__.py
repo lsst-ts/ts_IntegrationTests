@@ -1,8 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Data Management System.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -19,17 +21,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .love_stress_test_configs import *
-from .shutdown_configs import *
-from .take_image_latiss_configs import *
-from .track_target_configs import *
-from .auxtel_housekeeping_configs import *
-from .image_taking_configs import *
-from .auxtel_night_operations_configs import *
-from .auxtel_state_transition_configs import *
-from .maintel_housekeeping_configs import *
-from .maintel_state_transition_configs import *
-from .obssys2_state_transition_configs import *
-from .eas_state_transition_configs import *
-from .gencam_state_transition_configs import *
-from .enabled_offline_state_transition_configs import *
+from .auxtel_housekeeping_configs import *  # noqa
+from .auxtel_night_operations_configs import *  # noqa
+from .auxtel_state_transition_configs import *  # noqa
+from .eas_state_transition_configs import *  # noqa
+from .enabled_offline_state_transition_configs import *  # noqa
+from .gencam_state_transition_configs import *  # noqa
+from .image_taking_configs import *  # noqa
+from .love_stress_test_configs import *  # noqa
+from .maintel_housekeeping_configs import *  # noqa
+from .maintel_state_transition_configs import *  # noqa
+from .obssys2_state_transition_configs import *  # noqa
+from .shutdown_configs import *  # noqa
+from .take_image_latiss_configs import *  # noqa
+from .track_target_configs import *  # noqa

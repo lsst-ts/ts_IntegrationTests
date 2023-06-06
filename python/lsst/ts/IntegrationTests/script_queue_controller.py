@@ -1,8 +1,10 @@
-# This file is part of ts_IntegrationTests
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -19,8 +21,10 @@
 # You should have received a copy of the GNU General Public License
 
 import asyncio
+
 from lsst.ts import salobj
 from lsst.ts.idl.enums.Script import ScriptState
+from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
 
 # Create an inherited class from the controller,
@@ -40,7 +44,7 @@ class ScriptQueueController(salobj.Controller):
         ----------
         index : `int`
             Defines whether this is a MainTel (index=1)
-        or an AuxTel (index=2) controller.
+            or an AuxTel (index=2) controller.
         """
         super().__init__("ScriptQueue", index=index)
         self.index: int = index
@@ -91,16 +95,19 @@ class ScriptQueueController(salobj.Controller):
         self.queue_list.append(data.path)  # type: ignore
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.UNKNOWN,
             scriptState=ScriptState.UNKNOWN,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.LOADING,
             scriptState=ScriptState.UNCONFIGURED,
             force_output=True,
         )
         await self.evt_script.set_write(
             scriptSalIndex=len(self.queue_list),
+            processState=ScriptProcessState.CONFIGURED,
             scriptState=ScriptState.CONFIGURED,
             force_output=True,
         )
@@ -119,15 +126,14 @@ class ScriptQueueController(salobj.Controller):
         # self.log.info("ScriptQueue resumed\n")
         for script, _ in enumerate(self.queue_list, start=1):
             await self.evt_script.set_write(
-                scriptSalIndex=script, scriptState=ScriptState.RUNNING
-            )
-            await asyncio.sleep(0.1)
-            await self.evt_script.set_write(
-                scriptSalIndex=script, scriptState=ScriptState.STOPPING
+                scriptSalIndex=script,
+                processState=ScriptProcessState.RUNNING,
+                scriptState=ScriptState.RUNNING,
             )
             await asyncio.sleep(0.1)
             await self.evt_script.set_write(
                 scriptSalIndex=script,
+                processState=ScriptProcessState.DONE,
                 scriptState=ScriptState.DONE,
                 timestampProcessEnd=99999,
             )

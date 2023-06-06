@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the LSST Telescope and Site Systems.
-# This product includes software developed by the LSST Project
-# (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
+# This product includes software developed by the Vera C. Rubin Observatory
+# Project (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -21,13 +21,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-import sys
 import subprocess
+import sys
+import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController
-from lsst.ts.IntegrationTests import LoadCameraPlaylist
+from lsst.ts.IntegrationTests import LoadCameraPlaylist, ScriptQueueController
 from lsst.ts.IntegrationTests.configs.camera_playlist_configs import (
     atcamera_playlists,
     playlist_options,
@@ -72,14 +71,17 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_class.playlist_config["parameters"]["repeat"], True)
         print(
             f"Running the {script_class.camera} "
-            f"{script_class.playlist_config['parameters']['playlist']}."
-            f" Playist repeat is set to {script_class.playlist_config['parameters']['repeat']}."
+            f"{script_class.playlist_config['parameters']['playlist']}. "
+            f"Playlist repeat is set to "
+            f"{script_class.playlist_config['parameters']['repeat']}."
         )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to correct ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         self.assertEqual(script_class.index, 2)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_bad_inputs(self) -> None:
         """Attempt to execute the LoadCameraPlaylist integration test script,
@@ -93,7 +95,10 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         # Instantiate the LoadCameraPlaylist integration tests object and
         # execute the scripts.
         with self.assertRaises(KeyError):
-            LoadCameraPlaylist(camera=test_camera, playlist_shortname=test_playlist)
+            LoadCameraPlaylist(
+                camera=test_camera,
+                playlist_shortname=test_playlist,
+            )
 
     async def test_no_repeat(self) -> None:
         """Execute the LoadCameraPlaylist integration test script,
@@ -104,10 +109,11 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         test_camera = "cc"
         test_playlist = "master_flat"
         test_no_repeat = False
-        # Instantiate the LoadCameraPlaylist integration tests object and
-        # execute the scripts.
+        # Instantiate the LoadCameraPlaylist integration tests object.
         script_class = LoadCameraPlaylist(
-            camera=test_camera, playlist_shortname=test_playlist, repeat=test_no_repeat
+            camera=test_camera,
+            playlist_shortname=test_playlist,
+            repeat=test_no_repeat,
         )
         # Assert playlist repeat is set to False.
         self.assertEqual(script_class.playlist_config["parameters"]["repeat"], False)

@@ -20,38 +20,34 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelDisabledEnabled", "run_maintel_disabled_enabled"]
+__all__ = ["TelescopeAndDomeCheckout", "run_at_telescope_and_dome_checkout"]
 
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
 
-from .configs.config_registry import registry
 
-
-class MainTelDisabledEnabled(BaseScript):
+class TelescopeAndDomeCheckout(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
     """
 
-    index: int = 1
-    configs: tuple = (
-        registry["maintel_disabled_enabled"],
-        registry["maintel_camera_disabled_enabled"],
-    )
+    index: int = 2
+    configs: tuple = ([],)
     scripts: list = [
-        ("set_summary_state.py", BaseScript.is_standard),
-        ("set_summary_state.py", BaseScript.is_standard),
+        (
+            "auxtel/daytime_checkout/telescope_and_dome_checkout.py",
+            BaseScript.is_standard,
+        ),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_maintel_disabled_enabled() -> None:
-    script_class = MainTelDisabledEnabled()
+def run_at_telescope_and_dome_checkout() -> None:
+    script_class = TelescopeAndDomeCheckout()
     num_scripts = len(script_class.scripts)
-    print(f"\nMainTel Disabled to Enabled; running {num_scripts} scripts")
+    print(f"\nTelescope and Dome Daytime Checkout; running {num_scripts} scripts")
     asyncio.run(script_class.run())
