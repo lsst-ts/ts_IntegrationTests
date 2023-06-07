@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.12.0
+-------
+* Added the auxtel_latiss_checkout.py integration test module.
+
 v0.11.0
 -------
 * Added the auxtel_telescope_dome_checkout.py integration test module.
