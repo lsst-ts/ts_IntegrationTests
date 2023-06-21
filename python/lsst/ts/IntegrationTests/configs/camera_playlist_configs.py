@@ -32,18 +32,18 @@ cameras = ["at", "cc"]
 # Create the Camera short-name to playlist dictionary.
 
 atcamera_playlists = {
-    "master_flat": "bias_dark_flat.playlist",
-    "master_ptc": "bias_dark_ptc.playlist",
-    "cwfs": "cwfs-test_take_sequence.playlist",
-    "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal.playlist",
-    "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing.playlist",
-    "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification.playlist",
-    "test": "latiss_acquire_and_take_sequence-test_take_sequence.playlist",
+    "master_flat": "bias_dark_flat",
+    "master_ptc": "bias_dark_ptc",
+    "cwfs": "cwfs-test_take_sequence",
+    "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal",
+    "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing",
+    "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
+    "test": "latiss_acquire_and_take_sequence-test_take_sequence",
 }
 
 cccamera_playlists = {
-    "master_flat": "bias_dark_flat.playlist",
-    "master_ptc": "bias_dark_ptc.playlist",
+    "master_flat": "bias_dark_flat",
+    "master_ptc": "bias_dark_ptc",
 }
 
 # Define the sorted list of unique playlist short-names.
