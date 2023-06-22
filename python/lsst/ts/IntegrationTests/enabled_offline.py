@@ -38,6 +38,7 @@ class EnabledOffline(BaseScript):
 
     index: int = 2
     configs: tuple = (
+        registry["watcher_enabled_offline"],
         registry["sched_ocps_enabled_offline"],
         [],
         [],
@@ -46,10 +47,11 @@ class EnabledOffline(BaseScript):
         registry["eas_enabled_offline"],
         registry["maintel_enabled_offline"],
         registry["gencam_enabled_offline"],
-        # The Watcher-ScriptQueue script must run last.
-        registry["watcher_sq_enabled_offline"],
+        # The ScriptQueue script must run last.
+        registry["sq_enabled_offline"],
     )
     scripts: list = [
+        ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("auxtel/offline_atcs.py", BaseScript.is_standard),
         ("auxtel/offline_latiss.py", BaseScript.is_standard),

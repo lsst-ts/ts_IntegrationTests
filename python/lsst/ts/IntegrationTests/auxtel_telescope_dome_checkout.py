@@ -20,14 +20,14 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["TelescopeAndDomeCheckout", "run_at_telescope_and_dome_checkout"]
+__all__ = ["AuxTelTelescopeAndDomeCheckout", "run_auxtel_telescope_and_dome_checkout"]
 
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
 
 
-class TelescopeAndDomeCheckout(BaseScript):
+class AuxTelTelescopeAndDomeCheckout(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -46,8 +46,10 @@ class TelescopeAndDomeCheckout(BaseScript):
         super().__init__()
 
 
-def run_at_telescope_and_dome_checkout() -> None:
-    script_class = TelescopeAndDomeCheckout()
+def run_auxtel_telescope_and_dome_checkout() -> None:
+    script_class = AuxTelTelescopeAndDomeCheckout()
     num_scripts = len(script_class.scripts)
-    print(f"\nTelescope and Dome Daytime Checkout; running {num_scripts} scripts")
+    print(
+        f"\nAuxTel Telescope and Dome Daytime Checkout; running {num_scripts} scripts"
+    )
     asyncio.run(script_class.run())
