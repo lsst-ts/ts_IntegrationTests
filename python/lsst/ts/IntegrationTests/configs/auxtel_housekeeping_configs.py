@@ -27,7 +27,7 @@ from .config_registry import registry
 
 # Add the script configurations to the configuration registry.
 
-# ATDome config
+# ATDome homed config
 yaml_string = yaml.safe_load(
     """
     component: "ATDome"
@@ -35,13 +35,29 @@ yaml_string = yaml.safe_load(
     """
 )
 
-registry["atdome_housekeeping"] = yaml.safe_dump(
+registry["atdome_home"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-# ATMCS Housekeeping configs
+# ATDome park configs
+yaml_string = yaml.safe_load(
+    """
+    component: "ATDome"
+    cmd: moveAzimuth
+    parameters:
+        azimuth: 285
+    """
+)
+
+registry["atdome_park"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+# ATMCS setInstrumentPort configs
 yaml_string = yaml.safe_load(
     """
     component: "ATMCS"
@@ -52,22 +68,6 @@ yaml_string = yaml.safe_load(
 )
 
 registry["atmcs_housekeeping"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# ATSpectrograph Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "ATSpectrograph"
-    cmd: "changeDisperser"
-    parameters:
-        name: "empty_1"
-    """
-)
-
-registry["atspectrograph_housekeeping"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,

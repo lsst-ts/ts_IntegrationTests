@@ -57,7 +57,7 @@ class TerminatedScriptTestCase(unittest.IsolatedAsyncioTestCase):
         # Since TERMINATED is an acceptable terminal script state,
         # this test mainly concerns verifying the integration test
         # properly handles this state and doesn't hang indefinitely.
-        self.assertEqual(script_class.script_states, [7, 7, 7, 7, 7, 7])
+        self.assertEqual(script_class.script_states, [7, 7, 7, 7])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
