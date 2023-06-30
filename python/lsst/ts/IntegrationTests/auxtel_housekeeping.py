@@ -40,11 +40,13 @@ class AuxTelHousekeeping(BaseScript):
     configs: tuple = (
         [],
         registry["atdome_home"],
+        registry["atptg_park"],
         registry["atdome_park"],
         registry["atmcs_housekeeping"],
     )
     scripts: list = [
         ("auxtel/enable_atcs.py", BaseScript.is_standard),
+        ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
