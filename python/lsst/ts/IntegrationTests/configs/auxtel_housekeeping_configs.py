@@ -76,6 +76,20 @@ registry["atdome_park"] = yaml.safe_dump(
     canonical=True,
 )
 
+# ATPtg stop tracking
+yaml_string = yaml.safe_load(
+    """
+    component: "ATPtg"
+    cmd: stopTracking
+    """
+)
+
+registry["atptg_stop_tracking"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
 # ATMCS setInstrumentPort configs
 yaml_string = yaml.safe_load(
     """

@@ -51,6 +51,7 @@ class AuxTelHousekeeping(BaseScript):
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
+        ("run_command.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:

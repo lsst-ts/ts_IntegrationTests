@@ -59,7 +59,7 @@ class FailedScriptTestCase(unittest.IsolatedAsyncioTestCase):
         # by sending a resume command to the SQ. By verifying the final script
         # states, this test ensures the test script doesn't hang and properly
         # processes through the SQ.
-        self.assertEqual(script_class.script_states, [10, 10, 10, 10, 10])
+        self.assertEqual(script_class.script_states, [10, 10, 10, 10, 10, 10])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
