@@ -40,8 +40,9 @@ class AuxTelHousekeeping(BaseScript):
     configs: tuple = (
         [],
         registry["atdome_home"],
-        registry["atptg_park"],
         registry["atdome_park"],
+        registry["atptg_park"],
+        registry["atptg_stop_tracking"],
         registry["atmcs_housekeeping"],
     )
     scripts: list = [
