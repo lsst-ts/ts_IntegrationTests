@@ -43,6 +43,7 @@ registry["love_stress"] = yaml.safe_dump(
             "ATPneumatics:0",
             "ATPtg:0",
             "ATSpectrograph:0",
+            "ESS:301",
             "LaserTracker:1",
             "MTAirCompressor:1",
             "MTAirCompressor:2",
