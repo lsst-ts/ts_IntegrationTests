@@ -16,6 +16,7 @@ v0.13.0
 * Removed the .playlist extension.
 * Updated the auxtel_housekeeping.py script.
 * Added ESS:301 to love_stress_test_configs.py.
+* Updated Python version references in meta.yaml.
 
 v0.12.0
 -------
