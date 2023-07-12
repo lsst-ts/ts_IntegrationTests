@@ -63,6 +63,7 @@ def run_auxtel_track_target() -> None:
     parser.add_argument("target", type=str, help="Specify the target to track.")
     parser.add_argument(
         "--track-for",
+        "-t",
         type=int,
         default=0,
         help="Specify for how long to track the target"

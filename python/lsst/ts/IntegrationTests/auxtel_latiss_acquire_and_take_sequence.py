@@ -60,11 +60,9 @@ class AuxTelLatissAcquireTakeSequence(BaseScript):
 def run_auxtel_latiss_acquire_and_take_sequence() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--sequence",
-        "-s",
+        "sequence",
         type=str,
         choices=["pointing", "verify", "nominal", "test"],
-        required=True,
         help="Specify which sequence to run.",
     )
     args = parser.parse_args()
