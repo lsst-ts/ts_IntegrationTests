@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.14.0
+-------
+* Made required arguments positional.
+
 v0.13.0
 -------
 * Made the Watcher the first CSC to go offline.
