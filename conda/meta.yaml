@@ -7,7 +7,7 @@ source:
   path: ..
 
 build:
-  noarch: generic
+  noarch: python
   script: {{ PYTHON }} -m pip install --ignore-installed .
   entry_points:
     - auxtel_disabled_enabled = lsst.ts.IntegrationTests.auxtel_disabled_enabled:run_auxtel_disabled_enabled
