@@ -63,6 +63,11 @@ requirements:
     - pip
     - setuptools_scm
     - setuptools
+  build:
+    - python {{ python }}
+    - setuptools_scm
+    - setuptools
+    - ts-conda-build =0.3
   run:
     - python {{ python }}
     - ts-salobj
