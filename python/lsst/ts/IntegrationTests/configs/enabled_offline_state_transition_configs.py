@@ -27,6 +27,18 @@ from .config_registry import registry
 
 # Add the State Transition script configurations to the registry.
 
+# watcher_enabled_offline
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [Watcher, OFFLINE]
+    """
+)
+
+registry["watcher_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
 # sched_ocps_enabled_offline
 yaml_string = yaml.safe_load(
     """
@@ -69,19 +81,18 @@ registry["eas_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
-# authorize_test42_watcher_sq_enabled_offline
+# authorize_test42_sq_enabled_offline
 yaml_string = yaml.safe_load(
     """
     data:
     - [Authorize, OFFLINE]
     - [Test:42, OFFLINE]
-    - [Watcher, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:2, OFFLINE]
     """
 )
 
-registry["watcher_sq_enabled_offline"] = yaml.safe_dump(
+registry["sq_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 

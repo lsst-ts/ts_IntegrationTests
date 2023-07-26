@@ -10,6 +10,22 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.14.0
+-------
+* Made required arguments positional.
+
+v0.13.0
+-------
+* Made the Watcher the first CSC to go offline.
+* Removed the .playlist extension.
+* Updated the auxtel_housekeeping.py script.
+* Added ESS:301 to love_stress_test_configs.py.
+* Updated Python version references in meta.yaml.
+
+v0.12.0
+-------
+* Added the auxtel_latiss_checkout.py integration test module.
+
 v0.11.0
 -------
 * Added the auxtel_telescope_dome_checkout.py integration test module.

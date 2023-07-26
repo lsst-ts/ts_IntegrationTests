@@ -68,11 +68,9 @@ class ComCamCalibrations(BaseScript):
 def run_comcam_calibrations() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--calib_type",
-        "-t",
+        "calib_type",
         type=str,
         choices=["flat", "ptc"],
-        required=True,
         help="Specify which set of calibrations to run.",
     )
     args = parser.parse_args()

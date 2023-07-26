@@ -8,7 +8,7 @@ source:
 
 build:
   noarch: generic
-  script: python -m pip install --ignore-installed .
+  script: {{ PYTHON }} -m pip install --ignore-installed .
   entry_points:
     - auxtel_disabled_enabled = lsst.ts.IntegrationTests.auxtel_disabled_enabled:run_auxtel_disabled_enabled
     - auxtel_enable_atcs = lsst.ts.IntegrationTests.auxtel_enable_atcs:run_auxtel_enable_atcs
@@ -59,12 +59,12 @@ test:
 
 requirements:
   host:
-    - python
+    - python {{ python }}
     - pip
     - setuptools_scm
     - setuptools
   run:
-    - python
+    - python {{ python }}
     - ts-salobj
     - ts-idl
 

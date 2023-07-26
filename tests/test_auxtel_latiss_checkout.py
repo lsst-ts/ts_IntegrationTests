@@ -24,13 +24,10 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import (
-    AuxTelTelescopeAndDomeCheckout,
-    ScriptQueueController,
-)
+from lsst.ts.IntegrationTests import AuxTelLatissCheckout, ScriptQueueController
 
 
-class AuxTelTelescopeAndDomeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
+class AuxTelLatissCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the AuxTel Telescope and Dome Checkout integration test script."""
 
     async def asyncSetUp(self) -> None:
@@ -43,16 +40,16 @@ class AuxTelTelescopeAndDomeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_telescope_dome_checkout(self) -> None:
-        """Execute the AuxTelTelescopeDomeCheckout integration test script,
-        which runs the auxtel/daytime_checkout/telescope_and_dome_checkout.py
+    async def test_latiss_checkout(self) -> None:
+        """Execute the LatissCheckout integration test script,
+        which runs the auxtel/daytime_checkout/latiss_checkout.py
         in ts_standardscripts.
         """
-        # Instantiate the TelescopeAndDomeCheckout integration tests.
-        script_class = AuxTelTelescopeAndDomeCheckout()
+        # Instantiate the LatissCheckout integration tests.
+        script_class = AuxTelLatissCheckout()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"AuxTel Telescope and Dome Checkout; running {num_scripts} scripts")
+        print(f"LATISS Checkout; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.

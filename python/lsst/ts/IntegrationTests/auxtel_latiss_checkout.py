@@ -20,57 +20,34 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = [
-    "AuxTelLatissAcquireTakeSequence",
-    "run_auxtel_latiss_acquire_and_take_sequence",
-]
+__all__ = ["AuxTelLatissCheckout", "run_auxtel_latiss_checkout"]
 
-import argparse
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
 
-from .configs.config_registry import registry
 
-
-class AuxTelLatissAcquireTakeSequence(BaseScript):
+class AuxTelLatissCheckout(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
-    Parameters
-    ----------
-    sequence : `str`
-        Defines which sequence to run.
-        Choices are ["pointing", "verify", "nominal", "test"].
     """
 
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/latiss_acquire_and_take_sequence.py", BaseScript.is_external),
+        (
+            "auxtel/daytime_checkout/latiss_checkout.py",
+            BaseScript.is_standard,
+        ),
     ]
 
-    def __init__(self, sequence: str) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.sequence = sequence
-        self.configs = (registry[f"auxtel_acquire_and_take_sequence_{sequence}"],)
 
 
-def run_auxtel_latiss_acquire_and_take_sequence() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "sequence",
-        type=str,
-        choices=["pointing", "verify", "nominal", "test"],
-        help="Specify which sequence to run.",
-    )
-    args = parser.parse_args()
-    script_class = AuxTelLatissAcquireTakeSequence(sequence=args.sequence)
-    print(
-        f"\nAuxTel Latiss Acquire and Take Sequence; "
-        f"running the {script_class.scripts[0][0]} script, "
-        f"for the {script_class.sequence} sequence, "
-        f"with configuration;\n{script_class.configs}"
-    )
+def run_auxtel_latiss_checkout() -> None:
+    script_class = AuxTelLatissCheckout()
+    num_scripts = len(script_class.scripts)
+    print(f"\nLATISS Daytime Checkout; running {num_scripts} scripts")
     asyncio.run(script_class.run())

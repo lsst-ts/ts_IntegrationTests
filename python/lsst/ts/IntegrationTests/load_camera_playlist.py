@@ -82,7 +82,6 @@ def load_camera_playlist() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "camera",
-        metavar="camera",
         nargs="?",
         type=str.lower,
         choices=cameras,
@@ -90,7 +89,6 @@ def load_camera_playlist() -> None:
     )
     parser.add_argument(
         "playlist_shortname",
-        metavar="playlist_shortname",
         nargs="?",
         type=str.lower,
         choices=playlists,
