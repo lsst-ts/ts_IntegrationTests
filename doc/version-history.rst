@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.14.2
+-------
+* Added the parameterized build section to requirements in conda/meta.yaml.
+
 v0.14.1
 -------
 * Updated noarch value to python in conda/meta.yaml.
