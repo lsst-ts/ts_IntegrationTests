@@ -68,6 +68,7 @@ yaml_string = yaml.safe_load(
     - [ESS:103, OFFLINE]
     - [ESS:104, OFFLINE]
     - [ESS:105, OFFLINE]
+    - [ESS:106, OFFLINE]
     - [ESS:201, OFFLINE]
     - [ESS:202, OFFLINE]
     - [ESS:203, OFFLINE]

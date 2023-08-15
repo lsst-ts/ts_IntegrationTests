@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.15.0
+-------
+* Added the ESS:106 CSC.
+
 v0.14.2
 -------
 * Added the parameterized build section to requirements in conda/meta.yaml.
