@@ -31,7 +31,7 @@ from .image_taking_configs import *  # noqa
 from .love_stress_test_configs import *  # noqa
 from .maintel_housekeeping_configs import *  # noqa
 from .maintel_state_transition_configs import *  # noqa
-from .obssys2_state_transition_configs import *  # noqa
+from .obssys_state_transition_configs import *  # noqa
 from .shutdown_configs import *  # noqa
 from .take_image_latiss_configs import *  # noqa
 from .track_target_configs import *  # noqa
