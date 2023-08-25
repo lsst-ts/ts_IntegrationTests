@@ -39,9 +39,13 @@ class MainTelHousekeeping(BaseScript):
     index: int = 1
     configs: tuple = (
         registry["cccamera_housekeeping"],
+        registry["mtptg_park"],
+        registry["mtptg_stop_tracking"],
         registry["mtmount_housekeeping"],
     )
     scripts: list = [
+        ("run_command.py", BaseScript.is_standard),
+        ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
     ]

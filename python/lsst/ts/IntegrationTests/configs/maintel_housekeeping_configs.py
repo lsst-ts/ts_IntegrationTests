@@ -44,6 +44,39 @@ registry["cccamera_housekeeping"] = yaml.safe_dump(
     canonical=True,
 )
 
+# MTPtg park
+yaml_string = yaml.safe_load(
+    """
+    component: "MTPtg"
+    cmd: azElTarget
+    parameters:
+        targetName: Park position
+        azDegs: 0
+        elDegs: 80
+        rotPA: 0
+    """
+)
+
+registry["mtptg_park"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+# MTPtg stop tracking
+yaml_string = yaml.safe_load(
+    """
+    component: "MTPtg"
+    cmd: stopTracking
+    """
+)
+
+registry["mtptg_stop_tracking"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
 # MTMount Housekeeping configs
 yaml_string = yaml.safe_load(
     """
