@@ -38,7 +38,21 @@ yaml_string = yaml.safe_load(
     """
 )
 
-registry["cccamera_housekeeping"] = yaml.safe_dump(
+registry["cccamera_set_filter"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
+# MTMount Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "MTMount"
+    cmd: "homeBothAxes"
+    """
+)
+
+registry["mtmount_home_both_axes"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
@@ -72,20 +86,6 @@ yaml_string = yaml.safe_load(
 )
 
 registry["mtptg_stop_tracking"] = yaml.safe_dump(
-    yaml_string,
-    explicit_start=True,
-    canonical=True,
-)
-
-# MTMount Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
-    component: "MTMount"
-    cmd: "homeBothAxes"
-    """
-)
-
-registry["mtmount_housekeeping"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
