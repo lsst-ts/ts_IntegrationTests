@@ -59,8 +59,8 @@ from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
 from .maintel_offline_standby import *
 from .maintel_standby_disabled import *
-from .obssys2_disabled_enabled import *
-from .obssys2_standby_disabled import *
+from .obssys_disabled_enabled import *
+from .obssys_standby_disabled import *
 from .script_queue_controller import *
 from .testutils import *
 from .yaml_test_strings import *

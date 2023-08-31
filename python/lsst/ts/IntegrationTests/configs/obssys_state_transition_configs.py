@@ -27,7 +27,7 @@ from .config_registry import registry
 
 # Add the State Transition script configurations to the registry.
 
-# obssys2_standby_disabled
+# obssys_standby_disabled
 yaml_string = yaml.safe_load(
     """
     data:
@@ -35,14 +35,15 @@ yaml_string = yaml.safe_load(
     - [Scheduler:2, DISABLED]
     - [OCPS:1, DISABLED]
     - [OCPS:2, DISABLED]
+    - [Watcher, DISABLED]
     """
 )
 
-registry["obssys2_standby_disabled"] = yaml.safe_dump(
+registry["obssys_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
-# obssys2_disabled_enabled
+# obssys_disabled_enabled
 yaml_string = yaml.safe_load(
     """
     data:
@@ -50,9 +51,10 @@ yaml_string = yaml.safe_load(
     - [Scheduler:2, ENABLED]
     - [OCPS:1, ENABLED]
     - [OCPS:2, ENABLED]
+    - [Watcher, ENABLED]
     """
 )
 
-registry["obssys2_disabled_enabled"] = yaml.safe_dump(
+registry["obssys_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
