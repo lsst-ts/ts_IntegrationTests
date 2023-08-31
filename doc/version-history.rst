@@ -14,6 +14,7 @@ v0.16.0
 -------
 * Added Watcher to the ObsSys State transition tests.
 * Added MTPtg park and stop tracking tests to MainTel Housekeeping.
+* Consolidated the ObsSys 1 & 2 tests into just ObsSys.
 
 v0.15.0
 -------
