@@ -25,14 +25,14 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import (
-    ObsSys2DisabledEnabled,
-    ObsSys2StandbyDisabled,
+    ObsSysDisabledEnabled,
+    ObsSysStandbyDisabled,
     ScriptQueueController,
 )
 
 
-class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the ObsSys2 Standby to Disabled integration test script."""
+class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the ObsSys Standby to Disabled integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
@@ -44,18 +44,18 @@ class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_obssys2_standby_disabled(self) -> None:
-        """Execute the ObsSys2StandbyDisabled integration test script,
+    async def test_obssys_standby_disabled(self) -> None:
+        """Execute the ObsSysStandbyDisabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the obssys2_state_transition_configs.py
+        Use the configuration stored in the obssys_state_transition_configs.py
         module.
 
         """
-        # Instantiate the ObsSys2StandbyDisabled integration tests.
-        script_class = ObsSys2StandbyDisabled()
+        # Instantiate the ObsSysStandbyDisabled integration tests.
+        script_class = ObsSysStandbyDisabled()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"ObsSys2 Standby to Disabled; running {num_scripts} scripts")
+        print(f"ObsSys Standby to Disabled; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
@@ -63,18 +63,18 @@ class ObsSys2StateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
 
-    async def test_obssys2_disabled_enabled(self) -> None:
-        """Execute the ObsSys2DisabledEnabled integration test script,
+    async def test_obssys_disabled_enabled(self) -> None:
+        """Execute the ObsSysDisabledEnabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the obssys2_state_transition_configs.py
+        Use the configuration stored in the obssys_state_transition_configs.py
         module.
 
         """
-        # Instantiate the ObsSys2DisabledEnabled integration tests.
-        script_class = ObsSys2DisabledEnabled()
+        # Instantiate the ObsSysDisabledEnabled integration tests.
+        script_class = ObsSysDisabledEnabled()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"ObsSys2 Disabled to Enabled; running {num_scripts} scripts")
+        print(f"ObsSys Disabled to Enabled; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.

@@ -37,8 +37,8 @@ build:
     - maintel_housekeeping = lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping
     - maintel_offline_standby = lsst.ts.IntegrationTests.maintel_offline_standby:run_maintel_offline_standby
     - maintel_standby_disabled = lsst.ts.IntegrationTests.maintel_standby_disabled:run_maintel_standby_disabled
-    - obssys2_disabled_enabled = lsst.ts.IntegrationTests.obssys2_disabled_enabled:run_obssys2_disabled_enabled
-    - obssys2_standby_disabled = lsst.ts.IntegrationTests.obssys2_standby_disabled:run_obssys2_standby_disabled
+    - obssys_disabled_enabled = lsst.ts.IntegrationTests.obssys_disabled_enabled:run_obssys_disabled_enabled
+    - obssys_standby_disabled = lsst.ts.IntegrationTests.obssys_standby_disabled:run_obssys_standby_disabled
     - load_camera_playlist = lsst.ts.IntegrationTests.load_camera_playlist:load_camera_playlist
     - love_stress_test = lsst.ts.IntegrationTests.love_stress_test:run_love_stress_test
 
