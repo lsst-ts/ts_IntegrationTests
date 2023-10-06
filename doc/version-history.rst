@@ -15,6 +15,7 @@ v0.16.0
 * Added Watcher to the ObsSys State transition tests.
 * Added MTPtg park and stop tracking tests to MainTel Housekeeping.
 * Consolidated the ObsSys 1 & 2 tests into just ObsSys.
+* Added the auxtel_slew_and_take_image_checkout.py integration test module.
 
 v0.15.0
 -------
