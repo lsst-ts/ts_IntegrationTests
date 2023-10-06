@@ -40,6 +40,7 @@ from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
 from .auxtel_reset_offsets import *
 from .auxtel_shutdown import *
+from .auxtel_slew_and_take_image_checkout import *
 from .auxtel_standby_disabled import *
 from .auxtel_stop import *
 from .auxtel_telescope_dome_checkout import *
