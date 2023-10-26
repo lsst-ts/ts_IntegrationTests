@@ -21,6 +21,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import sys
 import unittest
 
 from lsst.ts import salobj
@@ -51,9 +52,13 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
+        # Mock the command-line arguments that the obssys_standby_disabled.py
+        # script expects.
+        test_env = "tts"
+        sys.argv[1:] = [test_env]
         # Instantiate the ObsSysStandbyDisabled integration tests.
-        script_class = ObsSysStandbyDisabled()
-        # Get number of scripts
+        script_class = ObsSysStandbyDisabled(test_env=test_env)
+        # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         print(f"ObsSys Standby to Disabled; running {num_scripts} scripts")
         # Execute the scripts.
@@ -70,9 +75,13 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         module.
 
         """
+        # Mock the command-line arguments that the obssys_disabled_enabled.py
+        # script expects.
+        test_env = "bts"
+        sys.argv[1:] = [test_env]
         # Instantiate the ObsSysDisabledEnabled integration tests.
-        script_class = ObsSysDisabledEnabled()
-        # Get number of scripts
+        script_class = ObsSysDisabledEnabled(test_env=test_env)
+        # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         print(f"ObsSys Disabled to Enabled; running {num_scripts} scripts")
         # Execute the scripts.
