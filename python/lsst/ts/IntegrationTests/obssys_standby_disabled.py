@@ -22,8 +22,10 @@
 
 __all__ = ["ObsSysStandbyDisabled", "run_obssys_standby_disabled"]
 
+import argparse
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
@@ -42,12 +44,56 @@ class ObsSysStandbyDisabled(BaseScript):
         ("set_summary_state.py", BaseScript.is_standard),
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, test_env: str) -> None:
         super().__init__()
+        # Set the OCPS index based on test environment
+        self.test_env = test_env
+        self.env_configs = yaml.safe_load(registry["obssys_standby_disabled"])
+        if test_env.lower() == "bts":
+            # Running on BTS with OCPS:3
+            self.ocps = "OCPS:3"
+        else:
+            # Running on TTS or Summit with OCPS:2
+            self.ocps = "OCPS:2"
+        self.env_configs["data"][3][0] = self.ocps
+        self.configs = (yaml.safe_dump(self.env_configs),)
 
 
 def run_obssys_standby_disabled() -> None:
-    script_class = ObsSysStandbyDisabled()
-    num_scripts = len(script_class.scripts)
-    print(f"\nObsSys Standby to Disabled; running {num_scripts} scripts")
-    asyncio.run(script_class.run())
+    # Define the script arguments.
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "test_env",
+        nargs="?",
+        type=str.lower,
+        choices=["bts", "tts", "summit"],
+        help="Specify on which environment the tests are running (case insensitive).",
+    )
+    args = parser.parse_args()
+    # Print the help if the environment is not defined.
+    if not (args.test_env):
+        parser.print_help()
+        exit()
+    main(args)
+
+
+def main(opts: argparse.Namespace) -> None:
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the state transition.
+    try:
+        script_class = ObsSysStandbyDisabled(
+            test_env=opts.test_env,
+        )
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        num_scripts = len(script_class.scripts)
+        print(
+            f"\nObsSys Standby to Disabled; "
+            f"running {num_scripts} scripts "
+            f"on the '{opts.test_env}' environment. "
+            f"with this configuration: \n"
+            f"{script_class.configs}"
+        )
+        asyncio.run(script_class.run())
