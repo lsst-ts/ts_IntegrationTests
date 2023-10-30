@@ -22,13 +22,13 @@
 
 __all__ = ["ObsSysStandbyDisabled", "run_obssys_standby_disabled"]
 
-import argparse
 import asyncio
 
 import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
+from .utils import get_test_env_arg
 
 
 class ObsSysStandbyDisabled(BaseScript):
@@ -60,30 +60,13 @@ class ObsSysStandbyDisabled(BaseScript):
 
 
 def run_obssys_standby_disabled() -> None:
-    # Define the script arguments.
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "test_env",
-        nargs="?",
-        type=str.lower,
-        choices=["bts", "tts", "summit"],
-        help="Specify on which environment the tests are running (case insensitive).",
-    )
-    args = parser.parse_args()
-    # Print the help if the environment is not defined.
-    if not (args.test_env):
-        parser.print_help()
-        exit()
-    main(args)
-
-
-def main(opts: argparse.Namespace) -> None:
     # Ensure the invocation is correct.
     # If not, raise KeyError.
     # If it is correct, execute the state transition.
+    args = get_test_env_arg()
     try:
         script_class = ObsSysStandbyDisabled(
-            test_env=opts.test_env,
+            test_env=args.test_env,
         )
     except KeyError as ke:
         print(repr(ke))
@@ -92,7 +75,7 @@ def main(opts: argparse.Namespace) -> None:
         print(
             f"\nObsSys Standby to Disabled; "
             f"running {num_scripts} scripts "
-            f"on the '{opts.test_env}' environment. "
+            f"on the '{args.test_env}' environment. "
             f"with this configuration: \n"
             f"{script_class.configs}"
         )
