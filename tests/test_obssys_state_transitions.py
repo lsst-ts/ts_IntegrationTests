@@ -57,7 +57,11 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         script_config = yaml.safe_load(script_class.configs[0])
-        print(f"ObsSys Standby to Disabled; running {num_scripts} scripts")
+        print(
+            f"ObsSys Standby to Disabled; running {num_scripts} scripts"
+            f" on the TTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
@@ -79,7 +83,11 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         script_config = yaml.safe_load(script_class.configs[0])
-        print(f"ObsSys Disabled to Enabled; running {num_scripts} scripts")
+        print(
+            f"ObsSys Disabled to Enabled; running {num_scripts} scripts"
+            f" on the BTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
