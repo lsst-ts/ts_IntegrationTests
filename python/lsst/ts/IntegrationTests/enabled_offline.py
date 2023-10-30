@@ -22,8 +22,10 @@
 
 __all__ = ["EnabledOffline", "run_enabled_offline"]
 
+import argparse
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
@@ -63,12 +65,64 @@ class EnabledOffline(BaseScript):
         ("set_summary_state.py", BaseScript.is_standard),
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, test_env: str) -> None:
         super().__init__()
+        # Set the OCPS index based on test environment
+        self.test_env = test_env
+        self.env_configs = yaml.safe_load(self.configs[1])
+        if test_env.lower() == "bts":
+            # Running on BTS with OCPS:3
+            self.ocps = "OCPS:3"
+        else:
+            # Running on TTS or Summit with OCPS:2
+            self.ocps = "OCPS:2"
+        self.env_configs["data"][3][0] = self.ocps
+        # Update the self.configs tuple with the updated
+        # registry["sched_ocps_enabled_offline"] configuration.
+        # Do this by converting the tuple to a list, replacing the
+        # updated entry and converting it back to a tuple.
+        temp_list = list(self.configs)
+        temp_list[1] = yaml.safe_dump(
+            self.env_configs, explicit_start=True, canonical=True
+        )
+        self.configs = tuple(temp_list)
 
 
 def run_enabled_offline() -> None:
-    script_class = EnabledOffline()
-    num_scripts = len(script_class.scripts)
-    print(f"\nEnabled to Offline; running {num_scripts} scripts")
-    asyncio.run(script_class.run())
+    # Define the script arguments.
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "test_env",
+        nargs="?",
+        type=str.lower,
+        choices=["bts", "tts", "summit"],
+        help="Specify on which environment the tests are running (case insensitive).",
+    )
+    args = parser.parse_args()
+    # Print the help if the environment is not defined.
+    if not (args.test_env):
+        parser.print_help()
+        exit()
+    main(args)
+
+
+def main(opts: argparse.Namespace) -> None:
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the state transition.
+    try:
+        script_class = EnabledOffline(
+            test_env=opts.test_env,
+        )
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        num_scripts = len(script_class.scripts)
+        print(
+            f"\nEnabled to Offline; "
+            f"running {num_scripts} scripts "
+            f"on the '{opts.test_env}' environment. "
+            f"with this configuration: \n"
+            f"{script_class.configs}"
+        )
+        asyncio.run(script_class.run())

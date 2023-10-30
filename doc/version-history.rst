@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.17.0
+-------
+* Parameterized the OCSP 2||3 index, determined by test environment.
+
 v0.16.0
 -------
 * Added Watcher to the ObsSys State transition tests.

@@ -50,7 +50,7 @@ class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the EnabledOffline integration tests.
-        script_class = EnabledOffline()
+        script_class = EnabledOffline(test_env="bts")
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"Enabled to Offline; running {num_scripts} scripts")
