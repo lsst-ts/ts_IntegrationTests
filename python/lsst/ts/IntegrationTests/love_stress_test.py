@@ -24,9 +24,11 @@ __all__ = ["LoveStressTest", "run_love_stress_test"]
 
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
+from .utils import get_test_env_arg
 
 
 class LoveStressTest(BaseScript):
@@ -42,12 +44,37 @@ class LoveStressTest(BaseScript):
         ("make_love_stress_tests.py", BaseScript.is_external),
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, test_env: str) -> None:
         super().__init__()
+        # Set the LOVE location based on test environment
+        self.test_env = test_env
+        self.env_configs = yaml.safe_load(registry["love_stress"])
+        if test_env.lower() == "bts":
+            # Running on BTS
+            self.location = "love01.ls.lsst.org"
+        elif test_env.lower() == "tts":
+            # Running on TTS
+            self.location = "love1.tu.lsst.org"
+        self.env_configs["location"] = self.location
+        self.configs = (yaml.safe_dump(self.env_configs),)
 
 
 def run_love_stress_test() -> None:
-    script_class = LoveStressTest()
-    num_scripts = len(script_class.scripts)
-    print(f"\nLOVE Stress Test; running {num_scripts} scripts")
-    asyncio.run(script_class.run())
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the Stress Test.
+    args = get_test_env_arg()
+    try:
+        script_class = LoveStressTest(
+            test_env=args.test_env,
+        )
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        num_scripts = len(script_class.scripts)
+        print(
+            f"\nLOVE Stress Test; running {num_scripts} scripts"
+            f" with this configuration:\n"
+            f"{script_class.configs}"
+        )
+        asyncio.run(script_class.run())
