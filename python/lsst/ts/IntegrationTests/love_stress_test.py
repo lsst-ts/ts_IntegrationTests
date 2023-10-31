@@ -49,12 +49,19 @@ class LoveStressTest(BaseScript):
         # Set the LOVE location based on test environment
         self.test_env = test_env
         self.env_configs = yaml.safe_load(registry["love_stress"])
-        if test_env.lower() == "bts":
-            # Running on BTS
-            self.location = "love01.ls.lsst.org"
+        if test_env.lower() == "summit":
+            # Running on Summit
+            self.location = "love01.cp.lsst.org"
         elif test_env.lower() == "tts":
             # Running on TTS
             self.location = "love1.tu.lsst.org"
+        elif test_env.lower() == "bts":
+            # Running on BTS
+            self.location = "love01.ls.lsst.org"
+        else:
+            raise Exception(
+                "Please choose one of the proper locations: ['bts', 'tts', 'summit']"
+            )
         self.env_configs["location"] = self.location
         self.configs = (yaml.safe_dump(self.env_configs),)
 
