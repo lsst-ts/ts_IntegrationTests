@@ -30,7 +30,7 @@ from .config_registry import registry
 
 registry["love_stress"] = yaml.safe_dump(
     {
-        "location": "love1.tu.lsst.org",
+        "location": "replace_me",
         "number_of_clients": 50,
         "number_of_messages": 5000,
         "data": [
