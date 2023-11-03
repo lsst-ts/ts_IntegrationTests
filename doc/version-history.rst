@@ -14,6 +14,7 @@ v0.17.0
 -------
 * Parameterized the OCSP 2||3 index, determined by test environment.
 * Updated love_stress_test to define the LOVE 'location' URL based on the test environment.
+* Added LOVE kubernetes instance testing.
 
 v0.16.0
 -------
