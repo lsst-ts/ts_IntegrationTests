@@ -33,6 +33,12 @@ def get_test_env_arg() -> None:
         choices=["bts", "tts", "summit"],
         help="Specify on which environment the tests are running (case insensitive).",
     )
+    parser.add_argument(
+        "--k8s",
+        default=False,
+        action="store_true",
+        help="Specify if the tests are running against the kubernetes instance.",
+    )
     args = parser.parse_args()
     # Print the help if the environment is not defined.
     if not (args.test_env):
