@@ -22,7 +22,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import subprocess
-import sys
 import unittest
 
 from lsst.ts import salobj
@@ -55,7 +54,6 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
         # script expects.
         test_camera = "at"
         test_playlist = "test"
-        sys.argv[1:] = [test_camera, test_playlist]
         # Instantiate the LoadCameraPlaylist integration tests.
         script_class = LoadCameraPlaylist(
             camera=test_camera, playlist_shortname=test_playlist

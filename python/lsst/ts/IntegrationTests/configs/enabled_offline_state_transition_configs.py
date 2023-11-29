@@ -46,7 +46,7 @@ yaml_string = yaml.safe_load(
     - [Scheduler:1, OFFLINE]
     - [Scheduler:2, OFFLINE]
     - [OCPS:1, OFFLINE]
-    - [OCPS:2, OFFLINE]
+    - [replace_me, OFFLINE]
     """
 )
 

@@ -19,42 +19,29 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import yaml
+import argparse
 
-from .config_registry import registry
 
-# Add the State Transition script configurations to the registry.
-
-# obssys_standby_disabled
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [Scheduler:1, DISABLED]
-    - [Scheduler:2, DISABLED]
-    - [OCPS:1, DISABLED]
-    - [replace_me, DISABLED]
-    - [Watcher, DISABLED]
-    """
-)
-
-registry["obssys_standby_disabled"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)
-
-# obssys_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [Scheduler:1, ENABLED]
-    - [Scheduler:2, ENABLED]
-    - [OCPS:1, ENABLED]
-    - [replace_me, ENABLED]
-    - [Watcher, ENABLED]
-    """
-)
-
-registry["obssys_disabled_enabled"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)
+def get_test_env_arg() -> None:
+    # Define the script arguments.
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "test_env",
+        nargs="?",
+        type=str.lower,
+        choices=["bts", "tts", "summit"],
+        help="Specify on which environment the tests are running (case insensitive).",
+    )
+    parser.add_argument(
+        "--k8s",
+        default=False,
+        action="store_true",
+        help="Specify if the tests are running against the kubernetes instance.",
+    )
+    args = parser.parse_args()
+    # Print the help if the environment is not defined.
+    if not (args.test_env):
+        parser.print_help()
+        exit()
+    return args

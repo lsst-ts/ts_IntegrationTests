@@ -24,9 +24,11 @@ __all__ = ["ObsSysDisabledEnabled", "run_obssys_disabled_enabled"]
 
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
+from .utils import get_test_env_arg
 
 
 class ObsSysDisabledEnabled(BaseScript):
@@ -42,12 +44,39 @@ class ObsSysDisabledEnabled(BaseScript):
         ("set_summary_state.py", BaseScript.is_standard),
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, test_env: str) -> None:
         super().__init__()
+        # Set the OCPS index based on test environment
+        self.test_env = test_env
+        self.env_configs = yaml.safe_load(registry["obssys_disabled_enabled"])
+        if test_env.lower() == "bts":
+            # Running on BTS with OCPS:3
+            self.ocps = "OCPS:3"
+        else:
+            # Running on TTS or Summit with OCPS:2
+            self.ocps = "OCPS:2"
+        self.env_configs["data"][3][0] = self.ocps
+        self.configs = (yaml.safe_dump(self.env_configs),)
 
 
 def run_obssys_disabled_enabled() -> None:
-    script_class = ObsSysDisabledEnabled()
-    num_scripts = len(script_class.scripts)
-    print(f"\nObsSys Disabled to Enabled; running {num_scripts} scripts")
-    asyncio.run(script_class.run())
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the state transition.
+    args = get_test_env_arg()
+    try:
+        script_class = ObsSysDisabledEnabled(
+            test_env=args.test_env,
+        )
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        num_scripts = len(script_class.scripts)
+        print(
+            f"\nObsSys Disabled to Enabled; "
+            f"running {num_scripts} scripts "
+            f"on the '{args.test_env}' environment, "
+            f"with this configuration: \n"
+            f"{script_class.configs}"
+        )
+        asyncio.run(script_class.run())

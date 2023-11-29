@@ -23,6 +23,7 @@
 
 import unittest
 
+import yaml
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import (
     ObsSysDisabledEnabled,
@@ -49,38 +50,52 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         which runs the ts_standardscripts/set_summary_state.py script.
         Use the configuration stored in the obssys_state_transition_configs.py
         module.
-
         """
+
         # Instantiate the ObsSysStandbyDisabled integration tests.
-        script_class = ObsSysStandbyDisabled()
-        # Get number of scripts
+        script_class = ObsSysStandbyDisabled(test_env="tts")
+        # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
-        print(f"ObsSys Standby to Disabled; running {num_scripts} scripts")
+        script_config = yaml.safe_load(script_class.configs[0])
+        print(
+            f"ObsSys Standby to Disabled; running {num_scripts} scripts"
+            f" on the TTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
+        # Assert OCPS index was set correctly.
+        self.assertEqual(script_config["data"][3][0], "OCPS:2")
 
     async def test_obssys_disabled_enabled(self) -> None:
         """Execute the ObsSysDisabledEnabled integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
         Use the configuration stored in the obssys_state_transition_configs.py
         module.
-
         """
+
         # Instantiate the ObsSysDisabledEnabled integration tests.
-        script_class = ObsSysDisabledEnabled()
-        # Get number of scripts
+        script_class = ObsSysDisabledEnabled(test_env="bts")
+        # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
-        print(f"ObsSys Disabled to Enabled; running {num_scripts} scripts")
+        script_config = yaml.safe_load(script_class.configs[0])
+        print(
+            f"ObsSys Disabled to Enabled; running {num_scripts} scripts"
+            f" on the BTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
+        # Assert OCPS index was set correctly.
+        self.assertEqual(script_config["data"][3][0], "OCPS:3")
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

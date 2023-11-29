@@ -23,6 +23,7 @@
 
 import unittest
 
+import yaml
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import LoveStressTest, ScriptQueueController
 
@@ -47,16 +48,49 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the LoveStress integration tests.
-        script_class = LoveStressTest()
-        # Get number of scripts
+        script_class = LoveStressTest(test_env="bts")
+        # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
-        print(f"LOVE Stress Test; running {num_scripts} scripts")
+        script_config = yaml.safe_load(script_class.configs[0])
+        print(
+            f"LOVE Stress Test; running {num_scripts} scripts"
+            f" on the BTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
+        # Assert location is correct.
+        self.assertEqual(script_config["location"], "http://love01.ls.lsst.org")
+
+    async def test_love_stress_on_k8s(self) -> None:
+        """Execute the LoveStress integration test script on the kubernetes
+        LOVE instance, which runs the
+        ts_externalscripts/make_love_stress_tests.py script.
+        Use the configuration stored in the love_stress_configs.py module.
+
+        """
+        # Instantiate the LoveStress integration tests.
+        script_class = LoveStressTest(test_env="bts", k8s="--k8s")
+        # Get number of scripts and the configuration.
+        num_scripts = len(script_class.scripts)
+        script_config = yaml.safe_load(script_class.configs[0])
+        print(
+            f"LOVE Stress Test; running {num_scripts} scripts"
+            f" on the BTS environment, with this configuration: \n"
+            f"{script_config}"
+        )
+        # Execute the scripts.
+        await script_class.run()
+        # Assert script was added to ScriptQueue.
+        self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
+        # Assert location is correct.
+        self.assertEqual(script_config["location"], "https://base-lsp.lsst.codes/love")
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
