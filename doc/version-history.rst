@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.17.1
+-------
+* Updated the latiss_acquire_and_take_sequence 'test' and 'nominal' configs with Cycle34 changes.
+
 v0.17.0
 -------
 * Parameterized the OCSP 2||3 index, determined by test environment.
