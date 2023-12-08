@@ -55,7 +55,7 @@ class ObsSysDisabledEnabled(BaseScript):
         else:
             # Running on TTS or Summit with OCPS:2
             self.ocps = "OCPS:2"
-        self.env_configs["data"][3][0] = self.ocps
+        self.env_configs["data"][-1][0] = self.ocps
         self.configs = (yaml.safe_dump(self.env_configs),)
 
 
