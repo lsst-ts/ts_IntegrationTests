@@ -69,7 +69,7 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
         # Assert OCPS index was set correctly.
-        self.assertEqual(script_config["data"][3][0], "OCPS:2")
+        self.assertEqual(script_config["data"][-1][0], "OCPS:2")
 
     async def test_obssys_disabled_enabled(self) -> None:
         """Execute the ObsSysDisabledEnabled integration test script,
@@ -95,7 +95,7 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
         # Assert OCPS index was set correctly.
-        self.assertEqual(script_config["data"][3][0], "OCPS:3")
+        self.assertEqual(script_config["data"][-1][0], "OCPS:3")
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
