@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.18.0
+-------
+* Switched to the new auxtel/latiss_acquire.py script.
+
 v0.17.2
 -------
 * Swapped the order of the Watcher and the OCPS:2||3 in the obssys_state_transition_configs.
