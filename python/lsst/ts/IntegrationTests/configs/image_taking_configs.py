@@ -150,3 +150,27 @@ registry["comcam_calibrations_flat"] = yaml.safe_dump(
     explicit_start=True,
     canonical=True,
 )
+
+# lsstcam_calibrations
+registry["lsstcam_calibrations_flat"] = yaml.safe_dump(
+    {
+        "n_discard_bias": 0,
+        "n_discard_dark": 0,
+        "n_discard_flat": 0,
+        "n_bias": 10,
+        "n_dark": 10,
+        "n_flat": 10,
+        "exp_times_dark": 20,
+        "exp_times_flat": 5,
+        "detectors": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        "filter": "r_03",
+        "calib_collection": "LSSTCam/calib/u/integrationtester/daily.replace_me.calib_type",
+        "generate_calibrations": True,
+        "do_verify": True,
+        "script_mode": "BIAS_DARK_FLAT",
+        "do_defects": True,
+        "certify_calib_begin_date": "replace_me",
+    },
+    explicit_start=True,
+    canonical=True,
+)
