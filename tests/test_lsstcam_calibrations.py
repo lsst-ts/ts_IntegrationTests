@@ -25,10 +25,10 @@ import unittest
 from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import LSSTCamCalibrations, ScriptQueueController
+from lsst.ts.IntegrationTests import LsstCamCalibrations, ScriptQueueController
 
 
-class LSSTCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
+class LsstCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
     """
     Test the Make Latiss Configurations integration test scripts.
     """
@@ -44,14 +44,14 @@ class LSSTCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
         await self.controller.start_task
 
     async def test_lsstcam_calibrations_flat(self) -> None:
-        """Execute the LSSTCamCalibrations integration test script,
+        """Execute the LsstCamCalibrations integration test script,
         which runs the ts_standardscripts/maintel/make_lsstcam_calibratons.py
         script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the LSSTCamCalibrations integration tests.
+        # Instantiate the LsstCamCalibrations integration tests.
         calib_type = "flat"
-        script_class = LSSTCamCalibrations(calib_type=calib_type)
+        script_class = LsstCamCalibrations(calib_type=calib_type)
         # Assert configurations were updated with current date.
         self.assertEqual(
             script_class.calib_configs["certify_calib_begin_date"],

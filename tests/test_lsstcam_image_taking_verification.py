@@ -47,7 +47,7 @@ class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
         which runs the ts_standardscripts/take_image_lsstcam.py script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the LSSTCamImageTaking integration tests.
+        # Instantiate the LsstCamImageTaking integration tests.
         script_class = LsstCamImageTaking()
         # Get number of scripts
         num_scripts = len(script_class.scripts)

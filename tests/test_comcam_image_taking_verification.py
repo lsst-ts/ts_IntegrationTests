@@ -42,27 +42,7 @@ class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_comcam_image_taking_bts(self) -> None:
-        """Execute the ComCamImageTaking integration test script,
-        which runs the ts_standardscripts/take_image_comcam.py script.
-        Use the configuration stored in the image_taking_configs.py module.
-        """
-        # Instantiate the ComCamImageTaking integration tests.
-        script_class = ComCamImageTaking(test_env="bts")
-        # Get number of scripts
-        num_scripts = len(script_class.scripts)
-        print(
-            f"ComCam Image Taking verification. "
-            f"Running the {script_class.scripts[0][0]} script."
-        )
-        # Execute the scripts.
-        await script_class.run()
-        # Assert script was added to ScriptQueue.
-        self.assertEqual(len(self.controller.queue_list), num_scripts)
-        # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8])
-
-    async def test_comcam_image_taking_tts(self) -> None:
+    async def test_comcam_image_taking(self) -> None:
         """Execute the ComCamImageTaking integration test script,
         which runs the ts_standardscripts/take_image_comcam.py script.
         Use the configuration stored in the image_taking_configs.py module.
