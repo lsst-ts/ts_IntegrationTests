@@ -24,7 +24,12 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import MainTelHousekeeping, ScriptQueueController
+from lsst.ts.IntegrationTests import (
+    ComCamHousekeeping,
+    LsstCamHousekeeping,
+    MainTelHousekeeping,
+    ScriptQueueController,
+)
 
 
 class MainTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
@@ -39,6 +44,32 @@ class MainTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
+
+    async def test_comcamhousekeeping(self) -> None:
+        """Execute the ComCamHousekeeping integration test script,
+        which runs the ts_standardscripts/run_command.py script.
+
+        """
+        # Instantiate the ComCamHousekeeping integration tests.
+        script_class = ComCamHousekeeping()
+        # Get number of scripts
+        num_scripts = len(script_class.scripts)
+        print(f"ComCam Housekeeping; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
+
+    async def test_lsstcamhousekeeping(self) -> None:
+        """Execute the LSSTCamHousekeeping integration test script,
+        which runs the ts_standardscripts/run_command.py script.
+
+        """
+        # Instantiate the LsstCamHousekeeping integration tests.
+        script_class = LsstCamHousekeeping()
+        # Get number of scripts
+        num_scripts = len(script_class.scripts)
+        print(f"LSSTCam Housekeeping; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
 
     async def test_maintel_housekeeping(self) -> None:
         """Execute the MainTelHousekeeping integration test script,
@@ -55,7 +86,7 @@ class MainTelHousekeepingTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8, 8, 8, 8])
+        self.assertEqual(script_class.script_states, [8, 8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
