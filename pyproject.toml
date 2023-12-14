@@ -46,6 +46,7 @@ eas_standby_disabled = "lsst.ts.IntegrationTests.eas_standby_disabled:run_eas_st
 gencam_disabled_enabled = "lsst.ts.IntegrationTests.gencam_disabled_enabled:run_gencam_disabled_enabled"
 gencam_standby_disabled = "lsst.ts.IntegrationTests.gencam_standby_disabled:run_gencam_standby_disabled"
 enabled_offline = "lsst.ts.IntegrationTests.enabled_offline:run_enabled_offline"
+lsstcam_image_taking = "lsst.ts.IntegrationTests.image_taking_verification:run_lsstcam_image_taking"
 maintel_disabled_enabled = "lsst.ts.IntegrationTests.maintel_disabled_enabled:run_maintel_disabled_enabled"
 maintel_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping"
 maintel_offline_standby = "lsst.ts.IntegrationTests.maintel_offline_standby:run_maintel_offline_standby"

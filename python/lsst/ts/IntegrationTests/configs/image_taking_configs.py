@@ -28,7 +28,7 @@ from .config_registry import registry
 # Add the AuxTel and ComCam image taking verification
 # script configurations to the registry.
 
-# auxtel_image_taking
+# AuxTel and MainTel image_taking
 registry["image_taking"] = yaml.safe_dump(
     {
         "nimages": 1,
