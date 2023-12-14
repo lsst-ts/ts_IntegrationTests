@@ -22,14 +22,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import unittest
+from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ComCamImageTaking, ScriptQueueController
+from lsst.ts.IntegrationTests import LsstCamCalibrations, ScriptQueueController
 
 
-class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
+class LsstCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
     """
-    Test the Run Camera Image Taking Verficicattion integration test scripts.
+    Test the Make Latiss Configurations integration test scripts.
     """
 
     async def asyncSetUp(self) -> None:
@@ -42,18 +43,32 @@ class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_comcam_image_taking(self) -> None:
-        """Execute the ComCamImageTaking integration test script,
-        which runs the ts_standardscripts/take_image_comcam.py script.
+    async def test_lsstcam_calibrations_flat(self) -> None:
+        """Execute the LsstCamCalibrations integration test script,
+        which runs the ts_standardscripts/maintel/make_lsstcam_calibratons.py
+        script.
         Use the configuration stored in the image_taking_configs.py module.
         """
-        # Instantiate the ComCamImageTaking integration tests.
-        script_class = ComCamImageTaking(test_env="tts")
+        # Instantiate the LsstCamCalibrations integration tests.
+        calib_type = "flat"
+        script_class = LsstCamCalibrations(calib_type=calib_type)
+        # Assert configurations were updated with current date.
+        self.assertEqual(
+            script_class.calib_configs["certify_calib_begin_date"],
+            date.today().strftime("%Y-%m-%d"),
+        )
+        self.assertEqual(
+            script_class.calib_configs["calib_collection"],
+            f"LSSTCam/calib/u/integrationtester/daily."
+            f"{date.today().strftime('%Y%m%d')}.{calib_type}",
+        )
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
-            f"ComCam Image Taking verification. "
-            f"Running the {script_class.scripts[0][0]} script."
+            f"AuxTel Make Latiss Configurations. "
+            f"Running the {script_class.scripts[0][0]} script "
+            f"for the master_{calib_type} calibrations,"
+            f"\nwith configuration;\n{script_class.configs}"
         )
         # Execute the scripts.
         await script_class.run()

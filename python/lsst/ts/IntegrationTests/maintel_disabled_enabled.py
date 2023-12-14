@@ -24,6 +24,7 @@ __all__ = ["MainTelDisabledEnabled", "run_maintel_disabled_enabled"]
 
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
@@ -46,8 +47,20 @@ class MainTelDisabledEnabled(BaseScript):
         ("set_summary_state.py", BaseScript.is_standard),
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, test_env: str) -> None:
         super().__init__()
+        # Set the MainTel Camera based on the test environment.
+        self.test_env = test_env
+        self.big_cam_configs = yaml.safe_load(
+            registry["maintel_camera_disabled_enabled"]
+        )
+        if test_env.lower() == "bts":
+            # Running on BTS with MTCamera
+            self.big_cam = "MTCamera"
+        else:
+            # Running on TTS or Summit with CCCamera
+            self.big_cam = "CCCamera"
+        self.big_cam_configs["data"][0][0] = self.big_cam
 
 
 def run_maintel_disabled_enabled() -> None:

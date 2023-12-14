@@ -56,6 +56,7 @@ from .gencam_standby_disabled import *
 from .image_taking_verification import *
 from .load_camera_playlist import *
 from .love_stress_test import *
+from .lsstcam_calibrations import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
 from .maintel_offline_standby import *

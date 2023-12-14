@@ -44,6 +44,23 @@ registry["cccamera_set_filter"] = yaml.safe_dump(
     canonical=True,
 )
 
+# MTCamera Housekeeping configs
+yaml_string = yaml.safe_load(
+    """
+    component: "MTCamera"
+    cmd: "setFilter"
+    parameters:
+        name: "r_03"
+        timeout: 45
+    """
+)
+
+registry["mtcamera_set_filter"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
+
 # MTMount Housekeeping configs
 yaml_string = yaml.safe_load(
     """
