@@ -107,6 +107,7 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
         "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "target_pointing_tolerance": 4,
@@ -125,6 +126,7 @@ registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
         "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
         "acq_exposure_time": 0.4,
@@ -145,6 +147,7 @@ registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
         "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
@@ -165,6 +168,7 @@ registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
         "grating_sequence": ["holo4_003", "holo4_003", "holo4_003"],
         "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],

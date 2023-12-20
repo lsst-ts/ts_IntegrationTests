@@ -20,13 +20,54 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelHousekeeping", "run_maintel_housekeeping"]
+__all__ = [
+    "ComCamHousekeeping",
+    "LsstCamHousekeeping",
+    "MainTelHousekeeping",
+    "run_comcam_housekeeping",
+    "run_lsstcam_housekeeping",
+    "run_maintel_housekeeping",
+]
 
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
+
+
+class ComCamHousekeeping(BaseScript):
+    """Execute the run_command script for the given CSC,
+    with the given Yaml configuration,
+    placed in the given ScriptQueue location.
+
+    """
+
+    index: int = 1
+    configs: tuple = (registry["cccamera_set_filter"],)
+    scripts: list = [
+        ("run_command.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
+
+
+class LsstCamHousekeeping(BaseScript):
+    """Execute the run_command script for the given CSC,
+    with the given Yaml configuration,
+    placed in the given ScriptQueue location.
+
+    """
+
+    index: int = 1
+    configs: tuple = (registry["mtcamera_set_filter"],)
+    scripts: list = [
+        ("run_command.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
 
 
 class MainTelHousekeeping(BaseScript):
@@ -38,7 +79,6 @@ class MainTelHousekeeping(BaseScript):
 
     index: int = 1
     configs: tuple = (
-        registry["cccamera_set_filter"],
         registry["mtmount_home_both_axes"],
         registry["mtptg_park"],
         registry["mtptg_stop_tracking"],
@@ -47,11 +87,24 @@ class MainTelHousekeeping(BaseScript):
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
-        ("run_command.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
         super().__init__()
+
+
+def run_comcam_housekeeping() -> None:
+    script_class = ComCamHousekeeping()
+    num_scripts = len(script_class.scripts)
+    print(f"\nComCam Housekeeping; running {num_scripts} scripts")
+    asyncio.run(script_class.run())
+
+
+def run_lsstcam_housekeeping() -> None:
+    script_class = LsstCamHousekeeping()
+    num_scripts = len(script_class.scripts)
+    print(f"\nLSSTCam Housekeeping; running {num_scripts} scripts")
+    asyncio.run(script_class.run())
 
 
 def run_maintel_housekeeping() -> None:

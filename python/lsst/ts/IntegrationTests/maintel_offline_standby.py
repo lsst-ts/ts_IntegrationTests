@@ -20,7 +20,12 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelOfflineStandby", "run_maintel_offline_standby"]
+__all__ = [
+    "ComCamOfflineStandby",
+    "LsstCamOfflineStandby",
+    "run_comcam_offline_standby",
+    "run_lsstcam_offline_standby",
+]
 
 import asyncio
 
@@ -29,7 +34,7 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class MainTelOfflineStandby(BaseScript):
+class ComCamOfflineStandby(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -37,7 +42,7 @@ class MainTelOfflineStandby(BaseScript):
     """
 
     index: int = 1
-    configs: tuple = (registry["maintel_offline_standby"],)
+    configs: tuple = (registry["comcam_offline_standby"],)
     scripts: list = [
         ("set_summary_state.py", BaseScript.is_standard),
     ]
@@ -46,8 +51,32 @@ class MainTelOfflineStandby(BaseScript):
         super().__init__()
 
 
-def run_maintel_offline_standby() -> None:
-    script_class = MainTelOfflineStandby()
+class LsstCamOfflineStandby(BaseScript):
+    """Execute the given Standard or External script,
+    with the given Yaml configuration,
+    placed in the given ScriptQueue location.
+
+    """
+
+    index: int = 1
+    configs: tuple = (registry["lsstcam_offline_standby"],)
+    scripts: list = [
+        ("set_summary_state.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
+
+
+def run_comcam_offline_standby() -> None:
+    script_class = ComCamOfflineStandby()
     num_scripts = len(script_class.scripts)
-    print(f"\nMainTel Offline to Standby; running {num_scripts} scripts")
+    print(f"\nComCam Offline to Standby; running {num_scripts} scripts")
+    asyncio.run(script_class.run())
+
+
+def run_lsstcam_offline_standby() -> None:
+    script_class = LsstCamOfflineStandby()
+    num_scripts = len(script_class.scripts)
+    print(f"\nLSSTCam Offline to Standby; running {num_scripts} scripts")
     asyncio.run(script_class.run())

@@ -20,57 +20,64 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = [
-    "AuxTelLatissAcquireTakeSequence",
-    "run_auxtel_latiss_acquire_and_take_sequence",
-]
+__all__ = ["LsstCamCalibrations", "run_lsstcam_calibrations"]
 
 import argparse
 import asyncio
 
+import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
 
 
-class AuxTelLatissAcquireTakeSequence(BaseScript):
+class LsstCamCalibrations(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
 
     Parameters
     ----------
-    sequence : `str`
-        Defines which sequence to run.
-        Choices are ["pointing", "verify", "nominal", "test"].
+    calib_type : `str`
+        Defines which set of calibrations to run.
+        Choices are ["flat", "ptc"].
     """
 
-    index: int = 2
+    index: int = 1
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/latiss_acquire.py", BaseScript.is_external),
+        ("maintel/make_lsstcam_calibrations.py", BaseScript.is_external),
     ]
 
-    def __init__(self, sequence: str) -> None:
+    def __init__(self, calib_type: str) -> None:
         super().__init__()
-        self.sequence = sequence
-        self.configs = (registry[f"auxtel_acquire_and_take_sequence_{sequence}"],)
+        self.calib_type = calib_type
+        self.calib_configs = yaml.safe_load(
+            registry[f"lsstcam_calibrations_{calib_type}"]
+        )
+        self.calib_configs["certify_calib_begin_date"] = super().get_current_date()
+        self.calib_configs["calib_collection"] = self.calib_configs[
+            "calib_collection"
+        ].replace("replace_me", super().get_current_date("%Y%m%d"))
+        self.calib_configs["calib_collection"] = self.calib_configs[
+            "calib_collection"
+        ].replace("calib_type", calib_type)
+        self.configs = (yaml.safe_dump(self.calib_configs),)
 
 
-def run_auxtel_latiss_acquire_and_take_sequence() -> None:
+def run_lsstcam_calibrations() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "sequence",
+        "calib_type",
         type=str,
-        choices=["pointing", "verify", "nominal", "test"],
-        help="Specify which sequence to run.",
+        choices=["flat", "ptc"],
+        help="Specify which set of calibrations to run.",
     )
     args = parser.parse_args()
-    script_class = AuxTelLatissAcquireTakeSequence(sequence=args.sequence)
+    script_class = LsstCamCalibrations(calib_type=args.calib_type)
     print(
-        f"\nAuxTel Latiss Acquire and Take Sequence; "
-        f"running the {script_class.scripts[0][0]} script, "
-        f"for the {script_class.sequence} sequence, "
-        f"with configuration;\n{script_class.configs}"
+        f"\nLSSTCam Calibrations; running the "
+        f"master_{script_class.calib_type} calibrations"
+        f"\nwith configuration;\n{script_class.configs}"
     )
     asyncio.run(script_class.run())

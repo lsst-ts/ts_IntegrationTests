@@ -58,7 +58,7 @@ class EnabledOffline(BaseScript):
         ("auxtel/offline_atcs.py", BaseScript.is_standard),
         ("auxtel/offline_latiss.py", BaseScript.is_standard),
         ("maintel/offline_mtcs.py", BaseScript.is_standard),
-        ("maintel/offline_comcam.py", BaseScript.is_standard),
+        ("replace_with_big_camera_offline_script", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
@@ -69,23 +69,31 @@ class EnabledOffline(BaseScript):
         super().__init__()
         # Set the OCPS index based on test environment
         self.test_env = test_env
-        self.env_configs = yaml.safe_load(self.configs[1])
-        if test_env.lower() == "bts":
-            # Running on BTS with OCPS:3
+        self.obssys_configs = yaml.safe_load(self.configs[1])
+        if self.test_env.lower() == "bts":
+            # Running on BTS with MTCamera and OCPS:3
+            self.big_cam_script = "maintel/offline_lsstcam.py"
             self.ocps = "OCPS:3"
         else:
-            # Running on TTS or Summit with OCPS:2
+            # Running on TTS or Summit with CCCamera and OCPS:2
+            self.big_cam_script = "maintel/offline_comcam.py"
             self.ocps = "OCPS:2"
-        self.env_configs["data"][3][0] = self.ocps
+        self.obssys_configs["data"][3][0] = self.ocps
         # Update the self.configs tuple with the updated
         # registry["sched_ocps_enabled_offline"] configuration.
         # Do this by converting the tuple to a list, replacing the
         # updated entry and converting it back to a tuple.
+        self.obssys_configs = yaml.safe_load(self.configs[1])
         temp_list = list(self.configs)
         temp_list[1] = yaml.safe_dump(
-            self.env_configs, explicit_start=True, canonical=True
+            self.obssys_configs, explicit_start=True, canonical=True
         )
         self.configs = tuple(temp_list)
+        # Update the self.scripts tuple with the proper Camera
+        # shutdown script, based on the environment.
+        temp_scripts = list(self.scripts)
+        temp_scripts[5] = self.big_cam_script
+        self.scripts = tuple(temp_scripts)
 
 
 def run_enabled_offline() -> None:

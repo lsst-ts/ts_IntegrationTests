@@ -23,8 +23,10 @@
 __all__ = [
     "AuxTelImageTaking",
     "ComCamImageTaking",
+    "LsstCamImageTaking",
     "run_auxtel_image_taking",
     "run_comcam_image_taking",
+    "run_lsstcam_image_taking",
 ]
 
 import asyncio
@@ -38,7 +40,6 @@ class AuxTelImageTaking(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
     """
 
     index: int = 2
@@ -55,13 +56,28 @@ class ComCamImageTaking(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
     """
 
     index: int = 1
     configs: tuple = (registry["image_taking"],)
     scripts: list = [
         ("maintel/take_image_comcam.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self, test_env: str) -> None:
+        super().__init__()
+
+
+class LsstCamImageTaking(BaseScript):
+    """Execute the given Standard or External script,
+    with the given Yaml configuration,
+    placed in the given ScriptQueue location.
+    """
+
+    index: int = 1
+    configs: tuple = (registry["image_taking"],)
+    scripts: list = [
+        ("maintel/take_image_lsstcam.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
@@ -79,4 +95,11 @@ def run_comcam_image_taking() -> None:
     script_class = ComCamImageTaking()
     num_scripts = len(script_class.scripts)
     print(f"\nComCam Image Taking Verification; running {num_scripts} scripts")
+    asyncio.run(script_class.run())
+
+
+def run_lsstcam_image_taking() -> None:
+    script_class = LsstCamImageTaking()
+    num_scripts = len(script_class.scripts)
+    print(f"\nLSSTCam Image Taking Verification; running {num_scripts} scripts")
     asyncio.run(script_class.run())

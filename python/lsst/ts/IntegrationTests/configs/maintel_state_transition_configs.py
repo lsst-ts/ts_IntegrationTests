@@ -27,7 +27,7 @@ from .config_registry import registry
 
 # Add the State Transition script configurations to the registry.
 
-# maintel_offline_standby
+# comcam_offline_standby
 yaml_string = yaml.safe_load(
     """
     data:
@@ -35,7 +35,19 @@ yaml_string = yaml.safe_load(
     """
 )
 
-registry["maintel_offline_standby"] = yaml.safe_dump(
+registry["comcam_offline_standby"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
+# lsstcam_offline_standby
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [MTCamera, STANDBY]
+    """
+)
+
+registry["lsstcam_offline_standby"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 

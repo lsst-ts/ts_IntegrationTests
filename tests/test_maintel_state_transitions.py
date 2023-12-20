@@ -25,15 +25,16 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import (
+    ComCamOfflineStandby,
+    LsstCamOfflineStandby,
     MainTelDisabledEnabled,
-    MainTelOfflineStandby,
     MainTelStandbyDisabled,
     ScriptQueueController,
 )
 
 
 class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the MainTel Standby to Disabled integration test script."""
+    """Test the MainTel State transition integration test scripts."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
@@ -45,18 +46,37 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_maintel_offline_standby(self) -> None:
-        """Execute the MainTelOfflineStandby integration test script,
+    async def test_comcam_offline_standby(self) -> None:
+        """Execute the ComCamOfflineStandby integration test script,
         which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the at_state_transition_configs.py
+        Use the configuration stored in the maintel_state_transition_configs.py
         module.
 
         """
-        # Instantiate the MainTelOfflineStandby integration tests.
-        script_class = MainTelOfflineStandby()
+        # Instantiate the ComCamOfflineStandby integration tests.
+        script_class = ComCamOfflineStandby()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"MainTel Offline to Standby; running {num_scripts} scripts")
+        print(f"ComCam Offline to Standby; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
+        # Assert script was added to ScriptQueue.
+        self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
+
+    async def test_lsstcam_offline_standby(self) -> None:
+        """Execute the LsstCamOfflineStandby integration test script,
+        which runs the ts_standardscripts/set_summary_state.py script.
+        Use the configuration stored in the maintel_state_transition_configs.py
+        module.
+
+        """
+        # Instantiate the LsstCamOfflineStandby integration tests.
+        script_class = LsstCamOfflineStandby()
+        # Get number of scripts
+        num_scripts = len(script_class.scripts)
+        print(f"LSSTCam Offline to Standby; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
@@ -72,7 +92,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the MainTelStandbyDisabled integration tests.
-        script_class = MainTelStandbyDisabled()
+        script_class = MainTelStandbyDisabled(test_env="bts")
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Standby to Disabled; running {num_scripts} scripts")
@@ -91,7 +111,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the MainTelDisabledEnabled integration tests.
-        script_class = MainTelDisabledEnabled()
+        script_class = MainTelDisabledEnabled(test_env="tts")
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Disabled to Enabled; running {num_scripts} scripts")
