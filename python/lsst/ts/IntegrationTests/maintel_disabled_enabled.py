@@ -28,6 +28,7 @@ import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 from .configs.config_registry import registry
+from .utils import get_test_env_arg
 
 
 class MainTelDisabledEnabled(BaseScript):
@@ -61,10 +62,30 @@ class MainTelDisabledEnabled(BaseScript):
             # Running on TTS or Summit with CCCamera
             self.big_cam = "CCCamera"
         self.big_cam_configs["data"][0][0] = self.big_cam
+        self.configs = (
+            registry["maintel_disabled_enabled"],
+            yaml.safe_dump(self.big_cam_configs),
+        )
 
 
 def run_maintel_disabled_enabled() -> None:
-    script_class = MainTelDisabledEnabled()
-    num_scripts = len(script_class.scripts)
-    print(f"\nMainTel Disabled to Enabled; running {num_scripts} scripts")
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the state transition.
+    args = get_test_env_arg()
+    try:
+        script_class = MainTelDisabledEnabled(
+            test_env=args.test_env,
+        )
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        num_scripts = len(script_class.scripts)
+        print(
+            f"\nMainTel Disabled to Enabled; "
+            f"running {num_scripts} scripts"
+            f"on the '{args.test_env}' environment, "
+            f"with this configuration: \n"
+            f"{script_class.configs}"
+        )
     asyncio.run(script_class.run())
