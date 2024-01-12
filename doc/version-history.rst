@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.19.0
+-------
+* Added the ComCam/MTCamera environment-based handling.
+
 v0.18.0
 -------
 * Switched to the new auxtel/latiss_acquire.py script.

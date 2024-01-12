@@ -75,7 +75,7 @@ def run_obssys_standby_disabled() -> None:
         print(
             f"\nObsSys Standby to Disabled; "
             f"running {num_scripts} scripts "
-            f"on the '{args.test_env}' environment. "
+            f"on the '{args.test_env}' environment, "
             f"with this configuration: \n"
             f"{script_class.configs}"
         )
