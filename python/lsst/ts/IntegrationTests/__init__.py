@@ -47,6 +47,7 @@ from .auxtel_telescope_dome_checkout import *
 from .auxtel_track_target import *
 from .auxtel_visit import *
 from .comcam_calibrations import *
+from .csc_state_transition import *
 from .eas_disabled_enabled import *
 from .eas_standby_disabled import *
 from .enabled_offline import *
