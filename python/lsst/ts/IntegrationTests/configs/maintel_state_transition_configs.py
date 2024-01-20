@@ -53,8 +53,8 @@ registry["maintel_standby_disabled"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [CCHeaderService, DISABLED]
-    - [CCOODS, DISABLED]
+    - [replace_me_HeaderService, DISABLED]
+    - [replace_me_OODS, DISABLED]
     """
 )
 
@@ -90,8 +90,8 @@ registry["maintel_disabled_enabled"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [CCHeaderService, ENABLED]
-    - [CCOODS, ENABLED]
+    - [replace_me_HeaderService, ENABLED]
+    - [replace_me_OODS, ENABLED]
     """
 )
 
