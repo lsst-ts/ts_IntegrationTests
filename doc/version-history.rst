@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.20.0
+-------
+* Add corrected config flags for pipetask execution in the latiss_calibration_* configs.
+
 v0.19.0
 -------
 * Added the ComCam/MTCamera environment-based handling.
