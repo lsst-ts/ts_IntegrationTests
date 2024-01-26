@@ -47,6 +47,7 @@ from .auxtel_telescope_dome_checkout import *
 from .auxtel_track_target import *
 from .auxtel_visit import *
 from .comcam_calibrations import *
+from .csc_state_transition import *
 from .eas_disabled_enabled import *
 from .eas_standby_disabled import *
 from .enabled_offline import *
@@ -59,7 +60,6 @@ from .love_stress_test import *
 from .lsstcam_calibrations import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
-from .maintel_offline_standby import *
 from .maintel_standby_disabled import *
 from .obssys_disabled_enabled import *
 from .obssys_standby_disabled import *

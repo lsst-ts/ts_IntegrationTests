@@ -60,6 +60,12 @@ class BaseScript:
         A list of tuples. The tuple is the script name and a boolean.
         The boolean specifies the script as Standard (True)
         or External (False).
+    cscs : `frozenset`
+        An immutable set of CSCs. This is used to validate CSC state
+        transition commands.
+    csc_states : `frozenset`
+        An immutable set of CSC states. This is used to validate CSC state
+        transition commands.
     processing_states : `frozenset`
         An immutable set of the ScriptQueue processing states.
     terminal_states : `frozenset`
@@ -73,6 +79,83 @@ class BaseScript:
     configs: tuple = ()
     scripts: list = []
 
+    # Define the list of CSCs.
+    # This is needed to validate the csc_state_transition configuration.
+    cscs = frozenset(
+        [
+            "ATAOS",
+            "MTAirCompressor",
+            "ATBuilding",
+            "ATCamera",
+            "ATDome",
+            "ATDomeTrajectory",
+            "ATHeaderService",
+            "ATHexapod",
+            "ATMCS",
+            "ATMonochromator",
+            "ATOODS",
+            "ATPneumatics",
+            "ATPtg",
+            "ATSpectrograph",
+            "ATWhiteLight",
+            "Authorize",
+            "GCHeaderService",
+            "CCCamera",
+            "CCHeaderService",
+            "CCOODS",
+            "CBP",
+            "DIMM",
+            "DREAM",
+            "DSM",
+            "EAS",
+            "Electrometer",
+            "ESS",
+            "FiberSpectrograph",
+            "GenericCamera",
+            "GIS",
+            "Guider",
+            "HVAC",
+            "LaserTracker",
+            "LEDProjector",
+            "LinearStage",
+            "LOVE",
+            "MTAOS",
+            "MTCamera",
+            "MTDome",
+            "MTDomeTrajectory",
+            "MTEEC",
+            "MTHeaderService",
+            "MTHexapod",
+            "MTM1M3",
+            "MTM1M3TS",
+            "MTM2",
+            "MTMount",
+            "MTOODS",
+            "MTPtg",
+            "MTRotator",
+            "MTVMS",
+            "OCPS",
+            "PMD",
+            "Scheduler",
+            "Script",
+            "ScriptQueue",
+            "SummitFacility",
+            "Test",
+            "TunableLaser",
+            "Watcher",
+            "WeatherForecast",
+        ]
+    )
+
+    # Define the list of CSC States.
+    csc_states = frozenset(
+        [
+            "Offline",
+            "Standby",
+            "Disabled",
+            "Enabled",
+        ]
+    )
     # Define the set of script states that indicate the script is processing.
     processing_states = frozenset(
         (
@@ -82,6 +165,7 @@ class BaseScript:
             ScriptProcessState.RUNNING,
         )
     )
+
     # Define the set of script states that indicate the script is complete.
     terminal_states = frozenset(
         (

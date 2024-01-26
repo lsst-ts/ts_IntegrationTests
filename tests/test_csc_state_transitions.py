@@ -24,42 +24,49 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import EnabledOffline, ScriptQueueController
+from lsst.ts.IntegrationTests import CSCStateTransition, ScriptQueueController
 
 
-class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
-    """Test the Enabled to Offline integration test script."""
+class CSCStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
+    """Test the CSC State transition integration test script."""
 
     async def asyncSetUp(self) -> None:
         # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
         salobj.set_random_lsst_dds_partition_prefix()
 
         # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
+        self.controller = ScriptQueueController(index=1)
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_enabled_offline(self) -> None:
-        """Execute the EnabledOffline integration test script,
-        which runs the ts_standardscripts/set_summary_state.py,
-        auxtel/offline_atcs.py, auxtel/offline_latiss.py,
-        maintel/offline_mtcs.py, maintel/offline_comcam.py scripts.
-        Use the configuration stored in the
-        enabled_offline_state_transition_configs.py module.
-
-        """
-        # Instantiate the EnabledOffline integration tests.
-        script_class = EnabledOffline()
+    async def test_comcam_offline_standby(self) -> None:
+        """Execute the Offline-to-Standby state transition for ComCam."""
+        # Instantiate the CSCStateTransition integration test.
+        script_class = CSCStateTransition(csc="CCCamera", state="Standby")
         # Get number of scripts
         num_scripts = len(script_class.scripts)
-        print(f"Enabled to Offline; running {num_scripts} scripts")
+        print(f"ComCam Offline to Standby; running {num_scripts} scripts")
         # Execute the scripts.
         await script_class.run()
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8, 8, 8, 8])
+        self.assertEqual(script_class.script_states, [8])
+
+    async def test_lsstcam_offline_standby(self) -> None:
+        """Execute the Offline-to-Standby state transition for LSSTCam."""
+        # Instantiate the CSCStateTransition integration tests.
+        script_class = CSCStateTransition(csc="MTCamera", state="Standby")
+        # Get number of scripts
+        num_scripts = len(script_class.scripts)
+        print(f"LSSTCam Offline to Standby; running {num_scripts} scripts")
+        # Execute the scripts.
+        await script_class.run()
+        # Assert script was added to ScriptQueue.
+        self.assertEqual(len(self.controller.queue_list), num_scripts)
+        # Assert scripts passed.
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

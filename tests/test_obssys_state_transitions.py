@@ -53,13 +53,13 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         """
 
         # Instantiate the ObsSysStandbyDisabled integration tests.
-        script_class = ObsSysStandbyDisabled(test_env="tts")
+        script_class = ObsSysStandbyDisabled()
         # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         script_config = yaml.safe_load(script_class.configs[0])
         print(
-            f"ObsSys Standby to Disabled; running {num_scripts} scripts"
-            f" on the TTS environment, with this configuration: \n"
+            f"ObsSys Standby to Disabled; running {num_scripts} scripts, "
+            f"with this configuration: \n"
             f"{script_config}"
         )
         # Execute the scripts.
@@ -68,8 +68,6 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
-        # Assert OCPS index was set correctly.
-        self.assertEqual(script_config["data"][-1][0], "OCPS:2")
 
     async def test_obssys_disabled_enabled(self) -> None:
         """Execute the ObsSysDisabledEnabled integration test script,
@@ -79,13 +77,13 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         """
 
         # Instantiate the ObsSysDisabledEnabled integration tests.
-        script_class = ObsSysDisabledEnabled(test_env="bts")
+        script_class = ObsSysDisabledEnabled()
         # Get number of scripts and the configuration.
         num_scripts = len(script_class.scripts)
         script_config = yaml.safe_load(script_class.configs[0])
         print(
-            f"ObsSys Disabled to Enabled; running {num_scripts} scripts"
-            f" on the BTS environment, with this configuration: \n"
+            f"ObsSys Disabled to Enabled; running {num_scripts} scripts, "
+            f"with this configuration: \n"
             f"{script_config}"
         )
         # Execute the scripts.
@@ -94,8 +92,6 @@ class ObsSysStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
-        # Assert OCPS index was set correctly.
-        self.assertEqual(script_config["data"][-1][0], "OCPS:3")
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

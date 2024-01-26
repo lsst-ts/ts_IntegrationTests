@@ -28,7 +28,6 @@ build:
     - auxtel_visit = lsst.ts.IntegrationTests.auxtel_visit:run_auxtel_visit
     - comcam_calibrations = lsst.ts.IntegrationTests.comcam_calibrations:run_comcam_calibrations
     - comcam_image_taking = lsst.ts.IntegrationTests.image_taking_verification:run_comcam_image_taking
-    - comcam_offline_standby = lsst.ts.IntegrationTests.maintel_offline_standby:run_maintel_offline_standby
     - eas_disabled_enabled = lsst.ts.IntegrationTests.eas_disabled_enabled:run_eas_disabled_enabled
     - eas_standby_disabled = lsst.ts.IntegrationTests.eas_standby_disabled:run_eas_standby_disabled
     - gencam_disabled_enabled = lsst.ts.IntegrationTests.gencam_disabled_enabled:run_gencam_disabled_enabled
@@ -36,13 +35,12 @@ build:
     - enabled_offline = lsst.ts.IntegrationTests.enabled_offline:run_enabled_offline
     - lsstcam_calibrations = lsst.ts.IntegrationTests.lsstcam_calibrations:run_lsstcam_calibrations
     - lsstcam_image_taking = lsst.ts.IntegrationTests.image_taking_verification:run_lsstcam_image_taking
-    - lsstcam_offline_standby = lsst.ts.IntegrationTests.maintel_offline_standby:run_maintel_offline_standby
     - maintel_disabled_enabled = lsst.ts.IntegrationTests.maintel_disabled_enabled:run_maintel_disabled_enabled
     - maintel_housekeeping = lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping
-    - maintel_offline_standby = lsst.ts.IntegrationTests.maintel_offline_standby:run_maintel_offline_standby
     - maintel_standby_disabled = lsst.ts.IntegrationTests.maintel_standby_disabled:run_maintel_standby_disabled
     - obssys_disabled_enabled = lsst.ts.IntegrationTests.obssys_disabled_enabled:run_obssys_disabled_enabled
     - obssys_standby_disabled = lsst.ts.IntegrationTests.obssys_standby_disabled:run_obssys_standby_disabled
+    - csc_state_transition = lsst.ts.IntegrationTests.csc_state_transition:csc_state_transition
     - load_camera_playlist = lsst.ts.IntegrationTests.load_camera_playlist:load_camera_playlist
     - love_stress_test = lsst.ts.IntegrationTests.love_stress_test:run_love_stress_test
 

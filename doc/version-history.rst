@@ -10,6 +10,12 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.20.0
+-------
+* Added corrected config flags for pipetask execution in the latiss_calibration_* configs.
+* Implemented the single-CSC state transition script.
+* Removed all OCPS 2/3 and MTCamera/CCCamera references; they will use the single-CSC script.
+
 v0.19.0
 -------
 * Added the ComCam/MTCamera environment-based handling.
