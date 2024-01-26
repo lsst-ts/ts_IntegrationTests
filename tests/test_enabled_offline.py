@@ -50,7 +50,7 @@ class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the EnabledOffline integration tests.
-        script_class = EnabledOffline(test_env="bts")
+        script_class = EnabledOffline()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"Enabled to Offline; running {num_scripts} scripts")
@@ -59,7 +59,7 @@ class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8, 8, 8, 8, 8])
+        self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8, 8, 8, 8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
