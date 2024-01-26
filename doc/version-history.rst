@@ -12,7 +12,9 @@ Version History
 
 v0.20.0
 -------
-* Add corrected config flags for pipetask execution in the latiss_calibration_* configs.
+* Added corrected config flags for pipetask execution in the latiss_calibration_* configs.
+* Implemented the single-CSC state transition script.
+* Removed all OCPS 2/3 and MTCamera/CCCamera references; they will use the single-CSC script.
 
 v0.19.0
 -------
