@@ -57,11 +57,14 @@ class MainTelDisabledEnabled(BaseScript):
         )
         if test_env.lower() == "bts":
             # Running on BTS with MTCamera
-            self.big_cam = "MTCamera"
+            self.big_cam_hs = "MTHeaderService"
+            self.big_cam_oods = "MTOODS"
         else:
             # Running on TTS or Summit with CCCamera
-            self.big_cam = "CCCamera"
-        self.big_cam_configs["data"][0][0] = self.big_cam
+            self.big_cam_hs = "CCHeaderService"
+            self.big_cam_oods = "CCOODS"
+        self.big_cam_configs["data"][0][0] = self.big_cam_hs
+        self.big_cam_configs["data"][0][1] = self.big_cam_oods
         self.configs = (
             registry["maintel_disabled_enabled"],
             yaml.safe_dump(self.big_cam_configs),

@@ -25,8 +25,6 @@ import unittest
 
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import (
-    ComCamOfflineStandby,
-    LsstCamOfflineStandby,
     MainTelDisabledEnabled,
     MainTelStandbyDisabled,
     ScriptQueueController,
@@ -45,44 +43,6 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
 
         # Start the controller and wait for it be ready.
         await self.controller.start_task
-
-    async def test_comcam_offline_standby(self) -> None:
-        """Execute the ComCamOfflineStandby integration test script,
-        which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the maintel_state_transition_configs.py
-        module.
-
-        """
-        # Instantiate the ComCamOfflineStandby integration tests.
-        script_class = ComCamOfflineStandby()
-        # Get number of scripts
-        num_scripts = len(script_class.scripts)
-        print(f"ComCam Offline to Standby; running {num_scripts} scripts")
-        # Execute the scripts.
-        await script_class.run()
-        # Assert script was added to ScriptQueue.
-        self.assertEqual(len(self.controller.queue_list), num_scripts)
-        # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8])
-
-    async def test_lsstcam_offline_standby(self) -> None:
-        """Execute the LsstCamOfflineStandby integration test script,
-        which runs the ts_standardscripts/set_summary_state.py script.
-        Use the configuration stored in the maintel_state_transition_configs.py
-        module.
-
-        """
-        # Instantiate the LsstCamOfflineStandby integration tests.
-        script_class = LsstCamOfflineStandby()
-        # Get number of scripts
-        num_scripts = len(script_class.scripts)
-        print(f"LSSTCam Offline to Standby; running {num_scripts} scripts")
-        # Execute the scripts.
-        await script_class.run()
-        # Assert script was added to ScriptQueue.
-        self.assertEqual(len(self.controller.queue_list), num_scripts)
-        # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8])
 
     async def test_maintel_standby_disabled(self) -> None:
         """Execute the MainTelStandbyDisabled integration test script,

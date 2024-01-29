@@ -35,7 +35,6 @@ yaml_string = yaml.safe_load(
     - [Scheduler:2, DISABLED]
     - [OCPS:1, DISABLED]
     - [Watcher, DISABLED]
-    - [replace_with_ocps2_3, DISABLED]
     """
 )
 
@@ -51,7 +50,6 @@ yaml_string = yaml.safe_load(
     - [Scheduler:2, ENABLED]
     - [OCPS:1, ENABLED]
     - [Watcher, ENABLED]
-    - [replace_with_ocps2_3, ENABLED]
     """
 )
 

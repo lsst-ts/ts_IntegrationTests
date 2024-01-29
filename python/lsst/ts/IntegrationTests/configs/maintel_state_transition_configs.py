@@ -27,30 +27,6 @@ from .config_registry import registry
 
 # Add the State Transition script configurations to the registry.
 
-# comcam_offline_standby
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [CCCamera, STANDBY]
-    """
-)
-
-registry["comcam_offline_standby"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)
-
-# lsstcam_offline_standby
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [MTCamera, STANDBY]
-    """
-)
-
-registry["lsstcam_offline_standby"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)
-
 # maintel_standby_disabled
 yaml_string = yaml.safe_load(
     """
@@ -77,9 +53,8 @@ registry["maintel_standby_disabled"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [CCCamera, DISABLED, Normal]
-    - [CCHeaderService, DISABLED]
-    - [CCOODS, DISABLED]
+    - [replace_me_HeaderService, DISABLED]
+    - [replace_me_OODS, DISABLED]
     """
 )
 
@@ -115,9 +90,8 @@ registry["maintel_disabled_enabled"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [CCCamera, ENABLED]
-    - [CCHeaderService, ENABLED]
-    - [CCOODS, ENABLED]
+    - [replace_me_HeaderService, ENABLED]
+    - [replace_me_OODS, ENABLED]
     """
 )
 
