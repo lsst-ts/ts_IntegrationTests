@@ -53,15 +53,18 @@ class MainTelStandbyDisabled(BaseScript):
         # Set the MainTel Camera based on the test environment.
         self.test_env = test_env
         self.big_cam_configs = yaml.safe_load(
-            registry["maintel_camera_disabled_enabled"]
+            registry["maintel_camera_standby_disabled"]
         )
         if test_env.lower() == "bts":
             # Running on BTS with MTCamera
-            self.big_cam = "MTCamera"
+            self.big_cam_hs = "MTHeaderService"
+            self.big_cam_oods = "MTOODS"
         else:
             # Running on TTS or Summit with CCCamera
-            self.big_cam = "CCCamera"
-        self.big_cam_configs["data"][0][0] = self.big_cam
+            self.big_cam_hs = "CCHeaderService"
+            self.big_cam_oods = "CCOODS"
+        self.big_cam_configs["data"][0][0] = self.big_cam_hs
+        self.big_cam_configs["data"][1][0] = self.big_cam_oods
         self.configs = (
             registry["maintel_standby_disabled"],
             yaml.safe_dump(self.big_cam_configs),
