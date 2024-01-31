@@ -64,7 +64,7 @@ class MainTelDisabledEnabled(BaseScript):
             self.big_cam_hs = "CCHeaderService"
             self.big_cam_oods = "CCOODS"
         self.big_cam_configs["data"][0][0] = self.big_cam_hs
-        self.big_cam_configs["data"][0][1] = self.big_cam_oods
+        self.big_cam_configs["data"][1][0] = self.big_cam_oods
         self.configs = (
             registry["maintel_disabled_enabled"],
             yaml.safe_dump(self.big_cam_configs),
