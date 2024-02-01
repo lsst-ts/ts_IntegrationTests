@@ -20,14 +20,14 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["SlewTakeImageCheckout", "run_auxtel_slew_take_image_checkout"]
+__all__ = ["SlewAndTakeImageCheckout", "run_auxtel_slew_and_take_image_checkout"]
 
 import asyncio
 
 from lsst.ts.IntegrationTests import BaseScript
 
 
-class SlewTakeImageCheckout(BaseScript):
+class SlewAndTakeImageCheckout(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -46,8 +46,8 @@ class SlewTakeImageCheckout(BaseScript):
         super().__init__()
 
 
-def run_auxtel_slew_take_image_checkout() -> None:
-    script_class = SlewTakeImageCheckout()
+def run_auxtel_slew_and_take_image_checkout() -> None:
+    script_class = SlewAndTakeImageCheckout()
     num_scripts = len(script_class.scripts)
     print(f"\nSlew and Take Image Daytime Checkout; running {num_scripts} scripts")
     asyncio.run(script_class.run())
