@@ -24,10 +24,10 @@
 import unittest
 
 from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ScriptQueueController, SlewTakeImageCheckout
+from lsst.ts.IntegrationTests import ScriptQueueController, SlewAndTakeImageCheckout
 
 
-class SlewTakeImageCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
+class SlewAndTakeImageCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the AuxTel Slew and Take Image Checkout integration test script."""
 
     async def asyncSetUp(self) -> None:
@@ -40,13 +40,13 @@ class SlewTakeImageCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_slew_take_image_checkout(self) -> None:
-        """Execute the SlewTakeImageCheckout integration test script,
+    async def test_auxtel_slew_and_take_image_checkout(self) -> None:
+        """Execute the SlewAndTakeImageCheckout integration test script,
         which runs the auxtel/daytime_checkout/telescope_and_dome_checkout.py
         in ts_standardscripts.
         """
-        # Instantiate the SlewTakeImageCheckout integration tests.
-        script_class = SlewTakeImageCheckout()
+        # Instantiate the SlewAndTakeImageCheckout integration tests.
+        script_class = SlewAndTakeImageCheckout()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"AuxTel Slew and Take Image Checkout; running {num_scripts} scripts")
