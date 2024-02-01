@@ -10,6 +10,15 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.20.2
+-------
+* Added a shutdown script for MTOODS and MTHeaderService.
+
+v0.20.1
+-------
+* Removed M1M3 from MainTel state transitions.
+* Fixed MainTel state transition environment based configurations.
+
 v0.20.0
 -------
 * Added corrected config flags for pipetask execution in the latiss_calibration_* configs.
