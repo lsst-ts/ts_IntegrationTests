@@ -110,6 +110,19 @@ registry["maintel_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
+# MainTel Camera enabled_offline
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [MTHeaderService, OFFLINE]
+    - [MTOODS, OFFLINE]
+    """
+)
+
+registry["maintel_camera_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
 # GenCam enabled_offline
 yaml_string = yaml.safe_load(
     """
