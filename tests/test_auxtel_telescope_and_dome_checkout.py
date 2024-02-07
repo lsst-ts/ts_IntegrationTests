@@ -43,8 +43,8 @@ class AuxTelTelescopeAndDomeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
         # Start the controller and wait for it be ready.
         await self.controller.start_task
 
-    async def test_auxtel_telescope_dome_checkout(self) -> None:
-        """Execute the AuxTelTelescopeDomeCheckout integration test script,
+    async def test_auxtel_telescope_and_dome_checkout(self) -> None:
+        """Execute the AuxTelTelescopeAndDomeCheckout integration test script,
         which runs the auxtel/daytime_checkout/telescope_and_dome_checkout.py
         in ts_standardscripts.
         """
