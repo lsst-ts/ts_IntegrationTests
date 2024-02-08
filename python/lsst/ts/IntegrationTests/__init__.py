@@ -43,7 +43,7 @@ from .auxtel_shutdown import *
 from .auxtel_slew_and_take_image_checkout import *
 from .auxtel_standby_disabled import *
 from .auxtel_stop import *
-from .auxtel_telescope_dome_checkout import *
+from .auxtel_telescope_and_dome_checkout import *
 from .auxtel_track_target import *
 from .auxtel_visit import *
 from .comcam_calibrations import *

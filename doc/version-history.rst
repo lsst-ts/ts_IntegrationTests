@@ -10,6 +10,18 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.21.0
+-------
+* Added the 'and' into all instances of auxtel_telescope_and_dome_checkout.
+
+v0.20.4
+-------
+* Fixed script names.
+
+v0.20.3
+-------
+* Re-added M1M3.
+
 v0.20.2
 -------
 * Added a shutdown script for MTOODS and MTHeaderService.
