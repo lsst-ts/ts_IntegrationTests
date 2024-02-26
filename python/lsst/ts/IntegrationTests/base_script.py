@@ -30,6 +30,8 @@ from lsst.ts import salobj
 from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
 
+import utils.py
+
 
 class BaseScript:
     """Defines the common attributes and functions for an
@@ -60,16 +62,6 @@ class BaseScript:
         A list of tuples. The tuple is the script name and a boolean.
         The boolean specifies the script as Standard (True)
         or External (False).
-    cscs : `frozenset`
-        An immutable set of CSCs. This is used to validate CSC state
-        transition commands.
-    csc_states : `frozenset`
-        An immutable set of CSC states. This is used to validate CSC state
-        transition commands.
-    processing_states : `frozenset`
-        An immutable set of the ScriptQueue processing states.
-    terminal_states : `frozenset`
-        An immutable set of the ScriptQueue terminal states.
     """
 
     # See Attributes for the definition.
@@ -78,104 +70,6 @@ class BaseScript:
     is_external: bool = False
     configs: tuple = ()
     scripts: list = []
-
-    # Define the list of CSCs.
-    # This is needed to validate the csc_state_transition configuration.
-    cscs = frozenset(
-        [
-            "ATAOS",
-            "MTAirCompressor",
-            "ATBuilding",
-            "ATCamera",
-            "ATDome",
-            "ATDomeTrajectory",
-            "ATHeaderService",
-            "ATHexapod",
-            "ATMCS",
-            "ATMonochromator",
-            "ATOODS",
-            "ATPneumatics",
-            "ATPtg",
-            "ATSpectrograph",
-            "ATWhiteLight",
-            "Authorize",
-            "GCHeaderService",
-            "CCCamera",
-            "CCHeaderService",
-            "CCOODS",
-            "CBP",
-            "DIMM",
-            "DREAM",
-            "DSM",
-            "EAS",
-            "Electrometer",
-            "ESS",
-            "FiberSpectrograph",
-            "GenericCamera",
-            "GIS",
-            "Guider",
-            "HVAC",
-            "LaserTracker",
-            "LEDProjector",
-            "LinearStage",
-            "LOVE",
-            "MTAOS",
-            "MTCamera",
-            "MTDome",
-            "MTDomeTrajectory",
-            "MTEEC",
-            "MTHeaderService",
-            "MTHexapod",
-            "MTM1M3",
-            "MTM1M3TS",
-            "MTM2",
-            "MTMount",
-            "MTOODS",
-            "MTPtg",
-            "MTRotator",
-            "MTVMS",
-            "OCPS:2",
-            "OCPS:3",
-            "PMD",
-            "Scheduler",
-            "Script",
-            "ScriptQueue",
-            "SummitFacility",
-            "Test",
-            "TunableLaser",
-            "Watcher",
-            "WeatherForecast",
-        ]
-    )
-
-    # Define the list of CSC States.
-    csc_states = frozenset(
-        [
-            "Offline",
-            "Standby",
-            "Disabled",
-            "Enabled",
-        ]
-    )
-    # Define the set of script states that indicate the script is processing.
-    processing_states = frozenset(
-        (
-            ScriptProcessState.UNKNOWN,
-            ScriptProcessState.LOADING,
-            ScriptProcessState.CONFIGURED,
-            ScriptProcessState.RUNNING,
-        )
-    )
-
-    # Define the set of script states that indicate the script is complete.
-    terminal_states = frozenset(
-        (
-            ScriptProcessState.DONE,
-            ScriptProcessState.LOADFAILED,
-            ScriptProcessState.CONFIGURE_FAILED,
-            ScriptProcessState.TERMINATED,
-        )
-    )
 
     def __init__(self, queue_placement: str = "LAST") -> None:
         """Initialize the given Standard or External
@@ -244,7 +138,7 @@ class BaseScript:
         data : ``lsst.ts.salobj.BaseMsgType``
             The object returned by the ScriptQueue Script Event (evt_script).
         """
-        if data.processState in self.processing_states:
+        if data.processState in utils.processing_states:
             # Script initial, configuration and running states.
             print(
                 f"Script processing state: "
@@ -252,7 +146,7 @@ class BaseScript:
             )
             return
         print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
-        if data.processState in self.terminal_states and data.timestampProcessEnd > 0:
+        if data.processState in utils.terminal_states and data.timestampProcessEnd > 0:
             print(
                 f"Script {data.scriptSalIndex} terminal processing state: "
                 f"{ScriptProcessState(data.processState).name}\n"
