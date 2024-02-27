@@ -48,7 +48,7 @@ class RunImageTakingVerificationTestCase(unittest.IsolatedAsyncioTestCase):
         Use the configuration stored in the image_taking_configs.py module.
         """
         # Instantiate the ComCamImageTaking integration tests.
-        script_class = ComCamImageTaking(test_env="tts")
+        script_class = ComCamImageTaking()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
