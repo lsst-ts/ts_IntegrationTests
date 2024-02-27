@@ -26,9 +26,7 @@ import argparse
 import asyncio
 
 import yaml
-from lsst.ts.IntegrationTests import BaseScript
-
-import utils.py
+from lsst.ts.IntegrationTests import BaseScript, utils
 
 
 class CSCStateTransition(BaseScript):

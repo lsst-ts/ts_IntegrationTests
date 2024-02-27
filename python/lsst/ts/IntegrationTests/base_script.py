@@ -29,8 +29,7 @@ from datetime import date
 from lsst.ts import salobj
 from lsst.ts.idl.enums.Script import ScriptState
 from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
-
-import utils.py
+from lsst.ts.IntegrationTests import utils
 
 
 class BaseScript:
