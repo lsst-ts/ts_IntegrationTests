@@ -22,8 +22,111 @@
 
 import argparse
 
+from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 
-def get_test_env_arg() -> None:
+# Define the various lists used by the modules in this package.
+
+# Define the list of CSCs.
+# This is needed to validate the csc_state_transition configuration.
+cscs = frozenset(
+    [
+        "ATAOS",
+        "MTAirCompressor",
+        "ATBuilding",
+        "ATCamera",
+        "ATDome",
+        "ATDomeTrajectory",
+        "ATHeaderService",
+        "ATHexapod",
+        "ATMCS",
+        "ATMonochromator",
+        "ATOODS",
+        "ATPneumatics",
+        "ATPtg",
+        "ATSpectrograph",
+        "ATWhiteLight",
+        "Authorize",
+        "GCHeaderService",
+        "CCCamera",
+        "CCHeaderService",
+        "CCOODS",
+        "CBP",
+        "DIMM",
+        "DREAM",
+        "DSM",
+        "EAS",
+        "Electrometer",
+        "ESS",
+        "FiberSpectrograph",
+        "GenericCamera",
+        "GIS",
+        "Guider",
+        "HVAC",
+        "LaserTracker",
+        "LEDProjector",
+        "LinearStage",
+        "LOVE",
+        "MTAOS",
+        "MTCamera",
+        "MTDome",
+        "MTDomeTrajectory",
+        "MTEEC",
+        "MTHeaderService",
+        "MTHexapod",
+        "MTM1M3",
+        "MTM1M3TS",
+        "MTM2",
+        "MTMount",
+        "MTOODS",
+        "MTPtg",
+        "MTRotator",
+        "MTVMS",
+        "OCPS:2",
+        "OCPS:3",
+        "PMD",
+        "Scheduler",
+        "Script",
+        "ScriptQueue",
+        "SummitFacility",
+        "Test",
+        "TunableLaser",
+        "Watcher",
+        "WeatherForecast",
+    ]
+)
+
+# Define the list of CSC States.
+csc_states = frozenset(
+    [
+        "Offline",
+        "Standby",
+        "Disabled",
+        "Enabled",
+    ]
+)
+
+# Define the set of script states that indicate the script is processing.
+processing_states = frozenset(
+    (
+        ScriptProcessState.UNKNOWN,
+        ScriptProcessState.LOADING,
+        ScriptProcessState.CONFIGURED,
+        ScriptProcessState.RUNNING,
+    )
+)
+
+# Define the set of script states that indicate the script is complete.
+terminal_states = frozenset(
+    (
+        ScriptProcessState.DONE,
+        ScriptProcessState.LOADFAILED,
+        ScriptProcessState.CONFIGURE_FAILED,
+        ScriptProcessState.TERMINATED,
+    )
+)
+
+
+def get_test_env_arg() -> argparse.Namespace:
     # Define the script arguments.
     parser = argparse.ArgumentParser()
     parser.add_argument(
