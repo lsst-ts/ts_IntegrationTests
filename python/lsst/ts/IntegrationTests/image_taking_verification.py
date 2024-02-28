@@ -64,7 +64,7 @@ class ComCamImageTaking(BaseScript):
         ("maintel/take_image_comcam.py", BaseScript.is_standard),
     ]
 
-    def __init__(self, test_env: str) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
 

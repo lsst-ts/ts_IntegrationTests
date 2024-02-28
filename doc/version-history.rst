@@ -10,6 +10,13 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.22.0
+-------
+* Switched M1M3 to individual state transitions.
+* Made the csc_state_transition.py script correctly handle indexed-CSCs.
+* Moved the various lists in base_script.py to utils.py.
+* Various formatting improvements.
+
 v0.21.0
 -------
 * Added the 'and' into all instances of auxtel_telescope_and_dome_checkout.

@@ -26,7 +26,7 @@ import argparse
 import asyncio
 
 import yaml
-from lsst.ts.IntegrationTests import BaseScript
+from lsst.ts.IntegrationTests import BaseScript, utils
 
 
 class CSCStateTransition(BaseScript):
@@ -38,6 +38,8 @@ class CSCStateTransition(BaseScript):
     ----------
     csc : `str`
         The name of the CSC to transition. Case-sensitive.
+    csc_index : `int`
+        The index value for the indexed-CSC.
     state : `str`
         The state to transition.
     additional_configuration : `str`
@@ -53,10 +55,12 @@ class CSCStateTransition(BaseScript):
         self,
         csc: str,
         state: str,
-        additional_configuration: str = None,
+        csc_index: int = 0,
+        additional_configuration: str = "",
     ) -> None:
         super().__init__()
         self.csc = csc
+        self.csc_index = csc_index
         self.state = state
         self.added_config = additional_configuration
         # Set the ScriptQueue index based on which telescope.
@@ -66,7 +70,11 @@ class CSCStateTransition(BaseScript):
             self.index = 1
         # Construct the intermediate configuration list.
         # Convert the list to a string.
-        temp_config = [self.csc, self.state]
+        if self.csc_index:
+            full_csc_name = f"{self.csc}:{self.csc_index}"
+        else:
+            full_csc_name = self.csc
+        temp_config = [full_csc_name, self.state]
         if self.added_config:
             temp_config.append(self.added_config)
         config = ", ".join(str(i) for i in temp_config)
@@ -86,9 +94,9 @@ class CSCStateTransition(BaseScript):
 
 def csc_state_transition() -> None:
     # Define the lists of CSC and State options.
-    csc_list = list(BaseScript.cscs)
+    csc_list = list(utils.cscs)
     csc_list.sort()
-    state_list = list(BaseScript.csc_states)
+    state_list = list(utils.csc_states)
     state_list.sort()
     # Define the script arguments.
     parser = argparse.ArgumentParser()
@@ -109,7 +117,16 @@ def csc_state_transition() -> None:
         help="Specify to which state to transition.",
     )
     parser.add_argument(
-        "additional_configuration",
+        "-x",
+        "--csc_index",
+        metavar="index",
+        nargs="?",
+        type=int,
+        help="Define the index of the CSC, if applicable.",
+    )
+    parser.add_argument(
+        "-a",
+        "--additional_configuration",
         nargs="?",
         type=str,
         help="Specify any additional configurations.",
@@ -133,7 +150,7 @@ def csc_state_transition() -> None:
             f"  state:\t{state_list}\n"
         )
         exit()
-    if args.csc not in BaseScript.cscs:
+    if args.csc not in utils.cscs:
         print(
             f"Invalid CSC: {args.csc}. "
             f"Perhaps it is misspelled or not properly capitalized."
