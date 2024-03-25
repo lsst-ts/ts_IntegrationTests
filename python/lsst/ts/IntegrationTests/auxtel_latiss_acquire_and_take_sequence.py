@@ -42,13 +42,13 @@ class AuxTelLatissAcquireTakeSequence(BaseScript):
     ----------
     sequence : `str`
         Defines which sequence to run.
-        Choices are ["pointing", "verify", "nominal", "test"].
+        Choices are ["pointing",].
     """
 
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/latiss_acquire.py", BaseScript.is_external),
+        ("auxtel/latiss_acquire_and_take_sequence.py", BaseScript.is_external),
     ]
 
     def __init__(self, sequence: str) -> None:
@@ -62,7 +62,9 @@ def run_auxtel_latiss_acquire_and_take_sequence() -> None:
     parser.add_argument(
         "sequence",
         type=str,
-        choices=["pointing", "verify", "nominal", "test"],
+        choices=[
+            "pointing",
+        ],
         help="Specify which sequence to run.",
     )
     args = parser.parse_args()
