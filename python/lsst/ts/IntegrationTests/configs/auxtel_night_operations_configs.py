@@ -107,7 +107,6 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "rot_type": "PhysicalSky",
         "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "target_pointing_tolerance": 4,
