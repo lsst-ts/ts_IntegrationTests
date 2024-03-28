@@ -10,6 +10,12 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.23.0
+-------
+* Fixed the csc_state_transition.py script to add the csc_index to the Class instantiation.
+* Updated the LATISS Acquire and Take Sequence tests to use the separate scripts instead of the combined script.
+* Updated ts-conda-build to version 0.4.
+
 v0.22.0
 -------
 * Switched M1M3 to individual state transitions.
