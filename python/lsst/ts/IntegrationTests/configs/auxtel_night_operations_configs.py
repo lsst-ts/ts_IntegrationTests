@@ -107,7 +107,6 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
 registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
-        "rot_type": "PhysicalSky",
         "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "target_pointing_tolerance": 4,
@@ -115,15 +114,16 @@ registry["auxtel_acquire_and_take_sequence_pointing"] = yaml.safe_dump(
         "do_acquire": True,
         "do_take_sequence": False,
         "do_pointing_model": True,
-        "reason": "IntegrationTesting",
-        "program": "IntegrationTesting",
+        "reason": "IntegrationTesting_PointingConfiguration",
+        "program": "IntegrationTesting_PointingConfiguration",
     },
     explicit_start=True,
     canonical=True,
 )
 
+# latiss_acquire and latiss_take_sequence configs
 # verfiy
-registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
+registry["auxtel_acquire_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
@@ -132,50 +132,69 @@ registry["auxtel_acquire_and_take_sequence_verify"] = yaml.safe_dump(
         "acq_exposure_time": 0.4,
         "target_pointing_tolerance": 6,
         "max_acq_iter": 3,
-        "do_acquire": True,
-        "do_take_sequence": False,
-        "do_pointing_model": False,
         "target_pointing_verification": False,
-        "reason": "IntegrationTesting",
-        "program": "IntegrationTesting",
+        "reason": "IntegrationTesting_VerifyConfiguration",
+        "program": "IntegrationTesting_VerifyConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+registry["auxtel_take_sequence_verify"] = yaml.safe_dump(
+    {
+        "filter_sequence": ["SDSSr_65mm"],
+        "grating_sequence": ["empty_1"],
+        "reason": "IntegrationTesting_VerifyConfiguration",
+        "program": "IntegrationTesting_VerifyConfiguration",
     },
     explicit_start=True,
     canonical=True,
 )
 
 # nominal/standard
-registry["auxtel_acquire_and_take_sequence_nominal"] = yaml.safe_dump(
+registry["auxtel_acquire_nominal"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
         "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
+        "target_pointing_tolerance": 5,
+        "target_pointing_verification": False,
+        "reason": "IntegrationTesting_NominalConfiguration",
+        "program": "IntegrationTesting_NominalConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+registry["auxtel_take_sequence_nominal"] = yaml.safe_dump(
+    {
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
         "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
-        "target_pointing_tolerance": 5,
-        "target_pointing_verification": False,
-        "do_acquire": True,
-        "do_take_sequence": True,
-        "reason": "IntegrationTesting",
-        "program": "IntegrationTesting",
+        "reason": "IntegrationTesting_NominalConfiguration",
+        "program": "IntegrationTesting_NominalConfiguration",
     },
     explicit_start=True,
     canonical=True,
 )
 
 # test
-registry["auxtel_acquire_and_take_sequence_test"] = yaml.safe_dump(
+registry["auxtel_acquire_test"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
+        "reason": "IntegrationTesting_TestConfiguration",
+        "program": "IntegrationTesting_TestConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+registry["auxtel_take_sequence_test"] = yaml.safe_dump(
+    {
         "grating_sequence": ["holo4_003", "holo4_003", "holo4_003"],
         "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
-        "do_acquire": False,
-        "do_take_sequence": True,
-        "reason": "IntegrationTesting",
-        "program": "IntegrationTesting",
+        "reason": "IntegrationTesting_TestConfiguration",
+        "program": "IntegrationTesting_TestConfiguration",
     },
     explicit_start=True,
     canonical=True,

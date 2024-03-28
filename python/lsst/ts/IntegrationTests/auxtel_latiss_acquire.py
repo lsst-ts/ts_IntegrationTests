@@ -21,8 +21,8 @@
 # You should have received a copy of the GNU General Public License
 
 __all__ = [
-    "AuxTelLatissAcquireTakeSequence",
-    "run_auxtel_latiss_acquire_and_take_sequence",
+    "AuxTelLatissAcquire",
+    "run_auxtel_latiss_acquire",
 ]
 
 import argparse
@@ -33,7 +33,7 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class AuxTelLatissAcquireTakeSequence(BaseScript):
+class AuxTelLatissAcquire(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
@@ -42,35 +42,33 @@ class AuxTelLatissAcquireTakeSequence(BaseScript):
     ----------
     sequence : `str`
         Defines which sequence to run.
-        Choices are ["pointing",].
+        Choices are ["verify", "nominal", "test"].
     """
 
     index: int = 2
     configs: tuple = ([],)
     scripts: list = [
-        ("auxtel/latiss_acquire_and_take_sequence.py", BaseScript.is_external),
+        ("auxtel/latiss_acquire.py", BaseScript.is_external),
     ]
 
     def __init__(self, sequence: str) -> None:
         super().__init__()
         self.sequence = sequence
-        self.configs = (registry[f"auxtel_acquire_and_take_sequence_{sequence}"],)
+        self.configs = (registry[f"auxtel_acquire_{sequence}"],)
 
 
-def run_auxtel_latiss_acquire_and_take_sequence() -> None:
+def run_auxtel_latiss_acquire() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "sequence",
         type=str,
-        choices=[
-            "pointing",
-        ],
+        choices=["verify", "nominal", "test"],
         help="Specify which sequence to run.",
     )
     args = parser.parse_args()
-    script_class = AuxTelLatissAcquireTakeSequence(sequence=args.sequence)
+    script_class = AuxTelLatissAcquire(sequence=args.sequence)
     print(
-        f"\nAuxTel Latiss Acquire and Take Sequence; "
+        f"\nAuxTel Latiss Acquire; "
         f"running the {script_class.scripts[0][0]} script, "
         f"for the {script_class.sequence} sequence, "
         f"with configuration;\n{script_class.configs}"
