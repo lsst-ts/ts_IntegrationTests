@@ -168,6 +168,7 @@ def main(opts: argparse.Namespace) -> None:
         script_class = CSCStateTransition(
             csc=opts.csc,
             state=opts.state,
+            csc_index=opts.csc_index,
             additional_configuration=opts.additional_configuration,
         )
     except KeyError as ke:
