@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.24.0
+-------
+* Added ESS:205 to the EAS state transition configurations.
+
 v0.23.0
 -------
 * Fixed the csc_state_transition.py script to add the csc_index to the Class instantiation.
