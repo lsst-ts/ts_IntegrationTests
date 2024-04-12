@@ -72,6 +72,7 @@ yaml_string = yaml.safe_load(
     - [ESS:202, OFFLINE]
     - [ESS:203, OFFLINE]
     - [ESS:204, OFFLINE]
+    - [ESS:205, OFFLINE]
     - [ESS:301, OFFLINE]
     - [WeatherForecast, OFFLINE]
     """

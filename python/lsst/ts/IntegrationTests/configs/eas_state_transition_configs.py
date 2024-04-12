@@ -44,6 +44,7 @@ yaml_string = yaml.safe_load(
     - [ESS:202, DISABLED]
     - [ESS:203, DISABLED]
     - [ESS:204, DISABLED]
+    - [ESS:205, DISABLED]
     - [ESS:301, DISABLED]
     """
 )
@@ -69,6 +70,7 @@ yaml_string = yaml.safe_load(
     - [ESS:202, ENABLED]
     - [ESS:203, ENABLED]
     - [ESS:204, ENABLED]
+    - [ESS:205, ENABLED]
     - [ESS:301, ENABLED]
     """
 )
