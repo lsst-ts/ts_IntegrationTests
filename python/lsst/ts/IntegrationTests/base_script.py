@@ -184,9 +184,6 @@ class BaseScript:
             # Since `async with` is used,
             # you do NOT have to wait for the remote to start
 
-            # Create the callback to the ScriptQueue Script Event that
-            # will wait for all the scripts to complete.
-            self.remote.evt_script.callback = self.wait_for_done
             # Convert the queue_placement parameter to the approprirate
             # ScriptQueue.Location Enum object.
             queue_placement = getattr(Location, self.queue_placement.upper())
@@ -213,6 +210,9 @@ class BaseScript:
             # Copy the script_indexes list to use in the Script Event callback.
             # This maintains the integrity of the real script_indexes list.
             self.temp_script_indexes = copy.deepcopy(script_indexes)
+            # Create the callback to the ScriptQueue Script Event that
+            # will wait for all the scripts to complete.
+            self.remote.evt_script.callback = self.wait_for_done
             # Resume the ScriptQueue to begin script execution.
             await self.remote.cmd_resume.set_start(timeout=10)
             # Wait for the scripts to complete.
