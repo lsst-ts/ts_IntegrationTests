@@ -45,6 +45,7 @@ yaml_string = yaml.safe_load(
     data:
     - [Scheduler:1, OFFLINE]
     - [Scheduler:2, OFFLINE]
+    - [Scheduler:3, OFFLINE]
     - [OCPS:1, OFFLINE]
     """
 )
@@ -92,6 +93,7 @@ yaml_string = yaml.safe_load(
     - [Test:42, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:2, OFFLINE]
+    - [ScriptQueue:3, OFFLINE]
     """
 )
 
