@@ -87,7 +87,6 @@ registry["eas_enabled_offline"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [Authorize, OFFLINE]
     - [Test:42, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:2, OFFLINE]

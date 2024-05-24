@@ -45,7 +45,6 @@ cscs = frozenset(
         "ATPtg",
         "ATSpectrograph",
         "ATWhiteLight",
-        "Authorize",
         "GCHeaderService",
         "CCCamera",
         "CCHeaderService",
