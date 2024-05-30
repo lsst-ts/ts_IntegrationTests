@@ -14,6 +14,8 @@ v0.24.0
 -------
 * Added ESS:205 to the EAS state transition configurations.
 * Added EPM:1 to the EAS state transition configurations.
+* Added ESS:107, ESS:108, Scheduler:3 and ScriptQueue:3 CSCs
+* Removed Authorize CSC.
 
 v0.23.0
 -------
