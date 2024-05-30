@@ -61,6 +61,7 @@ yaml_string = yaml.safe_load(
     - [DSM:1, OFFLINE]
     - [DIMM:1, OFFLINE]
     - [DIMM:2, OFFLINE]
+    - [EPM:1, OFFLINE]
     - [ESS:1, OFFLINE]
     - [ESS:101, OFFLINE]
     - [ESS:102, OFFLINE]

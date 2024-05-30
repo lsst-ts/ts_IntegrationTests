@@ -56,6 +56,7 @@ cscs = frozenset(
         "DSM",
         "EAS",
         "Electrometer",
+        "EPM",
         "ESS",
         "FiberSpectrograph",
         "GenericCamera",

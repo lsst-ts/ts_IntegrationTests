@@ -13,6 +13,7 @@ Version History
 v0.24.0
 -------
 * Added ESS:205 to the EAS state transition configurations.
+* Added EPM:1 to the EAS state transition configurations.
 
 v0.23.0
 -------
