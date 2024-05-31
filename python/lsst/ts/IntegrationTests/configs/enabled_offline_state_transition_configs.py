@@ -45,6 +45,7 @@ yaml_string = yaml.safe_load(
     data:
     - [Scheduler:1, OFFLINE]
     - [Scheduler:2, OFFLINE]
+    - [Scheduler:3, OFFLINE]
     - [OCPS:1, OFFLINE]
     """
 )
@@ -69,6 +70,8 @@ yaml_string = yaml.safe_load(
     - [ESS:104, OFFLINE]
     - [ESS:105, OFFLINE]
     - [ESS:106, OFFLINE]
+    - [ESS:107, OFFLINE]
+    - [ESS:108, OFFLINE]
     - [ESS:201, OFFLINE]
     - [ESS:202, OFFLINE]
     - [ESS:203, OFFLINE]
@@ -87,10 +90,10 @@ registry["eas_enabled_offline"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
-    - [Authorize, OFFLINE]
     - [Test:42, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:2, OFFLINE]
+    - [ScriptQueue:3, OFFLINE]
     """
 )
 
