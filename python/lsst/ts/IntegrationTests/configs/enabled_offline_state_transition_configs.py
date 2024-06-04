@@ -100,6 +100,18 @@ registry["sq_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
+# MTCS enabled_offline
+yaml_string = yaml.safe_load(
+    """
+    ignore:
+        - mtptg
+    """
+)
+
+registry["mtcs_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
 # MainTel enabled_offline
 yaml_string = yaml.safe_load(
     """
