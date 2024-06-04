@@ -33,7 +33,6 @@ yaml_string = yaml.safe_load(
     data:
     - [DIMM:1, DISABLED]
     - [DIMM:2, DISABLED]
-    - [EPM:1, DISABLED]
     - [ESS:1, DISABLED]
     - [ESS:101, DISABLED]
     - [ESS:102, DISABLED]
@@ -62,7 +61,6 @@ yaml_string = yaml.safe_load(
     data:
     - [DIMM:1, ENABLED]
     - [DIMM:2, ENABLED]
-    - [EPM:1, ENABLED]
     - [ESS:1, ENABLED]
     - [ESS:101, ENABLED]
     - [ESS:102, ENABLED]

@@ -42,7 +42,7 @@ class EnabledOffline(BaseScript):
         registry["sched_ocps_enabled_offline"],
         [],
         [],
-        [],
+        registry["mtcs_enabled_offline"],
         registry["eas_enabled_offline"],
         registry["maintel_enabled_offline"],
         registry["maintel_camera_enabled_offline"],

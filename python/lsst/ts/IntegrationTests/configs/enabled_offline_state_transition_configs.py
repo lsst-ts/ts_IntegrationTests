@@ -62,7 +62,6 @@ yaml_string = yaml.safe_load(
     - [DSM:1, OFFLINE]
     - [DIMM:1, OFFLINE]
     - [DIMM:2, OFFLINE]
-    - [EPM:1, OFFLINE]
     - [ESS:1, OFFLINE]
     - [ESS:101, OFFLINE]
     - [ESS:102, OFFLINE]
@@ -98,6 +97,18 @@ yaml_string = yaml.safe_load(
 )
 
 registry["sq_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
+# MTCS enabled_offline
+yaml_string = yaml.safe_load(
+    """
+    ignore:
+        - mtptg
+    """
+)
+
+registry["mtcs_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
