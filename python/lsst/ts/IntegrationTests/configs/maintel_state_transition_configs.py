@@ -39,7 +39,6 @@ yaml_string = yaml.safe_load(
     - [MTDome, DISABLED]
     - [MTDomeTrajectory, DISABLED]
     - [MTM2, DISABLED]
-    - [MTPtg, DISABLED]
     - [MTAOS, DISABLED]
     """
 )
@@ -75,7 +74,6 @@ yaml_string = yaml.safe_load(
     - [MTDome, ENABLED]
     - [MTDomeTrajectory, ENABLED]
     - [MTM2, ENABLED]
-    - [MTPtg, ENABLED]
     - [MTAOS, ENABLED]
     """
 )
