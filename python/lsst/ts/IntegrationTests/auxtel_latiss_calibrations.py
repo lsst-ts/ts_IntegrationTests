@@ -44,7 +44,7 @@ class AuxTelLatissCalibrations(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("auxtel/make_latiss_calibrations.py", BaseScript.is_external),
     ]

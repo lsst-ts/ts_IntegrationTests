@@ -34,7 +34,7 @@ class AuxTelTelescopeAndDomeCheckout(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         (
             "auxtel/daytime_checkout/telescope_and_dome_checkout.py",
