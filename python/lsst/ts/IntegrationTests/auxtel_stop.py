@@ -35,7 +35,7 @@ class AuxTelStop(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("auxtel/stop.py", BaseScript.is_standard),
     ]

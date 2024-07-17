@@ -144,7 +144,11 @@ class BaseScript:
                 f"{ScriptProcessState(data.processState).name}"
             )
             return
-        print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
+        if self.temp_script_indexes:
+            print(f"Waiting for script ID {self.temp_script_indexes[0]} to finish...")
+        else:
+            print("No scripts to wait for")
+            return
         if data.processState in utils.terminal_states and data.timestampProcessEnd > 0:
             print(
                 f"Script {data.scriptSalIndex} terminal processing state: "

@@ -44,7 +44,7 @@ class ComCamCalibrations(BaseScript):
     """
 
     index: int = 1
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("maintel/make_comcam_calibrations.py", BaseScript.is_external),
     ]

@@ -40,8 +40,8 @@ class EnabledOffline(BaseScript):
     configs: tuple = (
         registry["watcher_enabled_offline"],
         registry["sched_ocps_enabled_offline"],
-        [],
-        [],
+        "",
+        "",
         registry["mtcs_enabled_offline"],
         registry["eas_enabled_offline"],
         registry["maintel_enabled_offline"],

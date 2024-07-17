@@ -44,7 +44,7 @@ class LsstCamCalibrations(BaseScript):
     """
 
     index: int = 1
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("maintel/make_lsstcam_calibrations.py", BaseScript.is_external),
     ]
