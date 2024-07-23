@@ -35,7 +35,7 @@ class AuxTelShutdown(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("auxtel/shutdown.py", BaseScript.is_standard),
     ]

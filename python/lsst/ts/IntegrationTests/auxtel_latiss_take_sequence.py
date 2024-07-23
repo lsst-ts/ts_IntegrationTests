@@ -46,7 +46,7 @@ class AuxTelLatissTakeSequence(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("auxtel/latiss_take_sequence.py", BaseScript.is_standard),
     ]

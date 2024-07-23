@@ -34,7 +34,7 @@ class AuxTelLatissCheckout(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         (
             "auxtel/daytime_checkout/latiss_checkout.py",

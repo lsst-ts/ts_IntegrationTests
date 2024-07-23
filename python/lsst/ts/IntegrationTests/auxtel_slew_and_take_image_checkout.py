@@ -34,7 +34,7 @@ class SlewAndTakeImageCheckout(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         (
             "auxtel/daytime_checkout/slew_and_take_image_checkout.py",

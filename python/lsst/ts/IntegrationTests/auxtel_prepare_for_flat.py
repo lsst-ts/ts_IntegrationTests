@@ -35,7 +35,7 @@ class AuxTelPrepareFlat(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    configs: tuple = ("",)
     scripts: list = [
         ("auxtel/prepare_for/flat.py", BaseScript.is_standard),
     ]
