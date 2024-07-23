@@ -10,10 +10,14 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.25.0
+-------
+* Pre-Kafka improvements.
+
 v0.24.0
 -------
 * Added ESS:205 to the EAS state transition configurations.
-* Added ESS:107, ESS:108, Scheduler:3 and ScriptQueue:3 CSCs
+* Added ESS:107, ESS:108, Scheduler:3 and ScriptQueue:3 CSCs.
 * Set EPM:1 and MTPtg to individual state transition.
 * Added an ignore parameter for the MTPtg to the enabled_offline script.
 * Removed Authorize CSC.
