@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.26.0
+-------
+* Explicitly defines ComCam and LsstCam Housekeeping scripts.
+
 v0.25.0
 -------
 * Pre-Kafka improvements.
