@@ -13,6 +13,7 @@ Version History
 v0.26.0
 -------
 * Explicitly defines ComCam and LsstCam Housekeeping scripts.
+* Re-add MTPtg to LOVE Stress Test.
 
 v0.25.0
 -------
