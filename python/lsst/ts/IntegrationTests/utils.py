@@ -31,7 +31,6 @@ from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
 cscs = frozenset(
     [
         "ATAOS",
-        "MTAirCompressor",
         "ATBuilding",
         "ATCamera",
         "ATDome",
@@ -66,6 +65,7 @@ cscs = frozenset(
         "LEDProjector",
         "LinearStage",
         "LOVE",
+        "MTAirCompressor",
         "MTAOS",
         "MTCamera",
         "MTDome",
@@ -81,8 +81,7 @@ cscs = frozenset(
         "MTPtg",
         "MTRotator",
         "MTVMS",
-        "OCPS:2",
-        "OCPS:3",
+        "OCPS",
         "PMD",
         "Scheduler",
         "Script",

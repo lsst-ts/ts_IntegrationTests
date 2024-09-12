@@ -10,6 +10,11 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.27.0
+-------
+* Fixed CSC list to remove indexed instances of OCPS.
+* Fixed imports to comcam and lsstcam housekeeping scripts.
+
 v0.26.0
 -------
 * Explicitly defines ComCam and LsstCam Housekeeping scripts.
