@@ -81,16 +81,3 @@ yaml_string = yaml.safe_load(
 registry["maintel_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
-
-# maintel_camera_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
-    data:
-    - [replace_me_HeaderService, ENABLED]
-    - [replace_me_OODS, ENABLED]
-    """
-)
-
-registry["maintel_camera_disabled_enabled"] = yaml.safe_dump(
-    yaml_string, explicit_start=True, canonical=True
-)

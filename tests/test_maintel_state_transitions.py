@@ -52,7 +52,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the MainTelStandbyDisabled integration tests.
-        script_class = MainTelStandbyDisabled(test_env="bts")
+        script_class = MainTelStandbyDisabled()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Standby to Disabled; running {num_scripts} scripts")
@@ -61,7 +61,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8, 8])
+        self.assertEqual(script_class.script_states, [8])
 
     async def test_maintel_disabled_enabled(self) -> None:
         """Execute the MainTelDisabledEnabled integration test script,
@@ -71,7 +71,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
 
         """
         # Instantiate the MainTelDisabledEnabled integration tests.
-        script_class = MainTelDisabledEnabled(test_env="tts")
+        script_class = MainTelDisabledEnabled()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"MainTel Disabled to Enabled; running {num_scripts} scripts")
@@ -80,7 +80,7 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         # Assert script was added to ScriptQueue.
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8, 8])
+        self.assertEqual(script_class.script_states, [8])
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()
