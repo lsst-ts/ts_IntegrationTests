@@ -105,6 +105,7 @@ yaml_string = yaml.safe_load(
     """
     ignore:
         - mtptg
+        - mtrotator
     """
 )
 
