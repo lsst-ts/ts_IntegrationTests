@@ -45,7 +45,6 @@ class EnabledOffline(BaseScript):
         registry["mtcs_enabled_offline"],
         registry["eas_enabled_offline"],
         registry["maintel_enabled_offline"],
-        registry["maintel_camera_enabled_offline"],
         registry["gencam_enabled_offline"],
         # The ScriptQueue script must run last.
         registry["sq_enabled_offline"],
@@ -56,7 +55,6 @@ class EnabledOffline(BaseScript):
         ("auxtel/offline_atcs.py", BaseScript.is_standard),
         ("auxtel/offline_latiss.py", BaseScript.is_standard),
         ("maintel/offline_mtcs.py", BaseScript.is_standard),
-        ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
         ("set_summary_state.py", BaseScript.is_standard),
