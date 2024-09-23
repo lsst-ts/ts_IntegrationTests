@@ -14,6 +14,8 @@ v0.28.0
 -------
 * Removed MainTel Camera state transition scripts and configs.
 * Add MTRotator to ignore list in enabled_offline_state_transition_configs.py.
+* Moved the callback definition in base_script.py.
+* Fixed an empty-config definition.
 
 v0.27.0
 -------
