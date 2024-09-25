@@ -10,6 +10,13 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.28.0
+-------
+* Removed MainTel Camera state transition scripts and configs.
+* Add MTRotator to ignore list in enabled_offline_state_transition_configs.py.
+* Moved the callback definition in base_script.py.
+* Fixed an empty-config definition.
+
 v0.27.0
 -------
 * Fixed CSC list to remove indexed instances of OCPS.

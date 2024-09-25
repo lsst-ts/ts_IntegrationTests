@@ -38,7 +38,7 @@ class AuxTelHousekeeping(BaseScript):
 
     index: int = 2
     configs: tuple = (
-        [],
+        "",
         registry["atdome_home"],
         registry["atdome_park"],
         registry["atptg_park"],
