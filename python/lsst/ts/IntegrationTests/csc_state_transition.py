@@ -42,6 +42,8 @@ class CSCStateTransition(BaseScript):
         The index value for the indexed-CSC.
     state : `str`
         The state to transition.
+    sq_index : `int`
+        The index of the ScriptQueue to use to run the state transition.
     additional_configuration : `str`
         Any additional state-transition configuration items.
     """
@@ -55,26 +57,17 @@ class CSCStateTransition(BaseScript):
         self,
         csc: str,
         state: str,
-        csc_index: int = 0,
+        sq_index: int,
         additional_configuration: str = "",
     ) -> None:
         super().__init__()
         self.csc = csc
-        self.csc_index = csc_index
         self.state = state
+        self.index = sq_index
         self.added_config = additional_configuration
-        # Set the ScriptQueue index based on which telescope.
-        if csc[:2].lower() == "at":
-            self.index = 2
-        else:
-            self.index = 1
         # Construct the intermediate configuration list.
         # Convert the list to a string.
-        if self.csc_index:
-            full_csc_name = f"{self.csc}:{self.csc_index}"
-        else:
-            full_csc_name = self.csc
-        temp_config = [full_csc_name, self.state]
+        temp_config = [self.csc, self.state]
         if self.added_config:
             temp_config.append(self.added_config)
         config = ", ".join(str(i) for i in temp_config)
@@ -93,36 +86,30 @@ class CSCStateTransition(BaseScript):
 
 
 def csc_state_transition() -> None:
-    # Define the lists of CSC and State options.
-    csc_list = list(utils.cscs)
-    csc_list.sort()
+    # Define the State options lists.
     state_list = list(utils.csc_states)
     state_list.sort()
     # Define the script arguments.
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "csc",
-        metavar="csc",
-        nargs="?",
+        metavar="csc[:index]",
         type=str,
-        choices=csc_list,
-        help="Specify which CSC to command (case sensitive).",
+        help="Specify which CSC[:index] to command (case sensitive).",
     )
     parser.add_argument(
         "state",
         metavar="state",
-        nargs="?",
         type=str,
         choices=state_list,
         help="Specify to which state to transition.",
     )
     parser.add_argument(
-        "-x",
-        "--csc_index",
-        metavar="index",
-        nargs="?",
+        "sq_index",
+        metavar="scriptqueue_index",
         type=int,
-        help="Define the index of the CSC, if applicable.",
+        choices=[1, 2, 3],
+        help="Specify which ScriptQueue to use.",
     )
     parser.add_argument(
         "-a",
@@ -138,21 +125,16 @@ def csc_state_transition() -> None:
         help="Print the allowed options.",
     )
     args = parser.parse_args()
-    # Print the help if the camera is not defined,
-    # or info is not passed.
-    if not (args.info or args.csc or args.state):
+    if args.info:
         parser.print_help()
         exit()
-    if args.info:
-        print(
-            f"\nThe allowed options are:\n"
-            f"  csc:\t{csc_list}\n\n"
-            f"  state:\t{state_list}\n"
-        )
+    # Print the help if the CSC or STATE is not defined.
+    if not (args.csc or args.state):
+        parser.print_help()
         exit()
-    if args.csc not in utils.cscs:
+    if args.csc.split(":")[0] not in utils.cscs:
         print(
-            f"Invalid CSC: {args.csc}. "
+            f"Invalid CSC: {args.csc.split(':')[0]}. "
             f"Perhaps it is misspelled or not properly capitalized."
         )
         parser.print_help()
@@ -168,7 +150,7 @@ def main(opts: argparse.Namespace) -> None:
         script_class = CSCStateTransition(
             csc=opts.csc,
             state=opts.state,
-            csc_index=opts.csc_index,
+            sq_index=opts.sq_index,
             additional_configuration=opts.additional_configuration,
         )
     except KeyError as ke:
@@ -177,6 +159,7 @@ def main(opts: argparse.Namespace) -> None:
         print(
             f"\nTransitioning the {opts.csc.upper()} "
             f"to the {opts.state} state."
+            f"\nRunning on ScriptQueue {opts.sq_index}."
             f"\nConfiguration: {script_class.configs}."
         )
         asyncio.run(script_class.run())
