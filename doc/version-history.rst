@@ -10,6 +10,12 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.29.0
+-------
+* ESS index updates.
+* Add support for ScriptQueue:3.
+* Improvements to csc_state_transition script. Remove CSC index argument. Add ScriptQueue index argument.
+
 v0.28.0
 -------
 * Removed MainTel Camera state transition scripts and configs.

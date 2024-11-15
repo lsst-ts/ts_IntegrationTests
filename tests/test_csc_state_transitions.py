@@ -43,7 +43,7 @@ class CSCStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_comcam_offline_standby(self) -> None:
         """Execute the Offline-to-Standby state transition for ComCam."""
         # Instantiate the CSCStateTransition integration test.
-        script_class = CSCStateTransition(csc="CCCamera", state="Standby")
+        script_class = CSCStateTransition(csc="CCCamera", state="Standby", sq_index=1)
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"ComCam Offline to Standby; running {num_scripts} scripts")
@@ -57,7 +57,7 @@ class CSCStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_lsstcam_offline_standby(self) -> None:
         """Execute the Offline-to-Standby state transition for LSSTCam."""
         # Instantiate the CSCStateTransition integration tests.
-        script_class = CSCStateTransition(csc="MTCamera", state="Standby")
+        script_class = CSCStateTransition(csc="MTCamera", state="Standby", sq_index=1)
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(f"LSSTCam Offline to Standby; running {num_scripts} scripts")

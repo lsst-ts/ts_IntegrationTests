@@ -34,11 +34,12 @@ from lsst.ts.IntegrationTests import utils
 
 class BaseScript:
     """Defines the common attributes and functions for an
-       AuxTel or MainTel script.
+       AuxTel, MainTel or OCS script.
 
     Notes
     -----
-    Use index=1 for MainTel, 2 for AuxTel. The index is defined as a class
+    Use index=1 for MainTel, 2 for AuxTel or 3 for OCS
+    (Observatory Control System). The index is defined as a class
     attribute for simplicity.  The sub-Classes define which index,
     if necessary.
     The BaseScript class defaults to index=1, as the most common option.
@@ -46,8 +47,8 @@ class BaseScript:
     Attributes
     ----------
     index : `int`
-        The index represents the Main Telescope, index=1, or the
-        Auxilliary Telescope, index=2.
+        The index represents the Main Telescope, index=1, the
+        Auxilliary Telescope, index=2, or OCS, index=3.
     is_standard : boolean
         Variable used to specify the script as Standard; value is True.
         Used for readability.
