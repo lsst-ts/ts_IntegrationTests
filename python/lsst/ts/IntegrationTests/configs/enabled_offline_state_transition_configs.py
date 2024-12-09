@@ -58,19 +58,23 @@ registry["sched_ocps_enabled_offline"] = yaml.safe_dump(
 yaml_string = yaml.safe_load(
     """
     data:
+    - [DREAM, OFFLINE]
     - [DSM:2, OFFLINE]
     - [DSM:1, OFFLINE]
     - [DIMM:1, OFFLINE]
     - [DIMM:2, OFFLINE]
+    - [EPM:1, OFFLINE]
     - [ESS:1, OFFLINE]
-    - [ESS:101, OFFLINE]
-    - [ESS:102, OFFLINE]
-    - [ESS:103, OFFLINE]
     - [ESS:104, OFFLINE]
     - [ESS:105, OFFLINE]
     - [ESS:106, OFFLINE]
     - [ESS:107, OFFLINE]
     - [ESS:108, OFFLINE]
+    - [ESS:109, OFFLINE]
+    - [ESS:110, OFFLINE]
+    - [ESS:111 OFFLINE]
+    - [ESS:112 OFFLINE]
+    - [ESS:113 OFFLINE]
     - [ESS:201, OFFLINE]
     - [ESS:202, OFFLINE]
     - [ESS:203, OFFLINE]
@@ -91,8 +95,8 @@ yaml_string = yaml.safe_load(
     data:
     - [Test:42, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
-    - [ScriptQueue:2, OFFLINE]
     - [ScriptQueue:3, OFFLINE]
+    - [ScriptQueue:2, OFFLINE]
     """
 )
 
@@ -137,5 +141,17 @@ yaml_string = yaml.safe_load(
 )
 
 registry["gencam_enabled_offline"] = yaml.safe_dump(
+    yaml_string, explicit_start=True, canonical=True
+)
+
+# ATBuilding
+yaml_string = yaml.safe_load(
+    """
+    data:
+    - [ATBuilding, OFFLINE]
+    """
+)
+
+registry["atbuilding_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
