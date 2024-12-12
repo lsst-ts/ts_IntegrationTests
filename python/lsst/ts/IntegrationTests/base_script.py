@@ -201,7 +201,7 @@ class BaseScript:
                     isStandard=script[1],
                     path=script[0],
                     config=config,
-                    logLevel=10,
+                    logLevel=self.log_level if hasattr(self, "log_level") else 10,
                     location=queue_placement,
                 )
                 try:
