@@ -52,11 +52,12 @@ class LoveStressTest(BaseScript):
         ("make_love_stress_tests.py", BaseScript.is_external),
     ]
 
-    def __init__(self, test_env: str, k8s: bool = False) -> None:
+    def __init__(self, test_env: str, k8s: bool = False, log_level: int = 20) -> None:
         super().__init__()
         # Set the LOVE location based on test environment
         self.test_env = test_env
         self.k8s = k8s
+        self.log_level = log_level
         self.env_configs = yaml.safe_load(registry["love_stress"])
         if test_env.lower() == "summit":
             # Running on Summit

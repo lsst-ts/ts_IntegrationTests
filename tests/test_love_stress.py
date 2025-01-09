@@ -65,6 +65,8 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_class.script_states, [8])
         # Assert location is correct.
         self.assertEqual(script_config["location"], "http://love01.ls.lsst.org")
+        # Assert script is run in INFO mode.
+        self.assertEqual(script_class.log_level, 20)
 
     async def test_love_stress_on_k8s(self) -> None:
         """Execute the LoveStress integration test script on the kubernetes
@@ -91,6 +93,8 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_class.script_states, [8])
         # Assert location is correct.
         self.assertEqual(script_config["location"], "https://base-lsp.lsst.codes/love")
+        # Assert script is run in INFO mode.
+        self.assertEqual(script_class.log_level, 20)
 
     async def asyncTearDown(self) -> None:
         await self.controller.close()

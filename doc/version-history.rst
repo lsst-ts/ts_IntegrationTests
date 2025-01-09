@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.30.0
+-------
+* Allow scripts to be run with specific log levels.
+
 v0.29.0
 -------
 * ESS index updates.
