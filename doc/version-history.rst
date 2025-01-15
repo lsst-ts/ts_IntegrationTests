@@ -10,6 +10,10 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.31.0
+-------
+* Update MTCamera configs for a loaded filter.
+
 v0.30.0
 -------
 * Allow scripts to be run with specific log levels.
