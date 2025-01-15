@@ -163,7 +163,7 @@ registry["lsstcam_calibrations_flat"] = yaml.safe_dump(
         "exp_times_dark": 20,
         "exp_times_flat": 5,
         "detectors": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-        "filter": "r_03",
+        "filter": "r_57",
         "calib_collection": "LSSTCam/calib/u/integrationtester/daily.replace_me.calib_type",
         "generate_calibrations": True,
         "do_verify": True,
