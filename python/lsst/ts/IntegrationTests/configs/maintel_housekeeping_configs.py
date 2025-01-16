@@ -50,8 +50,8 @@ yaml_string = yaml.safe_load(
     component: "MTCamera"
     cmd: "setFilter"
     parameters:
-        name: "r_03"
-        timeout: 45
+        name: "r_57"
+        timeout: 150
     """
 )
 
