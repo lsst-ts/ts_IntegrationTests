@@ -81,6 +81,8 @@ yaml_string = yaml.safe_load(
     az: 0.0
     el: 80
     target_name: "Park position"
+    ignore:
+    - mtm1m3
     """
 )
 
