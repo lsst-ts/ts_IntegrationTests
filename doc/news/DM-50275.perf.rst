@@ -1,0 +1,1 @@
+Add the ignore M1M3 flag to the mtcamera_set_filter config in maintel_housekeeping_configs.py.
