@@ -51,10 +51,9 @@ build:
 
 test:
   requires:
-    - ts-conda-build =0.4
-    - ts-dds
-    - ts-salobj
-    - ts-idl
+    - ts-conda-build =0.5
+    - ts-xml {{ xml_version }}
+    - ts-salobj {{ salobj_version }}
     - yamllint
     - parameterized
   source_files:
@@ -68,17 +67,11 @@ requirements:
   host:
     - python {{ python }}
     - pip
-    - setuptools_scm
-    - setuptools
-  build:
-    - python {{ python }}
-    - setuptools_scm
-    - setuptools
-    - ts-conda-build =0.4
+    - setuptools-scm ={{setuptools_scm}}
+    - setuptools >={{ setuptools}}
   run:
     - python {{ python }}
     - ts-salobj
-    - ts-idl
 
 about:
   home: https://github.com/lsst-ts/ts_IntegrationTests
