@@ -23,8 +23,8 @@
 import asyncio
 
 from lsst.ts import salobj
-from lsst.ts.idl.enums.Script import ScriptState
-from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
+from lsst.ts.xml.enums.Script import ScriptState
+from lsst.ts.xml.enums.ScriptQueue import ScriptProcessState
 
 
 # Create an inherited class from the controller,
