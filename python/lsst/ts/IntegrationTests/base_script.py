@@ -27,9 +27,9 @@ import copy
 from datetime import date
 
 from lsst.ts import salobj
-from lsst.ts.idl.enums.Script import ScriptState
-from lsst.ts.idl.enums.ScriptQueue import Location, ScriptProcessState
 from lsst.ts.IntegrationTests import utils
+from lsst.ts.xml.enums.Script import ScriptState
+from lsst.ts.xml.enums.ScriptQueue import Location, ScriptProcessState
 
 
 class BaseScript:

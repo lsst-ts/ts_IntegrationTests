@@ -22,8 +22,8 @@
 
 import asyncio
 
-from lsst.ts.idl.enums.Script import ScriptState
-from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
+from lsst.ts.xml.enums.Script import ScriptState
+from lsst.ts.xml.enums.ScriptQueue import ScriptProcessState
 
 from .script_queue_controller import ScriptQueueController
 
