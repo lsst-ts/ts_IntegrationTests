@@ -21,7 +21,10 @@
 __all__ = ["ATPneumaticsCheckout", "run_atpneumatics_checkout"]
 
 import asyncio
+
 from lsst.ts.IntegrationTests import BaseScript
+
+from .configs.config_registry import registry
 
 
 class ATPneumaticsCheckout(BaseScript):
@@ -32,9 +35,16 @@ class ATPneumaticsCheckout(BaseScript):
     """
 
     index: int = 2
-    configs: tuple = ([],)
+    # configs: tuple = ([],)
+    # scripts: list = [
+    #    (
+    #        "auxtel/daytime_checkout/atpneumatics_checkout.py",
+    #        BaseScript.is_standard
+    #    ),
+    # ]
+    configs: tuple = (registry["auxtel_disable_all_corrections"],)
     scripts: list = [
-        ("auxtel/daytime_checkout/atpneumatics_checkout.py", BaseScript.is_standard),
+        ("run_command.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
