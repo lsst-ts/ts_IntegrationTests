@@ -28,13 +28,16 @@ except ImportError:
     __version__ = "?"
 
 from .base_script import *  # isort: skip
+from .auxtel_daytime_atpneumatics import *
+from .auxtel_daytime_latiss import *
+from .auxtel_daytime_slew_and_take_image import *
+from .auxtel_daytime_telescope_and_dome import *
 from .auxtel_disabled_enabled import *
 from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire import *
 from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
-from .auxtel_latiss_checkout import *
 from .auxtel_latiss_take_sequence import *
 from .auxtel_latiss_wep_align import *
 from .auxtel_offline_standby import *
@@ -42,10 +45,8 @@ from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
 from .auxtel_reset_offsets import *
 from .auxtel_shutdown import *
-from .auxtel_slew_and_take_image_checkout import *
 from .auxtel_standby_disabled import *
 from .auxtel_stop import *
-from .auxtel_telescope_and_dome_checkout import *
 from .auxtel_track_target import *
 from .auxtel_visit import *
 from .comcam_calibrations import *
