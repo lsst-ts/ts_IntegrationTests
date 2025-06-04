@@ -1,0 +1,1 @@
+Rename AT Daytime checkout test scripts to better group them together.
