@@ -32,8 +32,8 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the LOVE Stress Test integration test script."""
 
     async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
+        # Define LSST_TOPIC_SUBNAME.
+        salobj.set_test_topic_subname()
 
         # Create the ScriptQueue Controller.
         self.controller = ScriptQueueController(index=1)
@@ -95,7 +95,3 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_config["location"], "https://base-lsp.lsst.codes/love")
         # Assert script is run in INFO mode.
         self.assertEqual(script_class.log_level, 20)
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task

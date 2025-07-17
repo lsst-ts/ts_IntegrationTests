@@ -36,8 +36,8 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the Run Camera Playlist integration test script."""
 
     async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
+        # Define LSST_TOPIC_SUBNAME.
+        salobj.set_test_topic_subname()
 
         # Create the ScriptQueue Controller.
         self.controller = ScriptQueueController(index=2)
@@ -154,7 +154,3 @@ class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
                 assert True
             else:
                 assert False
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task

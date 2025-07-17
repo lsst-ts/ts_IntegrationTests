@@ -41,8 +41,8 @@ class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
     """
 
     async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
+        # Define LSST_TOPIC_SUBNAME.
+        salobj.set_test_topic_subname()
 
         # Create the ScriptQueue Controller.
         self.controller = ScriptQueueController(index=2)

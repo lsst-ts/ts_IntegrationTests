@@ -35,8 +35,8 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
     """Test the MainTel State transition integration test scripts."""
 
     async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
+        # Define LSST_TOPIC_SUBNAME.
+        salobj.set_test_topic_subname()
 
         # Create the ScriptQueue Controller.
         self.controller = ScriptQueueController(index=1)
@@ -81,7 +81,3 @@ class MainTelStateTransitionTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task
