@@ -36,7 +36,7 @@ class EnabledOffline(BaseScript):
 
     """
 
-    index: int = 2
+    index: int = 3
     configs: tuple = (
         registry["watcher_enabled_offline"],
         registry["sched_ocps_enabled_offline"],

@@ -36,7 +36,7 @@ class ObsSysStandbyDisabled(BaseScript):
 
     """
 
-    index: int = 1
+    index: int = 3
     configs: tuple = (registry["obssys_standby_disabled"],)
     scripts: list = [
         ("set_summary_state.py", BaseScript.is_standard),
