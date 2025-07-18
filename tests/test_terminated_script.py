@@ -21,18 +21,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
+from base_test import BaseTestClass
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import AuxTelHousekeeping, FailingScriptQueueController
 
 
-class TerminatedScriptTestCase(unittest.IsolatedAsyncioTestCase):
+class TerminatedScriptTestCase(BaseTestClass):
     """Test when a script is TERMINATED."""
 
     async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
+        # Define LSST_TOPIC_SUBNAME.
+        salobj.set_test_topic_subname()
 
         # Create the ScriptQueue Controller.
         self.controller = FailingScriptQueueController(index=2, test_type="TERMINATED")
@@ -58,7 +57,3 @@ class TerminatedScriptTestCase(unittest.IsolatedAsyncioTestCase):
         # this test mainly concerns verifying the integration test
         # properly handles this state and doesn't hang indefinitely.
         self.assertEqual(script_class.script_states, [7, 7, 7, 7, 7, 7])
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task

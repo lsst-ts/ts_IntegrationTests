@@ -36,7 +36,7 @@ class EasDisabledEnabled(BaseScript):
 
     """
 
-    index: int = 1
+    index: int = 3
     configs: tuple = (registry["eas_disabled_enabled"],)
     scripts: list = [
         ("set_summary_state.py", BaseScript.is_standard),

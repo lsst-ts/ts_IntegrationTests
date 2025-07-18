@@ -21,34 +21,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
-from lsst.ts import salobj
+from base_test import BaseTestClass
 from lsst.ts.IntegrationTests import (
     AuxTelLatissAcquire,
     AuxTelLatissAcquireTakeSequence,
     AuxTelLatissTakeSequence,
     AuxTelLatissWEPAlign,
     AuxTelResetOffsets,
-    ScriptQueueController,
 )
 from parameterized import parameterized
 
 
-class AuxTelNightOperationsTestCase(unittest.IsolatedAsyncioTestCase):
+class AuxTelNightOperationsTestCase(BaseTestClass):
     """
     Test the AuxTel Night Operations integration test scripts.
     """
 
-    async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
-
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use AuxTel ScriptQueue.
+    index = 2
 
     async def test_auxtel_reset_offsets(self) -> None:
         """Execute the AuxTelResetOffsets integration test script,

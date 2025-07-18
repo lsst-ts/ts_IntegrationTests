@@ -21,26 +21,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
+from base_test import BaseTestClass
 from lsst.ts.IntegrationTests import (
     ATPneumaticsCheckout,
     AuxTelLatissCheckout,
     AuxTelTelescopeAndDomeCheckout,
-    ScriptQueueController,
     SlewAndTakeImageCheckout,
 )
 
 
-class AuxTelDaytimeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
+class AuxTelDaytimeCheckoutTestCase(BaseTestClass):
     """Test the AuxTel Daytime Checkout integration test scripts."""
 
-    async def asyncSetUp(self) -> None:
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use AuxTel ScriptQueue.
+    index = 2
 
     async def test_latiss_checkout(self) -> None:
         """Execute the LatissCheckout integration test script,
@@ -109,7 +103,3 @@ class AuxTelDaytimeCheckoutTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task

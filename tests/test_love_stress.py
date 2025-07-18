@@ -21,25 +21,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
 import yaml
-from lsst.ts import salobj
-from lsst.ts.IntegrationTests import LoveStressTest, ScriptQueueController
+from base_test import BaseTestClass
+from lsst.ts.IntegrationTests import LoveStressTest
 
 
-class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
+class LoveStressTestCase(BaseTestClass):
     """Test the LOVE Stress Test integration test script."""
 
-    async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
-
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=1)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use MainTel ScriptQueue.
+    index = 1
 
     async def test_love_stress(self) -> None:
         """Execute the LoveStress integration test script,
@@ -95,7 +86,3 @@ class LoveStressTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(script_config["location"], "https://base-lsp.lsst.codes/love")
         # Assert script is run in INFO mode.
         self.assertEqual(script_class.log_level, 20)
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task
