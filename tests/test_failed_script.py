@@ -21,13 +21,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
+from base_test import BaseTestClass
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import AuxTelHousekeeping, FailingScriptQueueController
 
 
-class FailedScriptTestCase(unittest.IsolatedAsyncioTestCase):
+class FailedScriptTestCase(BaseTestClass):
     """Test when a script is FAILED."""
 
     async def asyncSetUp(self) -> None:

@@ -21,13 +21,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
+from base_test import BaseTestClass
 from lsst.ts import salobj
 from lsst.ts.IntegrationTests import AuxTelHousekeeping, FailingScriptQueueController
 
 
-class TerminatedScriptTestCase(unittest.IsolatedAsyncioTestCase):
+class TerminatedScriptTestCase(BaseTestClass):
     """Test when a script is TERMINATED."""
 
     async def asyncSetUp(self) -> None:

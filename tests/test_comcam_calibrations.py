@@ -21,27 +21,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
 from datetime import date
 
-from lsst.ts import salobj
-from lsst.ts.IntegrationTests import ComCamCalibrations, ScriptQueueController
+from base_test import BaseTestClass
+from lsst.ts.IntegrationTests import ComCamCalibrations
 
 
-class ComCamCalibrationsTestCase(unittest.IsolatedAsyncioTestCase):
+class ComCamCalibrationsTestCase(BaseTestClass):
     """
     Test the Make Latiss Configurations integration test scripts.
     """
 
-    async def asyncSetUp(self) -> None:
-        # Define LSST_TOPIC_SUBNAME.
-        salobj.set_test_topic_subname()
-
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=1)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use MainTel ScriptQueue.
+    index = 1
 
     async def test_comcam_calibrations_flat(self) -> None:
         """Execute the ComCamCalibrations integration test script,

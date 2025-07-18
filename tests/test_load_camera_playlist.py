@@ -22,28 +22,20 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import subprocess
-import unittest
 
-from lsst.ts import salobj
-from lsst.ts.IntegrationTests import LoadCameraPlaylist, ScriptQueueController
+from base_test import BaseTestClass
+from lsst.ts.IntegrationTests import LoadCameraPlaylist
 from lsst.ts.IntegrationTests.configs.camera_playlist_configs import (
     atcamera_playlists,
     playlist_options,
 )
 
 
-class LoadCameraPlaylistTestCase(unittest.IsolatedAsyncioTestCase):
+class LoadCameraPlaylistTestCase(BaseTestClass):
     """Test the Run Camera Playlist integration test script."""
 
-    async def asyncSetUp(self) -> None:
-        # Define LSST_TOPIC_SUBNAME.
-        salobj.set_test_topic_subname()
-
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use AuxTel ScriptQueue.
+    index = 2
 
     async def test_camera_playlist(self) -> None:
         """Execute the LoadCameraPlaylist integration test script,
