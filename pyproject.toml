@@ -56,6 +56,7 @@ maintel_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_mainte
 maintel_standby_disabled = "lsst.ts.IntegrationTests.maintel_standby_disabled:run_maintel_standby_disabled"
 obssys_disabled_enabled = "lsst.ts.IntegrationTests.obssys_disabled_enabled:run_obssys_disabled_enabled"
 obssys_standby_disabled = "lsst.ts.IntegrationTests.obssys_standby_disabled:run_obssys_standby_disabled"
+run_command = "lsst.ts.IntegrationTests.run_command:run_command"
 csc_state_transition = "lsst.ts.IntegrationTests.csc_state_transition:csc_state_transition"
 load_camera_playlist = "lsst.ts.IntegrationTests.load_camera_playlist:load_camera_playlist"
 love_stress_test = "lsst.ts.IntegrationTests.love_stress_test:run_love_stress_test"
