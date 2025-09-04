@@ -66,6 +66,7 @@ from .maintel_housekeeping import *
 from .maintel_standby_disabled import *
 from .obssys_disabled_enabled import *
 from .obssys_standby_disabled import *
+from .run_command import *
 from .script_queue_controller import *
 from .testutils import *
 from .utils import *
