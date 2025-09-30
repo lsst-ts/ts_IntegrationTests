@@ -10,7 +10,7 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
-v0.31.0 (2025-09-30)
+v0.32.0 (2025-09-30)
 ====================
 
 New Features
@@ -32,7 +32,6 @@ Bug Fixes
 Performance Enhancement
 -----------------------
 
-- Update MTCamera configs for a loaded filter.
 - Add the ignore M1M3 flag to the mtcamera_set_filter config in maintel_housekeeping_configs.py. (`DM-50275 <https://rubinobs.atlassian.net//browse/DM-50275>`_)
 
 
@@ -42,6 +41,10 @@ Documentation
 - Add towncrier to handle version history. (`DM-50468 <https://rubinobs.atlassian.net//browse/DM-50468>`_)
 - Rename AT Daytime checkout test scripts to better group them together. (`OSW-249 <https://rubinobs.atlassian.net//browse/OSW-249>`_)
 
+
+v0.31.0
+-------
+* Update MTCamera configs for a loaded filter.
 
 v0.30.0
 -------
