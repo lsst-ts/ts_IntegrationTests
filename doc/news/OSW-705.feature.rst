@@ -1,1 +1,0 @@
-Add a base test class that defines asyncSetUp and asyncTearDown. Add Kafka topic cleanup to TearDown. Update unit tests to inherit from new BaseTestClass.

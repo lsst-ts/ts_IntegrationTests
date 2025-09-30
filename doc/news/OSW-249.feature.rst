@@ -1,1 +1,0 @@
-Add ATPneumatics Daytime Checkout integration test.

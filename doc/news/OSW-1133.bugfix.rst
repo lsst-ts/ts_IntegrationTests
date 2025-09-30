@@ -1,1 +1,0 @@
-Update script names in pyproject.toml. Re-order scripts alphabetically.

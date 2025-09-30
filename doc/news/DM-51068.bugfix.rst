@@ -1,1 +1,0 @@
-Update scripts to get Enum values from the XML package, as the IDL package is now gone.
