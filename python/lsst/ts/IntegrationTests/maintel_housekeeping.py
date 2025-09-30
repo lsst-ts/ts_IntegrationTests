@@ -85,7 +85,7 @@ class MainTelHousekeeping(BaseScript):
     )
     scripts: list = [
         ("run_command.py", BaseScript.is_standard),
-        ("run_command.py", BaseScript.is_standard),
+        ("maintel/point_azel.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
     ]
 

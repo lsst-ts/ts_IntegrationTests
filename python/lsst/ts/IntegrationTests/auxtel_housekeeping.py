@@ -48,8 +48,8 @@ class AuxTelHousekeeping(BaseScript):
     scripts: list = [
         ("auxtel/enable_atcs.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
-        ("run_command.py", BaseScript.is_standard),
-        ("run_command.py", BaseScript.is_standard),
+        ("auxtel/atdome/slew_dome.py", BaseScript.is_standard),
+        ("auxtel/point_azel.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
         ("run_command.py", BaseScript.is_standard),
     ]

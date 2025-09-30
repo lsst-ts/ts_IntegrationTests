@@ -22,7 +22,7 @@
 
 import argparse
 
-from lsst.ts.idl.enums.ScriptQueue import ScriptProcessState
+from lsst.ts.xml.enums.ScriptQueue import ScriptProcessState
 
 # Define the various lists used by the modules in this package.
 
@@ -79,6 +79,7 @@ cscs = frozenset(
         "MTMount",
         "MTOODS",
         "MTPtg",
+        "MTReflector",
         "MTRotator",
         "MTVMS",
         "OCPS",

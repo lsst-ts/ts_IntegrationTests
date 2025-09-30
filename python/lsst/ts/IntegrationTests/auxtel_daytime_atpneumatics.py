@@ -1,10 +1,8 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# This file is part of ts_IntegrationTests.
+# This file is part of ts_IntegrationTests
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the LSST Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -20,7 +18,7 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["EasDisabledEnabled", "run_eas_disabled_enabled"]
+__all__ = ["ATPneumaticsCheckout", "run_atpneumatics_checkout"]
 
 import asyncio
 
@@ -29,25 +27,32 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class EasDisabledEnabled(BaseScript):
+class ATPneumaticsCheckout(BaseScript):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
 
     """
 
-    index: int = 3
-    configs: tuple = (registry["eas_disabled_enabled"],)
+    index: int = 2
+    # configs: tuple = ([],)
+    # scripts: list = [
+    #    (
+    #        "auxtel/daytime_checkout/atpneumatics_checkout.py",
+    #        BaseScript.is_standard
+    #    ),
+    # ]
+    configs: tuple = (registry["auxtel_disable_all_corrections"],)
     scripts: list = [
-        ("set_summary_state.py", BaseScript.is_standard),
+        ("run_command.py", BaseScript.is_standard),
     ]
 
     def __init__(self) -> None:
         super().__init__()
 
 
-def run_eas_disabled_enabled() -> None:
-    script_class = EasDisabledEnabled()
+def run_atpneumatics_checkout() -> None:
+    script_class = ATPneumaticsCheckout()
     num_scripts = len(script_class.scripts)
-    print(f"\nEAS Disabled to Enabled; running {num_scripts} scripts")
+    print(f"\nATPneumatics Daytime Checkout; running {num_scripts} scripts")
     asyncio.run(script_class.run())

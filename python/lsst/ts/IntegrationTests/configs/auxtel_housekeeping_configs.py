@@ -44,13 +44,9 @@ registry["atdome_home"] = yaml.safe_dump(
 # ATPtg park
 yaml_string = yaml.safe_load(
     """
-    component: "ATPtg"
-    cmd: azElTarget
-    parameters:
-        targetName: Park position
-        azDegs: 0
-        elDegs: 80
-        rotPA: 0
+    az: 0.0
+    el: 80
+    target_name: "Park position"
     """
 )
 
@@ -63,10 +59,7 @@ registry["atptg_park"] = yaml.safe_dump(
 # ATDome park configs
 yaml_string = yaml.safe_load(
     """
-    component: "ATDome"
-    cmd: moveAzimuth
-    parameters:
-        azimuth: 285
+    az: 285
     """
 )
 

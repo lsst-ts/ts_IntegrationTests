@@ -78,13 +78,11 @@ registry["mtmount_home_both_axes"] = yaml.safe_dump(
 # MTPtg park
 yaml_string = yaml.safe_load(
     """
-    component: "MTPtg"
-    cmd: azElTarget
-    parameters:
-        targetName: Park position
-        azDegs: 0
-        elDegs: 80
-        rotPA: 0
+    az: 0.0
+    el: 80
+    target_name: "Park position"
+    ignore:
+    - mtm1m3
     """
 )
 

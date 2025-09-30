@@ -10,6 +10,38 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+v0.32.0 (2025-09-30)
+====================
+
+New Features
+------------
+
+- Add MTReflector to cscs list in utils.py. (`OSW-240 <https://rubinobs.atlassian.net//browse/OSW-240>`_)
+- Add ATPneumatics Daytime Checkout integration test. (`OSW-249 <https://rubinobs.atlassian.net//browse/OSW-249>`_)
+- Add run_command.py script, which enables running arbitrary commands in the integration testing. (`OSW-260 <https://rubinobs.atlassian.net//browse/OSW-260>`_)
+- Add a base test class that defines asyncSetUp and asyncTearDown. Add Kafka topic cleanup to TearDown. Update unit tests to inherit from new BaseTestClass. (`OSW-705 <https://rubinobs.atlassian.net//browse/OSW-705>`_)
+
+
+Bug Fixes
+---------
+
+- Update scripts to get Enum values from the XML package, as the IDL package is now gone. (`DM-51068 <https://rubinobs.atlassian.net//browse/DM-51068>`_)
+- Update script names in pyproject.toml. Re-order scripts alphabetically. (`OSW-1133 <https://rubinobs.atlassian.net//browse/OSW-1133>`_)
+
+
+Performance Enhancement
+-----------------------
+
+- Add the ignore M1M3 flag to the mtcamera_set_filter config in maintel_housekeeping_configs.py. (`DM-50275 <https://rubinobs.atlassian.net//browse/DM-50275>`_)
+
+
+Documentation
+-------------
+
+- Add towncrier to handle version history. (`DM-50468 <https://rubinobs.atlassian.net//browse/DM-50468>`_)
+- Rename AT Daytime checkout test scripts to better group them together. (`OSW-249 <https://rubinobs.atlassian.net//browse/OSW-249>`_)
+
+
 v0.31.0
 -------
 * Update MTCamera configs for a loaded filter.

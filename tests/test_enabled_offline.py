@@ -21,24 +21,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import unittest
-
-from lsst.ts import salobj
-from lsst.ts.IntegrationTests import EnabledOffline, ScriptQueueController
+from base_test import BaseTestClass
+from lsst.ts.IntegrationTests import EnabledOffline
 
 
-class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
+class EnabledOfflineTestCase(BaseTestClass):
     """Test the Enabled to Offline integration test script."""
 
-    async def asyncSetUp(self) -> None:
-        # Set the LSST_DDS_PARTITION_PREFIX ENV_VAR.
-        salobj.set_random_lsst_dds_partition_prefix()
-
-        # Create the ScriptQueue Controller.
-        self.controller = ScriptQueueController(index=2)
-
-        # Start the controller and wait for it be ready.
-        await self.controller.start_task
+    # Use OCS ScriptQueue.
+    index = 3
 
     async def test_enabled_offline(self) -> None:
         """Execute the EnabledOffline integration test script,
@@ -60,7 +51,3 @@ class EnabledOfflineTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.controller.queue_list), num_scripts)
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8, 8, 8, 8, 8, 8, 8, 8, 8, 8])
-
-    async def asyncTearDown(self) -> None:
-        await self.controller.close()
-        await self.controller.done_task
