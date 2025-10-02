@@ -10,6 +10,19 @@ Version History
 .. No new work should be required in order to complete this section.
 .. Below is an example of a version history format.
 
+   Do not remove the following comment line.
+
+.. towncrier release notes start
+
+v0.33.0 (2025-10-02)
+====================
+
+New Features
+------------
+
+- Add mute_alarms flag to csc_state_transition.py. (`OSW-1153 <https://rubinobs.atlassian.net//browse/OSW-1153>`_)
+
+
 v0.32.0 (2025-09-30)
 ====================
 

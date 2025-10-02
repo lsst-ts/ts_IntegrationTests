@@ -1,1 +1,0 @@
-Add mute_alarms flag to csc_state_transition.py.
