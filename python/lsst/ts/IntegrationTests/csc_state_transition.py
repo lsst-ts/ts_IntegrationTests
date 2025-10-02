@@ -46,6 +46,9 @@ class CSCStateTransition(BaseScript):
         The index of the ScriptQueue to use to run the state transition.
     additional_configuration : `str`
         Any additional state-transition configuration items.
+    mute_alarms : `bool`
+        The set_summary_state accepts a boolean argument to command the Watcher
+        to mute alarms. This is necessary when moving a CSC to Offline.
     """
 
     configs: tuple = ()
@@ -59,12 +62,14 @@ class CSCStateTransition(BaseScript):
         state: str,
         sq_index: int,
         additional_configuration: str = "",
+        mute_alarms: bool = True,
     ) -> None:
         super().__init__()
         self.csc = csc
         self.state = state
         self.index = sq_index
         self.added_config = additional_configuration
+        self.mute_alarms = mute_alarms
         # Construct the intermediate configuration list.
         # Convert the list to a string.
         temp_config = [self.csc, self.state]
@@ -78,6 +83,7 @@ class CSCStateTransition(BaseScript):
             f"""
             data:
             - [{config}]
+            mute_alarms: self.mute_alarms
             """
         )
         self.configs = (
@@ -117,6 +123,13 @@ def csc_state_transition() -> None:
         nargs="?",
         type=str,
         help="Specify any additional configurations.",
+    )
+    parser.add_argument(
+        "-m",
+        "--mute_alarms",
+        type=bool,
+        action="store_true",
+        help="Tell the Watcher to mute alarms. Include if setting CSC to Offline.",
     )
     parser.add_argument(
         "-i",
@@ -161,5 +174,6 @@ def main(opts: argparse.Namespace) -> None:
             f"to the {opts.state} state."
             f"\nRunning on ScriptQueue {opts.sq_index}."
             f"\nConfiguration: {script_class.configs}."
+            f"\nMute Alarms: {script_class.mute_alarms}."
         )
         asyncio.run(script_class.run())
