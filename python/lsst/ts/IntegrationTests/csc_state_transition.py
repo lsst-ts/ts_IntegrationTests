@@ -83,7 +83,7 @@ class CSCStateTransition(BaseScript):
             f"""
             data:
             - [{config}]
-            mute_alarms: self.mute_alarms
+            mute_alarms: {self.mute_alarms}
             """
         )
         self.configs = (
