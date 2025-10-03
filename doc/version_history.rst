@@ -14,6 +14,15 @@ Version History
 
 .. towncrier release notes start
 
+v0.34.0 (2025-10-03)
+====================
+
+Bug Fixes
+---------
+
+- Remove type from mute_alarms argument in csc_state_transition.py. (`OSW-1153 <https://rubinobs.atlassian.net//browse/OSW-1153>`_)
+
+
 v0.33.0 (2025-10-02)
 ====================
 

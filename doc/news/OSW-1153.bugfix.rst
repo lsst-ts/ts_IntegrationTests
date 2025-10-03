@@ -1,1 +1,0 @@
-Remove type from mute_alarms argument in csc_state_transition.py.
