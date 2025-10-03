@@ -127,7 +127,6 @@ def csc_state_transition() -> None:
     parser.add_argument(
         "-m",
         "--mute_alarms",
-        type=bool,
         action="store_true",
         help="Tell the Watcher to mute alarms. Include if setting CSC to Offline.",
     )
