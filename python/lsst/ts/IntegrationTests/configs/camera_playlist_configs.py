@@ -27,7 +27,11 @@ from .config_registry import registry
 
 # Create the list Camera short-names.
 
-cameras = ["at", "cc"]
+cameras = [
+    "at",
+    "cc",
+    "mt",
+]
 
 # Create the Camera short-name to playlist dictionary.
 
@@ -46,6 +50,10 @@ cccamera_playlists = {
     "master_ptc": "bias_dark_ptc",
 }
 
+mtcamera_playlists = {
+    "master_flat": "bias_dark_flat",
+}
+
 # Define the sorted list of unique playlist short-names.
 
 playlists = sorted(
@@ -55,10 +63,12 @@ playlists = sorted(
 # Create the sorted list of allowable Camera-PlaylistShortname options.
 
 playlist_options = []
-for item in list(cccamera_playlists.keys()):
-    playlist_options.append(("cc", item))
 for item in list(atcamera_playlists.keys()):
     playlist_options.append(("at", item))
+for item in list(cccamera_playlists.keys()):
+    playlist_options.append(("cc", item))
+for item in list(mtcamera_playlists.keys()):
+    playlist_options.append(("mt", item))
 playlist_options.sort()
 
 # Add the script configurations to the configuration registry.
