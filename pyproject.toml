@@ -21,7 +21,7 @@ where = [ "python" ]
  
 [project.scripts]
 auxtel_daytime_atpneumatics = "lsst.ts.IntegrationTests.auxtel_daytime_atpneumatics:run_atpneumatics_checkout"
-auxtel_daytime_latiss = "lsst.ts.IntegrationTests.auxtel_auxtel_daytime_latiss:run_auxtel_latiss_checkout"
+auxtel_daytime_latiss = "lsst.ts.IntegrationTests.auxtel_daytime_latiss:run_auxtel_latiss_checkout"
 auxtel_daytime_slew_and_take_image = "lsst.ts.IntegrationTests.auxtel_daytime_slew_and_take_image:run_auxtel_slew_and_take_image_checkout"
 auxtel_daytime_telescope_and_dome = "lsst.ts.IntegrationTests.auxtel_daytime_telescope_and_dome:run_auxtel_telescope_and_dome_checkout"
 auxtel_disabled_enabled = "lsst.ts.IntegrationTests.auxtel_disabled_enabled:run_auxtel_disabled_enabled"
@@ -53,6 +53,7 @@ gencam_standby_disabled = "lsst.ts.IntegrationTests.gencam_standby_disabled:run_
 enabled_offline = "lsst.ts.IntegrationTests.enabled_offline:run_enabled_offline"
 load_camera_playlist = "lsst.ts.IntegrationTests.load_camera_playlist:load_camera_playlist"
 love_stress_test = "lsst.ts.IntegrationTests.love_stress_test:run_love_stress_test"
+lsstcam_calibrations = "lsst.ts.IntegrationTests.lsstcam_calibrations:run_lsstcam_calibrations"
 lsstcam_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_lsstcam_housekeeping"
 lsstcam_image_taking = "lsst.ts.IntegrationTests.image_taking_verification:run_lsstcam_image_taking"
 maintel_disabled_enabled = "lsst.ts.IntegrationTests.maintel_disabled_enabled:run_maintel_disabled_enabled"
