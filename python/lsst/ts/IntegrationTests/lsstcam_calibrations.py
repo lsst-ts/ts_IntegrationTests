@@ -41,6 +41,9 @@ class LsstCamCalibrations(BaseScript):
     calib_type : `str`
         Defines which set of calibrations to run.
         Choices are ["flat", "ptc"].
+    wait_time : `int`
+        Defines how long, in seconds, to wait between exposures.
+        Default is 0.
     """
 
     index: int = 1
@@ -49,9 +52,10 @@ class LsstCamCalibrations(BaseScript):
         ("maintel/make_lsstcam_calibrations.py", BaseScript.is_external),
     ]
 
-    def __init__(self, calib_type: str) -> None:
+    def __init__(self, calib_type: str, wait_time: int = 0) -> None:
         super().__init__()
         self.calib_type = calib_type
+        self.wait_time = wait_time
         self.calib_configs = yaml.safe_load(
             registry[f"lsstcam_calibrations_{calib_type}"]
         )
@@ -61,7 +65,8 @@ class LsstCamCalibrations(BaseScript):
         ].replace("replace_me", super().get_current_date("%Y%m%d"))
         self.calib_configs["calib_collection"] = self.calib_configs[
             "calib_collection"
-        ].replace("calib_type", calib_type)
+        ].replace("calib_type", self.calib_type)
+        self.calib_configs["wait_between_exposures"] = self.wait_time
         self.configs = (yaml.safe_dump(self.calib_configs),)
 
 
@@ -73,8 +78,16 @@ def run_lsstcam_calibrations() -> None:
         choices=["flat", "ptc"],
         help="Specify which set of calibrations to run.",
     )
+    parser.add_argument(
+        "-w",
+        "--wait",
+        metavar="wait_between_exposures",
+        type=int,
+        default=0,
+        help="Specify the time, in seconds, to wait between exposures. Default is 0.",
+    )
     args = parser.parse_args()
-    script_class = LsstCamCalibrations(calib_type=args.calib_type)
+    script_class = LsstCamCalibrations(calib_type=args.calib_type, wait_time=args.wait)
     print(
         f"\nLSSTCam Calibrations; running the "
         f"master_{script_class.calib_type} calibrations"
