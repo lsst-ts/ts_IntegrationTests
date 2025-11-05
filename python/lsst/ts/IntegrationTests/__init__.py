@@ -65,6 +65,7 @@ from .love_stress_test import *
 from .lsstcam_calibrations import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
+from .maintel_open_mirror_covers import *
 from .maintel_point_azel import *
 from .maintel_slew_dome import *
 from .maintel_standby_disabled import *

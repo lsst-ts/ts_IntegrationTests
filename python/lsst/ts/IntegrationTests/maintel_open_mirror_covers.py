@@ -20,7 +20,7 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelSlewDome", "maintel_slew_dome"]
+__all__ = ["MainTelOpenMirrorCovers", "maintel_open_mirror_covers"]
 
 import argparse
 import asyncio
@@ -30,13 +30,11 @@ import yaml
 from lsst.ts.IntegrationTests import BaseScript
 
 
-class MainTelSlewDome(BaseScript):
-    """Execute the maintel/slew_dome.py standard script.
+class MainTelOpenMirrorCovers(BaseScript):
+    """Execute the maintel/open_mirror_covers.py standard script.
 
     Attributes
     ----------
-    az : `float`
-        The azimuth position of the slew.
     ignore : `List[str]`
         A list of CSCs to ignore when executing the slew.
         Default is [] (empty list).
@@ -44,18 +42,16 @@ class MainTelSlewDome(BaseScript):
 
     configs: tuple = ()
     scripts: list = [
-        ("maintel/slew_dome.py", BaseScript.is_standard),
+        ("maintel/open_mirror_covers.py", BaseScript.is_standard),
     ]
 
-    def __init__(self, az: float, ignore: List[str] = []) -> None:
+    def __init__(self, ignore: List[str] = []) -> None:
         super().__init__()
-        self.az = az
         self.ignore = ignore
         # Convert config to a properly formatted YAML document.
         yaml_string = yaml.safe_load(
             f"""
             data:
-            - [az, {self.az}]
             ignore: {self.ignore}
             """
         )
@@ -64,15 +60,9 @@ class MainTelSlewDome(BaseScript):
         )
 
 
-def maintel_slew_dome() -> None:
+def maintel_open_mirror_covers() -> None:
     # Define the script arguments.
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "az",
-        metavar="Azimuth",
-        type=float,
-        help="Specify the desired Azimuth position.",
-    )
     parser.add_argument(
         "-i",
         "--ignore",
@@ -91,14 +81,11 @@ def main(opts: argparse.Namespace) -> None:
     # If not, raise KeyError.
     # If it is correct, execute the slew.
     try:
-        script_class = MainTelSlewDome(
-            az=opts.az,
+        script_class = MainTelOpenMirrorCovers(
             ignore=opts.ignore,
         )
     except KeyError as ke:
         print(repr(ke))
     else:
-        print(
-            f"\nSlewing MTDome to {opts.az} degrees." f"\nIgnore list: {opts.ignore}."
-        )
+        print(f"Opening mirror covers." f"\nIgnore list: {opts.ignore}.")
         asyncio.run(script_class.run())
