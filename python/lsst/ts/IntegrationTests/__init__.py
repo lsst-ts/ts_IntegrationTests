@@ -66,6 +66,7 @@ from .lsstcam_calibrations import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
 from .maintel_point_azel import *
+from .maintel_slew_dome import *
 from .maintel_standby_disabled import *
 from .obssys_disabled_enabled import *
 from .obssys_standby_disabled import *
