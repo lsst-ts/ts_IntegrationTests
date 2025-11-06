@@ -1,1 +1,1 @@
-Add maintel_slew_dome, maintel_open_mirror_covers integration test scripts.
+Add maintel_slew_dome, maintel_open_mirror_covers and maintel_move_rotator integration test scripts.

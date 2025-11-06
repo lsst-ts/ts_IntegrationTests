@@ -59,6 +59,7 @@ lsstcam_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_lsstca
 lsstcam_image_taking = "lsst.ts.IntegrationTests.image_taking_verification:run_lsstcam_image_taking"
 maintel_disabled_enabled = "lsst.ts.IntegrationTests.maintel_disabled_enabled:run_maintel_disabled_enabled"
 maintel_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping"
+maintel_move_rotator = "lsst.ts.IntegrationTests.maintel_move_rotator:maintel_move_rotator"
 maintel_open_mirror_covers = "lsst.ts.IntegrationTests.maintel_open_mirror_covers:maintel_open_mirror_covers"
 maintel_point_azel = "lsst.ts.IntegrationTests.maintel_point_azel:run_maintel_point_azel"
 maintel_slew_dome = "lsst.ts.IntegrationTests.maintel_slew_dome:maintel_slew_dome"
