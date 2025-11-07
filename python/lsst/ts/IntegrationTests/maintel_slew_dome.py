@@ -31,7 +31,7 @@ from lsst.ts.IntegrationTests import BaseScript
 
 
 class MainTelSlewDome(BaseScript):
-    """Execute the maintel/slew_dome.py standard script.
+    """Execute the maintel/mtdome/slew_dome.py standard script.
 
     Attributes
     ----------
@@ -44,7 +44,7 @@ class MainTelSlewDome(BaseScript):
 
     configs: tuple = ()
     scripts: list = [
-        ("maintel/slew_dome.py", BaseScript.is_standard),
+        ("maintel/mtdome/slew_dome.py", BaseScript.is_standard),
     ]
 
     def __init__(self, az: float, ignore: List[str] = []) -> None:
@@ -54,8 +54,7 @@ class MainTelSlewDome(BaseScript):
         # Convert config to a properly formatted YAML document.
         yaml_string = yaml.safe_load(
             f"""
-            data:
-            - [az, {self.az}]
+            az: {self.az}
             ignore: {self.ignore}
             """
         )
