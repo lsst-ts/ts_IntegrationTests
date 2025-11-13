@@ -31,7 +31,7 @@ from lsst.ts.IntegrationTests import BaseScript
 
 
 class MainTelMoveRotator(BaseScript):
-    """Execute the maintel/move_rotator.py standard script.
+    """Execute the maintel/mtrotator/move_rotator.py standard script.
 
     Attributes
     ----------
@@ -44,7 +44,7 @@ class MainTelMoveRotator(BaseScript):
 
     configs: tuple = ()
     scripts: list = [
-        ("maintel/move_rotator.py", BaseScript.is_standard),
+        ("maintel/mtrotator/move_rotator.py", BaseScript.is_standard),
     ]
 
     def __init__(self, angle: float, ignore: List[str] = []) -> None:
@@ -54,8 +54,7 @@ class MainTelMoveRotator(BaseScript):
         # Convert config to a properly formatted YAML document.
         yaml_string = yaml.safe_load(
             f"""
-            data:
-            - [angle, {self.angle}]
+            angle: {self.angle}
             ignore: {self.ignore}
             """
         )

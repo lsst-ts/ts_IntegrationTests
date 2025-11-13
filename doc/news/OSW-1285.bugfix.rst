@@ -1,0 +1,1 @@
+Fix typos, formatting, syntax and missing code in auxtel/maintel point_azel, and maintel slew_dome, open_mirror_covers and move_rotator scripts.

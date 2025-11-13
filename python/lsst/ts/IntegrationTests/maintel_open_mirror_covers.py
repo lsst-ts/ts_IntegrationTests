@@ -51,7 +51,6 @@ class MainTelOpenMirrorCovers(BaseScript):
         # Convert config to a properly formatted YAML document.
         yaml_string = yaml.safe_load(
             f"""
-            data:
             ignore: {self.ignore}
             """
         )
