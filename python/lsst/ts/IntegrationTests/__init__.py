@@ -63,6 +63,7 @@ from .image_taking_verification import *
 from .load_camera_playlist import *
 from .love_stress_test import *
 from .lsstcam_calibrations import *
+from .maintel_csc_end_of_night import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
 from .maintel_move_rotator import *
