@@ -1,0 +1,1 @@
+Add the maintel_csc_end_of_night.py integration test script.
