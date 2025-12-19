@@ -24,7 +24,6 @@
 from base_test import BaseTestClass
 from lsst.ts.IntegrationTests import (
     AuxTelLatissAcquire,
-    AuxTelLatissAcquireTakeSequence,
     AuxTelLatissTakeSequence,
     AuxTelLatissWEPAlign,
     AuxTelResetOffsets,
@@ -84,37 +83,7 @@ class AuxTelNightOperationsTestCase(BaseTestClass):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
 
-    @parameterized.expand(
-        [
-            "pointing",
-        ]
-    )
-    async def test_auxtel_latiss_acquire_and_take_sequence(self, sequence: str) -> None:
-        """Execute the AuxTelLatissAcquireTakeSequence integration test script,
-        which runs the
-        ts_externalscripts/auxtel/auxtel_latiss_acquire_and_take_sequence.py
-        script.
-        Use the configurations stored in the auxtel_night_operations_configs.py
-        module.
-        """
-        # Instantiate the AuxTelLatissAcquireTakeSequence integration tests.
-        script_class = AuxTelLatissAcquireTakeSequence(sequence=sequence)
-        # Get number of scripts
-        num_scripts = len(script_class.scripts)
-        print(
-            f"AuxTel Latiss Acquire and Take Sequence. "
-            f"Running the {script_class.scripts[0][0]} script, "
-            f"for the {script_class.sequence} sequence, "
-            f"\nwith configuration;\n{script_class.configs}"
-        )
-        # Execute the scripts.
-        await script_class.run()
-        # Assert script was added to ScriptQueue.
-        self.assertEqual(len(self.controller.queue_list), num_scripts)
-        # Assert scripts passed.
-        self.assertEqual(script_class.script_states, [8])
-
-    @parameterized.expand(["verify", "nominal", "test"])
+    @parameterized.expand(["verify", "pointing", "nominal", "test"])
     async def test_auxtel_latiss_acquire(self, sequence: str) -> None:
         """Execute the AuxTelLatissAcquire integration test scripts,
         which runs the
@@ -139,7 +108,7 @@ class AuxTelNightOperationsTestCase(BaseTestClass):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
 
-    @parameterized.expand(["verify", "nominal", "test"])
+    @parameterized.expand(["verify", "pointing", "nominal", "test"])
     async def test_auxtel_latiss_take_sequence(self, sequence: str) -> None:
         """Execute the AuxTelLatissTakeSequence integration test scripts,
         which runs the

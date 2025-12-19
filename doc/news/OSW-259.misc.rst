@@ -1,0 +1,3 @@
+Add the 'pointing' option back to the auxtel_latiss_acquire.py and auxtel_latiss_take_sequence.py scripts.
+
+Split the pointing config into acquire and take sequence, as is for test/nominal/verify.
