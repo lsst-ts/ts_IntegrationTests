@@ -107,11 +107,11 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
 registry["auxtel_acquire_pointing"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
         "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "target_pointing_tolerance": 4,
-        "max_acq_iter": 4,
-        "do_pointing_model": True,
+        "max_acq_iter": 0,
         "reason": "IntegrationTesting_PointingConfiguration",
         "program": "IntegrationTesting_PointingConfiguration",
     },
@@ -127,6 +127,7 @@ registry["auxtel_take_sequence_pointing"] = yaml.safe_dump(
     explicit_start=True,
     canonical=True,
 )
+
 # latiss_acquire and latiss_take_sequence configs
 # verfiy
 registry["auxtel_acquire_verify"] = yaml.safe_dump(
