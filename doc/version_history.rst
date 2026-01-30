@@ -14,6 +14,47 @@ Version History
 
 .. towncrier release notes start
 
+v0.35.0 (2026-01-30)
+====================
+
+New Features
+------------
+
+- Add the maintel_csc_end_of_night.py integration test script. (`OSW-1159 <https://rubinobs.atlassian.net//browse/OSW-1159>`_)
+- Add MTCamera playlist options.
+  Add lsstcam_calibrations script to pyproject.toml. (`OSW-1183 <https://rubinobs.atlassian.net//browse/OSW-1183>`_)
+- Add wait_between_exposures config to all camera calibrations scripts. (`OSW-1285 <https://rubinobs.atlassian.net//browse/OSW-1285>`_)
+- Add telescope point_azel scripts. (`OSW-1373 <https://rubinobs.atlassian.net//browse/OSW-1373>`_)
+- Add maintel_slew_dome, maintel_open_mirror_covers and maintel_move_rotator integration test scripts. (`OSW-1383 <https://rubinobs.atlassian.net//browse/OSW-1383>`_)
+
+
+Bug Fixes
+---------
+
+- Fix typo in pyproject.toml. (`OSW-1183 <https://rubinobs.atlassian.net//browse/OSW-1183>`_)
+- Fix typos, formatting, syntax and missing code in auxtel/maintel point_azel, and maintel slew_dome, open_mirror_covers and move_rotator scripts. (`OSW-1285 <https://rubinobs.atlassian.net//browse/OSW-1285>`_)
+
+
+Performance Enhancement
+-----------------------
+
+- Add unit tests for test_csc_state_transitions.py. (`OSW-1176 <https://rubinobs.atlassian.net//browse/OSW-1176>`_)
+
+
+API Removal or Deprecation
+--------------------------
+
+- Remove the auxtel_latiss_acquire_and_take_sequence.py script. (`OSW-259 <https://rubinobs.atlassian.net//browse/OSW-259>`_)
+
+
+Other Changes and Additions
+---------------------------
+
+- Add the 'pointing' option back to the auxtel_latiss_acquire.py and auxtel_latiss_take_sequence.py scripts.
+
+  Split the pointing config into acquire and take sequence, as is for test/nominal/verify. (`OSW-259 <https://rubinobs.atlassian.net//browse/OSW-259>`_)
+
+
 v0.34.0 (2025-10-03)
 ====================
 
