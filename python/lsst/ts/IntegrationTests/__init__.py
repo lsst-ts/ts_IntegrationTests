@@ -37,7 +37,6 @@ from .auxtel_disabled_enabled import *
 from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire import *
-from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
 from .auxtel_latiss_take_sequence import *
 from .auxtel_latiss_wep_align import *

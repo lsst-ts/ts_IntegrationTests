@@ -42,7 +42,7 @@ class AuxTelLatissAcquire(BaseScript):
     ----------
     sequence : `str`
         Defines which sequence to run.
-        Choices are ["verify", "nominal", "test"].
+        Choices are ["verify", "pointing", "nominal", "test"].
     """
 
     index: int = 2
@@ -62,7 +62,7 @@ def run_auxtel_latiss_acquire() -> None:
     parser.add_argument(
         "sequence",
         type=str,
-        choices=["verify", "nominal", "test"],
+        choices=["verify", "pointing", "nominal", "test"],
         help="Specify which sequence to run.",
     )
     args = parser.parse_args()
