@@ -20,57 +20,51 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = [
-    "AuxTelLatissAcquire",
-    "run_auxtel_latiss_acquire",
-]
+__all__ = ["MainTelPointAzEl", "run_maintel_point_azel"]
 
-import argparse
 import asyncio
 
-from lsst.ts.IntegrationTests import BaseScript
+import yaml
+from lsst.ts.IntegrationTests import BasePointAzEl, BaseScript
 
-from .configs.config_registry import registry
 
-
-class AuxTelLatissAcquire(BaseScript):
+class MainTelPointAzEl(BasePointAzEl):
     """Execute the given Standard or External script,
     with the given Yaml configuration,
     placed in the given ScriptQueue location.
-
-    Parameters
-    ----------
-    sequence : `str`
-        Defines which sequence to run.
-        Choices are ["verify", "pointing", "nominal", "test"].
     """
 
-    index: int = 2
+    index: int = 1
     configs: tuple = ("",)
     scripts: list = [
-        ("auxtel/latiss_acquire.py", BaseScript.is_external),
+        ("maintel/point_azel.py", BaseScript.is_standard),
     ]
 
-    def __init__(self, sequence: str) -> None:
-        super().__init__()
-        self.sequence = sequence
-        self.configs = (registry[f"auxtel_acquire_{sequence}"],)
+    def __init__(self, args=None) -> None:
+        super().__init__(args)
+        # Convert config to a properly formatted YAML document.
+        yaml_string = yaml.safe_load(
+            f"""
+            az: {self.args.az}
+            el: {self.args.el}
+            rot_tel: {self.args.rot_tel}
+            target_name: {self.args.target_name}
+            ignore: {self.args.ignore}
+            """
+        )
+        self.configs = (
+            yaml.safe_dump(yaml_string, explicit_start=True, canonical=True),
+        )
 
 
-def run_auxtel_latiss_acquire() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "sequence",
-        type=str,
-        choices=["verify", "pointing", "nominal", "test"],
-        help="Specify which sequence to run.",
-    )
-    args = parser.parse_args()
-    script_class = AuxTelLatissAcquire(sequence=args.sequence)
+def run_maintel_point_azel() -> None:
+    script_class = MainTelPointAzEl()
+    num_scripts = len(script_class.scripts)
     print(
-        f"\nAuxTel Latiss Acquire; "
-        f"running the {script_class.scripts[0][0]} script, "
-        f"for the {script_class.sequence} sequence, "
-        f"with configuration;\n{script_class.configs}"
+        f"\nMainTel Point AzEl; running {num_scripts} scripts"
+        f"\nAz,El: [{script_class.args.az},{script_class.args.el}]"
+        f"\nRotator:: {script_class.args.rot_tel}"
+        f"\nTarget: {script_class.args.target_name}"
+        f"\nIgnore list: {script_class.args.ignore}"
     )
     asyncio.run(script_class.run())

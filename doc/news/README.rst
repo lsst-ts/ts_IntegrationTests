@@ -15,7 +15,17 @@ The ``<TYPE>`` should be one of:
 * ``removal``: A deprecation or removal of API.
 * ``misc``: Other minor changes and/or additions
 
-An example file name would therefore look like ``DM-40534.doc.rst``.
+An example file name would therefore look like ``OSW-99999.doc.rst``.
+
+For example, if you are adding a new feature ticket OSW-12345, you would create a file named ``OSW-12345.feature.rst`` in this directory.
+
+If you have ``towncrier`` installed in your environment you can use:
+
+.. code-block:: bash
+
+   $ towncrier create <JIRA_TICKET>.<TYPE>.rst
+
+for package level changes.
 
 Each developer now has to create the news fragments for the changes they have made on their own branches, instead of adding them to the release notes directly.
 The news fragments are then automatically integrated into the release notes by the ``towncrier`` tool.

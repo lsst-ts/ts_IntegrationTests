@@ -28,6 +28,7 @@ except ImportError:
     __version__ = "?"
 
 from .base_script import *  # isort: skip
+from .base_point_azel import *  # isort: skip
 from .auxtel_daytime_atpneumatics import *
 from .auxtel_daytime_latiss import *
 from .auxtel_daytime_slew_and_take_image import *
@@ -36,11 +37,11 @@ from .auxtel_disabled_enabled import *
 from .auxtel_enable_atcs import *
 from .auxtel_housekeeping import *
 from .auxtel_latiss_acquire import *
-from .auxtel_latiss_acquire_and_take_sequence import *
 from .auxtel_latiss_calibrations import *
 from .auxtel_latiss_take_sequence import *
 from .auxtel_latiss_wep_align import *
 from .auxtel_offline_standby import *
+from .auxtel_point_azel import *
 from .auxtel_prepare_for_flat import *
 from .auxtel_prepare_for_onsky import *
 from .auxtel_reset_offsets import *
@@ -61,8 +62,13 @@ from .image_taking_verification import *
 from .load_camera_playlist import *
 from .love_stress_test import *
 from .lsstcam_calibrations import *
+from .maintel_csc_end_of_night import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
+from .maintel_move_rotator import *
+from .maintel_open_mirror_covers import *
+from .maintel_point_azel import *
+from .maintel_slew_dome import *
 from .maintel_standby_disabled import *
 from .obssys_disabled_enabled import *
 from .obssys_standby_disabled import *
