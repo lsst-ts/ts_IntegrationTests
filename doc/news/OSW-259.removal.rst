@@ -1,1 +1,0 @@
-Remove the auxtel_latiss_acquire_and_take_sequence.py script.

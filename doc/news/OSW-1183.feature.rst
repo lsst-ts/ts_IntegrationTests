@@ -1,2 +1,0 @@
-Add MTCamera playlist options.
-Add lsstcam_calibrations script to pyproject.toml.
