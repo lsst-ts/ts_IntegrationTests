@@ -92,6 +92,7 @@ cscs = frozenset(
         "TunableLaser",
         "Watcher",
         "WeatherForecast",
+        "WFOODS",
     ]
 )
 
