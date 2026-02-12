@@ -36,6 +36,10 @@ cameras = [
 # Create the Camera short-name to playlist dictionary.
 
 atcamera_playlists = {
+    "default": "default",
+    "bias": "bias",
+    "dark": "dark",
+    "flat": "flat",
     "master_flat": "bias_dark_flat",
     "master_ptc": "bias_dark_ptc",
     "cwfs": "cwfs-test_take_sequence",
@@ -51,6 +55,10 @@ cccamera_playlists = {
 }
 
 mtcamera_playlists = {
+    "default": "default",
+    "bias": "bias",
+    "dark": "dark",
+    "flat": "flat",
     "master_flat": "bias_dark_flat",
 }
 
