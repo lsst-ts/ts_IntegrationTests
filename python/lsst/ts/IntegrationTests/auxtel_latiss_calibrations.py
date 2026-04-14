@@ -83,6 +83,7 @@ def run_auxtel_latiss_calibrations() -> None:
         "--wait",
         metavar="wait_between_exposures",
         type=int,
+        default=0,
         help="Specify the time, in seconds, to wait between exposures. Default is 0.",
     )
     args = parser.parse_args()
