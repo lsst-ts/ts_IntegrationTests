@@ -1,1 +1,0 @@
-Use the move_p2p.py script, which still allows for ignoring the M1M3, to park the MainTel.
