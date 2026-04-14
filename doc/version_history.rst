@@ -14,23 +14,6 @@ Version History
 
 .. towncrier release notes start
 
-v0.36.0 (2026-04-14)
-====================
-
-Bug Fixes
----------
-
-- Add default value to 'wait_between_exposures' argument in auxtel_latiss_calibrations.py.
-
-  Add WFOODS to utils.py. (`OSW-1790 <https://rubinobs.atlassian.net//browse/OSW-1790>`_)
-
-
-Performance Enhancement
------------------------
-
-- Add additional playlists to camera_playlist_configs.py. (`OSW-1790 <https://rubinobs.atlassian.net//browse/OSW-1790>`_)
-
-
 v0.35.0 (2026-01-30)
 ====================
 
