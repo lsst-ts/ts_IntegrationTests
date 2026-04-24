@@ -65,6 +65,7 @@ from .lsstcam_calibrations import *
 from .maintel_csc_end_of_night import *
 from .maintel_disabled_enabled import *
 from .maintel_housekeeping import *
+from .maintel_lower_m1m3 import *
 from .maintel_move_rotator import *
 from .maintel_open_mirror_covers import *
 from .maintel_point_azel import *
