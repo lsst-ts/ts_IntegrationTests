@@ -1,3 +1,0 @@
-Add default value to 'wait_between_exposures' argument in auxtel_latiss_calibrations.py.
-
-Add WFOODS to utils.py.
