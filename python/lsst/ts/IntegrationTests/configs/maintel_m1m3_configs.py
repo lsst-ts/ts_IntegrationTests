@@ -21,18 +21,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .auxtel_housekeeping_configs import *  # noqa
-from .auxtel_night_operations_configs import *  # noqa
-from .auxtel_state_transition_configs import *  # noqa
-from .eas_state_transition_configs import *  # noqa
-from .enabled_offline_state_transition_configs import *  # noqa
-from .gencam_state_transition_configs import *  # noqa
-from .image_taking_configs import *  # noqa
-from .love_stress_test_configs import *  # noqa
-from .maintel_housekeeping_configs import *  # noqa
-from .maintel_m1m3_configs import *  # noqa
-from .maintel_state_transition_configs import *  # noqa
-from .obssys_state_transition_configs import *  # noqa
-from .shutdown_configs import *  # noqa
-from .take_image_latiss_configs import *  # noqa
-from .track_target_configs import *  # noqa
+import yaml
+
+from .config_registry import registry
+
+# Add the script configurations to the configuration registry.
+
+# lower_m1m3
+yaml_string = yaml.safe_load(
+    """
+    test_case: {name: "integration_testing", execution: "integration_testing", version: "v1"}
+    """
+)
+registry["lower_m1m3"] = yaml.safe_dump(
+    yaml_string,
+    explicit_start=True,
+    canonical=True,
+)
