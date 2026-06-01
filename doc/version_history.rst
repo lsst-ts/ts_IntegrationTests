@@ -14,6 +14,16 @@ Version History
 
 .. towncrier release notes start
 
+v0.37.0 (2026-06-01)
+====================
+
+New Features
+------------
+
+- Add lower_m1m3 tests. (`OSW-2175 <https://rubinobs.atlassian.net//browse/OSW-2175>`_)
+- Add raise_m1m3 tests. (`OSW-2229 <https://rubinobs.atlassian.net//browse/OSW-2229>`_)
+
+
 v0.36.0 (2026-04-14)
 ====================
 
