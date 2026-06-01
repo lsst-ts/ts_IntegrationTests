@@ -19,20 +19,38 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .auxtel_housekeeping_configs import *  # noqa
-from .auxtel_night_operations_configs import *  # noqa
-from .auxtel_state_transition_configs import *  # noqa
-from .eas_state_transition_configs import *  # noqa
-from .enabled_offline_state_transition_configs import *  # noqa
-from .gencam_state_transition_configs import *  # noqa
-from .image_taking_configs import *  # noqa
-from .love_stress_test_configs import *  # noqa
-from .maintel_housekeeping_configs import *  # noqa
-from .maintel_m1m3_configs import *  # noqa
-from .maintel_state_transition_configs import *  # noqa
-from .obssys_state_transition_configs import *  # noqa
-from .shutdown_configs import *  # noqa
-from .take_image_latiss_configs import *  # noqa
-from .track_target_configs import *  # noqa
+__all__ = ["MainTelM1M3EnableSlewFlags", "maintel_m1m3_enable_slew_flags"]
+
+import asyncio
+
+from lsst.ts.IntegrationTests import BaseScript
+
+from .configs.config_registry import registry
+
+
+class MainTelM1M3EnableSlewFlags(BaseScript):
+    """Execute the maintel/m1m3/enable_m1m3_slew_controller_flags.py
+    standard script.
+    """
+
+    configs: tuple = registry["m1m3_disable_slew_flags"]
+    scripts: list = [
+        ("maintel/m1m3/enable_m1m3_slew_controller_flags.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
+
+
+def maintel_m1m3_enable_slew_flags() -> None:
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the raise.
+    try:
+        script_class = MainTelM1M3EnableSlewFlags()
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        print("\nDisabling M1M3 slew controller flags.")
+        asyncio.run(script_class.run())

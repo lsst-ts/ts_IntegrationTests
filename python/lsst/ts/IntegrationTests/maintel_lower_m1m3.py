@@ -19,20 +19,37 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .auxtel_housekeeping_configs import *  # noqa
-from .auxtel_night_operations_configs import *  # noqa
-from .auxtel_state_transition_configs import *  # noqa
-from .eas_state_transition_configs import *  # noqa
-from .enabled_offline_state_transition_configs import *  # noqa
-from .gencam_state_transition_configs import *  # noqa
-from .image_taking_configs import *  # noqa
-from .love_stress_test_configs import *  # noqa
-from .maintel_housekeeping_configs import *  # noqa
-from .maintel_m1m3_configs import *  # noqa
-from .maintel_state_transition_configs import *  # noqa
-from .obssys_state_transition_configs import *  # noqa
-from .shutdown_configs import *  # noqa
-from .take_image_latiss_configs import *  # noqa
-from .track_target_configs import *  # noqa
+__all__ = ["MainTelLowerM1M3", "maintel_lower_m1m3"]
+
+import asyncio
+
+from lsst.ts.IntegrationTests import BaseScript
+
+from .configs.config_registry import registry
+
+
+class MainTelLowerM1M3(BaseScript):
+    """Execute the maintel/m1m3/lower_m1m3.py standard script."""
+
+    index: int = 1
+    configs: tuple = (registry["lower_m1m3"],)
+    scripts: list = [
+        ("maintel/m1m3/lower_m1m3.py", BaseScript.is_standard),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
+
+
+def maintel_lower_m1m3() -> None:
+    # Ensure the invocation is correct.
+    # If not, raise KeyError.
+    # If it is correct, execute the lower.
+    try:
+        script_class = MainTelLowerM1M3()
+    except KeyError as ke:
+        print(repr(ke))
+    else:
+        print("\nRaising M1M3.")
+        asyncio.run(script_class.run())
