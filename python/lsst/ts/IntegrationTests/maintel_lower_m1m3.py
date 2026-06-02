@@ -51,5 +51,5 @@ def maintel_lower_m1m3() -> None:
     except KeyError as ke:
         print(repr(ke))
     else:
-        print("\nRaising M1M3.")
+        print("\nLowering M1M3.")
         asyncio.run(script_class.run())
