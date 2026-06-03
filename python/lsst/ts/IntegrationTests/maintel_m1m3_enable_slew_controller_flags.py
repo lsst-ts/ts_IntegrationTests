@@ -37,7 +37,8 @@ class MainTelM1M3EnableSlewControllerFlags(BaseScript):
     standard script.
     """
 
-    configs: tuple = registry["m1m3_disable_slew_controller_flags"]
+    index: int = 1
+    configs: tuple = (registry["m1m3_disable_slew_controller_flags"],)
     scripts: list = [
         ("maintel/m1m3/enable_m1m3_slew_controller_flags.py", BaseScript.is_standard),
     ]
