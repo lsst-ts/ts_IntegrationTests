@@ -22,28 +22,28 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from base_test import BaseTestClass
-from lsst.ts.IntegrationTests import MainTelM1M3EnableSlewFlags
+from lsst.ts.IntegrationTests import MainTelM1M3EnableSlewControllerFlags
 
 
-class MainTelM1M3EnableSlewFlagsTestCase(BaseTestClass):
+class MainTelM1M3EnableSlewControllerFlagsTestCase(BaseTestClass):
     """
-    Test the MainTel M1M3EnableSlewFlags integration test scripts.
+    Test the MainTel M1M3EnableSlewControllerFlags integration test scripts.
     """
 
     # Use MainTel ScriptQueue.
     index = 1
 
-    async def test_maintel_m1m3_disable_slew_flags(self) -> None:
-        """Execute the MainTelM1M3EnableSlewFlags integration test script,
-        which runs the maintel/m1m3/enable_m1m3_slew_controller_flags.py
-        standard script.
+    async def test_maintel_m1m3_disable_slew_controller_flags(self) -> None:
+        """Execute the MainTelM1M3EnableSlewControllerFlags integration test
+        script, which runs the
+        maintel/m1m3/enable_m1m3_slew_controller_flags.py standard script.
         """
-        # Instantiate the MainTelM1M3EnableSlewFlags integration tests.
-        script_class = MainTelM1M3EnableSlewFlags()
+        # Instantiate the M1M3EnableSlewControllerFlags integration tests.
+        script_class = MainTelM1M3EnableSlewControllerFlags()
         # Get number of scripts
         num_scripts = len(script_class.scripts)
         print(
-            f"Test MainTel M1M3EnableSlewFlags.\nRunning the {script_class.scripts[0][0]} script."
+            f"Test MainTel M1M3EnableSlewControllerFlagss.\nRunning the {script_class.scripts[0][0]} script."
         )
         # Execute the scripts.
         await script_class.run()
