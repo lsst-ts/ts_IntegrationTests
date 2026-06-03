@@ -64,9 +64,9 @@ from .love_stress_test import *
 from .lsstcam_calibrations import *
 from .maintel_csc_end_of_night import *
 from .maintel_disabled_enabled import *
-from .maintel_enable_m1m3_slew_controller_flags import *
 from .maintel_housekeeping import *
 from .maintel_lower_m1m3 import *
+from .maintel_m1m3_enable_slew_controller_flags import *
 from .maintel_move_rotator import *
 from .maintel_open_mirror_covers import *
 from .maintel_point_azel import *

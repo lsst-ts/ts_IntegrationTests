@@ -62,7 +62,7 @@ yaml_string = yaml.safe_load(
      - BOOSTERVALVES
     """
 )
-registry["m1m3_disable_slew_flags"] = yaml.safe_dump(
+registry["m1m3_disable_slew_controller_flags"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
