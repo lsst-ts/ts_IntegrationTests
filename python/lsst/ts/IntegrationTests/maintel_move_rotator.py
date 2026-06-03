@@ -52,12 +52,10 @@ class MainTelMoveRotator(BaseScript):
         self.angle = angle
         self.ignore = ignore
         # Convert config to a properly formatted YAML document.
-        yaml_string = yaml.safe_load(
-            f"""
+        yaml_string = yaml.safe_load(f"""
             angle: {self.angle}
             ignore: {self.ignore}
-            """
-        )
+            """)
         self.configs = (
             yaml.safe_dump(yaml_string, explicit_start=True, canonical=True),
         )

@@ -28,8 +28,7 @@ from .config_registry import registry
 # Add the State Transition script configurations to the registry.
 
 # eas_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [DIMM:1, DISABLED]
     - [DIMM:2, DISABLED]
@@ -49,16 +48,14 @@ yaml_string = yaml.safe_load(
     - [ESS:203, DISABLED]
     - [ESS:204, DISABLED]
     - [ESS:301, DISABLED]
-    """
-)
+    """)
 
 registry["eas_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # eas_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [DIMM:1, ENABLED]
     - [DIMM:2, ENABLED]
@@ -78,8 +75,7 @@ yaml_string = yaml.safe_load(
     - [ESS:203, ENABLED]
     - [ESS:204, ENABLED]
     - [ESS:301, ENABLED]
-    """
-)
+    """)
 
 registry["eas_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True

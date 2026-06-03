@@ -28,8 +28,7 @@ from .config_registry import registry
 # Add the State Transition script configurations to the registry.
 
 # auxtel_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATDome, DISABLED]
     - [ATDomeTrajectory, DISABLED]
@@ -38,31 +37,27 @@ yaml_string = yaml.safe_load(
     - [ATAOS, DISABLED]
     - [ATHexapod, DISABLED]
     - [ATPtg, DISABLED]
-    """
-)
+    """)
 
 registry["auxtel_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # auxtel_camera_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATOODS, DISABLED]
     - [ATCamera, DISABLED, Normal]
     - [ATHeaderService, DISABLED]
     - [ATSpectrograph, DISABLED]
-    """
-)
+    """)
 
 registry["auxtel_camera_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # auxtel_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATDome, ENABLED]
     - [ATDomeTrajectory, ENABLED]
@@ -71,35 +66,30 @@ yaml_string = yaml.safe_load(
     - [ATAOS, ENABLED]
     - [ATHexapod, ENABLED]
     - [ATPtg, ENABLED]
-    """
-)
+    """)
 
 registry["auxtel_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # auxtel_camera_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATOODS, ENABLED]
     - [ATCamera, ENABLED]
     - [ATHeaderService, ENABLED]
     - [ATSpectrograph, ENABLED]
-    """
-)
+    """)
 
 registry["auxtel_camera_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # auxtel_offline_standby
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATCamera, STANDBY]
-    """
-)
+    """)
 
 registry["auxtel_offline_standby"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True

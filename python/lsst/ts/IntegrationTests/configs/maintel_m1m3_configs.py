@@ -28,11 +28,9 @@ from .config_registry import registry
 # Add the script configurations to the configuration registry.
 
 # raise_m1m3
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     test_case: {name: "integration_testing", execution: "integration_testing", version: "v1"}
-    """
-)
+    """)
 registry["raise_m1m3"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
@@ -40,11 +38,9 @@ registry["raise_m1m3"] = yaml.safe_dump(
 )
 
 # lower_m1m3
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     test_case: {name: "integration_testing", execution: "integration_testing", version: "v1"}
-    """
-)
+    """)
 registry["lower_m1m3"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
@@ -52,16 +48,14 @@ registry["lower_m1m3"] = yaml.safe_dump(
 )
 
 # enable_slew_flags
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     enable: [False, False, False, False]
     slew_flags:
      - ACCELERATIONFORCES
      - BALANCEFORCES
      - VELOCITYFORCES
      - BOOSTERVALVES
-    """
-)
+    """)
 registry["m1m3_disable_slew_controller_flags"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,

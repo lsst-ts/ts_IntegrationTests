@@ -28,15 +28,13 @@ from .config_registry import registry
 # Add the script configurations to the configuration registry.
 
 # CCCamera Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "CCCamera"
     cmd: "setFilter"
     parameters:
         name: "r_03"
         timeout: 45
-    """
-)
+    """)
 
 registry["cccamera_set_filter"] = yaml.safe_dump(
     yaml_string,
@@ -45,15 +43,13 @@ registry["cccamera_set_filter"] = yaml.safe_dump(
 )
 
 # MTCamera Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "MTCamera"
     cmd: "setFilter"
     parameters:
         name: "r_57"
         timeout: 150
-    """
-)
+    """)
 
 registry["mtcamera_set_filter"] = yaml.safe_dump(
     yaml_string,
@@ -62,12 +58,10 @@ registry["mtcamera_set_filter"] = yaml.safe_dump(
 )
 
 # MTMount Housekeeping configs
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "MTMount"
     cmd: "homeBothAxes"
-    """
-)
+    """)
 
 registry["mtmount_home_both_axes"] = yaml.safe_dump(
     yaml_string,
@@ -76,14 +70,12 @@ registry["mtmount_home_both_axes"] = yaml.safe_dump(
 )
 
 # MTPtg park
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     az: 0.0
     el: 80
     ignore:
     - mtm1m3
-    """
-)
+    """)
 
 registry["mtptg_park"] = yaml.safe_dump(
     yaml_string,
@@ -92,12 +84,10 @@ registry["mtptg_park"] = yaml.safe_dump(
 )
 
 # MTPtg stop tracking
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "MTPtg"
     cmd: stopTracking
-    """
-)
+    """)
 
 registry["mtptg_stop_tracking"] = yaml.safe_dump(
     yaml_string,

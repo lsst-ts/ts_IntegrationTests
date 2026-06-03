@@ -32,8 +32,7 @@ def yaml_test_string1() -> None:
         IntegrationTests.yaml_test_string1()
 
     """
-    yaml_string = yaml.safe_load(
-        """
+    yaml_string = yaml.safe_load("""
         data:
         - - CCCamera
         - DISABLED
@@ -42,8 +41,7 @@ def yaml_test_string1() -> None:
         - DISABLED
         - - CCArchiver
         - DISABLED
-        """
-    )
+        """)
     return yaml.safe_dump(yaml_string, explicit_start=True, canonical=True)
 
 

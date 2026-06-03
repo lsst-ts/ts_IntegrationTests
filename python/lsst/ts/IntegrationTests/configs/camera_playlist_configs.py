@@ -81,15 +81,13 @@ playlist_options.sort()
 
 # Add the script configurations to the configuration registry.
 
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "replace_me"
     cmd: "play"
     parameters:
         playlist: "replace_me"
         repeat: True
-    """
-)
+    """)
 
 registry["camera_playlist"] = yaml.safe_dump(
     yaml_string,

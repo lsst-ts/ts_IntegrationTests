@@ -28,26 +28,22 @@ from .config_registry import registry
 # Add the State Transition script configurations to the registry.
 
 # gencam_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [GenericCamera:1, DISABLED]
     - [GCHeaderService:1, DISABLED]
-    """
-)
+    """)
 
 registry["gencam_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # gencam_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [GenericCamera:1, ENABLED]
     - [GCHeaderService:1, ENABLED]
-    """
-)
+    """)
 
 registry["gencam_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
