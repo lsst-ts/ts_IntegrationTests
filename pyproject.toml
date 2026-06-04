@@ -60,6 +60,7 @@ maintel_disabled_enabled = "lsst.ts.IntegrationTests.maintel_disabled_enabled:ru
 maintel_m1m3_enable_slew_controller_flags = "lsst.ts.IntegrationTests.maintel_m1m3_enable_slew_controller_flags:maintel_m1m3_enable_slew_controller_flags"
 maintel_csc_end_of_night = "lsst.ts.IntegrationTests.maintel_csc_end_of_night:maintel_csc_end_of_night"
 maintel_housekeeping = "lsst.ts.IntegrationTests.maintel_housekeeping:run_maintel_housekeeping"
+maintel_lasertracker_align = "lsst.ts.IntegrationTests.maintel_lasertracker_align:maintel_lasertracker_align"
 maintel_lower_m1m3 = "lsst.ts.IntegrationTests.maintel_lower_m1m3:maintel_lower_m1m3"
 maintel_move_rotator = "lsst.ts.IntegrationTests.maintel_move_rotator:maintel_move_rotator"
 maintel_open_mirror_covers = "lsst.ts.IntegrationTests.maintel_open_mirror_covers:maintel_open_mirror_covers"
