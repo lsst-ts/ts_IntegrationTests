@@ -28,12 +28,10 @@ from .config_registry import registry
 # Add the script configurations to the configuration registry.
 
 # ATDome homed config
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATDome"
     cmd: "homeAzimuth"
-    """
-)
+    """)
 
 registry["atdome_home"] = yaml.safe_dump(
     yaml_string,
@@ -42,13 +40,11 @@ registry["atdome_home"] = yaml.safe_dump(
 )
 
 # ATPtg park
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     az: 0.0
     el: 80
     target_name: "Park position"
-    """
-)
+    """)
 
 registry["atptg_park"] = yaml.safe_dump(
     yaml_string,
@@ -57,11 +53,9 @@ registry["atptg_park"] = yaml.safe_dump(
 )
 
 # ATDome park configs
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     az: 285
-    """
-)
+    """)
 
 registry["atdome_park"] = yaml.safe_dump(
     yaml_string,
@@ -70,12 +64,10 @@ registry["atdome_park"] = yaml.safe_dump(
 )
 
 # ATPtg stop tracking
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATPtg"
     cmd: stopTracking
-    """
-)
+    """)
 
 registry["atptg_stop_tracking"] = yaml.safe_dump(
     yaml_string,
@@ -84,14 +76,12 @@ registry["atptg_stop_tracking"] = yaml.safe_dump(
 )
 
 # ATMCS setInstrumentPort configs
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATMCS"
     cmd: "setInstrumentPort"
     parameters:
         port: 2
-    """
-)
+    """)
 
 registry["atmcs_housekeeping"] = yaml.safe_dump(
     yaml_string,

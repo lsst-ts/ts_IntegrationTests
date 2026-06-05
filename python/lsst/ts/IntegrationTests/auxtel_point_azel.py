@@ -43,15 +43,13 @@ class AuxTelPointAzEl(BasePointAzEl):
     def __init__(self, args=None) -> None:
         super().__init__(args)
         # Convert config to a properly formatted YAML document.
-        yaml_string = yaml.safe_load(
-            f"""
+        yaml_string = yaml.safe_load(f"""
             az: {self.args.az}
             el: {self.args.el}
             rot_tel: {self.args.rot_tel}
             target_name: {self.args.target_name}
             ignore: {self.args.ignore}
-            """
-        )
+            """)
         self.configs = (
             yaml.safe_dump(yaml_string, explicit_start=True, canonical=True),
         )

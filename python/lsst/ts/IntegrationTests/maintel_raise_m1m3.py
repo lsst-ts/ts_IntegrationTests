@@ -32,6 +32,7 @@ from .configs.config_registry import registry
 class MainTelRaiseM1M3(BaseScript):
     """Execute the maintel/m1m3/raise_m1m3.py standard script."""
 
+    index: int = 1
     configs: tuple = (registry["raise_m1m3"],)
     scripts: list = [
         ("maintel/m1m3/raise_m1m3.py", BaseScript.is_standard),

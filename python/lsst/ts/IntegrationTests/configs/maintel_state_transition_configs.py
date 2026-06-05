@@ -28,8 +28,7 @@ from .config_registry import registry
 # Add the State Transition script configurations to the registry.
 
 # maintel_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [LaserTracker:1, DISABLED]
     - [MTMount, DISABLED]
@@ -40,29 +39,25 @@ yaml_string = yaml.safe_load(
     - [MTDomeTrajectory, DISABLED]
     - [MTM2, DISABLED]
     - [MTAOS, DISABLED]
-    """
-)
+    """)
 
 registry["maintel_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # maintel_camera_standby_disabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [replace_me_HeaderService, DISABLED]
     - [replace_me_OODS, DISABLED]
-    """
-)
+    """)
 
 registry["maintel_camera_standby_disabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # maintel_disabled_enabled
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [MTAirCompressor:1, ENABLED]
     - [MTAirCompressor:2, ENABLED]
@@ -75,8 +70,7 @@ yaml_string = yaml.safe_load(
     - [MTDomeTrajectory, ENABLED]
     - [MTM2, ENABLED]
     - [MTAOS, ENABLED]
-    """
-)
+    """)
 
 registry["maintel_disabled_enabled"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
