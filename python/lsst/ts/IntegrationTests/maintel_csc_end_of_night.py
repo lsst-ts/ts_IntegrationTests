@@ -49,11 +49,9 @@ class MainTelCscEndOfNight(BaseScript):
         super().__init__()
         self.ignore = ignore
         # Convert config to a properly formatted YAML document.
-        yaml_string = yaml.safe_load(
-            f"""
+        yaml_string = yaml.safe_load(f"""
             ignore: {self.ignore}
-            """
-        )
+            """)
         self.configs = (
             yaml.safe_dump(yaml_string, explicit_start=True, canonical=True),
         )

@@ -25,6 +25,7 @@ A simple script to run the load_camera_playlist integration test.
 This makes the script available, via the command line, to the
 appropriate unit test.
 """
+
 from lsst.ts.IntegrationTests import load_camera_playlist
 
 load_camera_playlist()

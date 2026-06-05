@@ -28,35 +28,30 @@ from .config_registry import registry
 # Add the State Transition script configurations to the registry.
 
 # watcher_enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [Watcher, OFFLINE]
-    """
-)
+    """)
 
 registry["watcher_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # sched_ocps_enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [Scheduler:1, OFFLINE]
     - [Scheduler:2, OFFLINE]
     - [Scheduler:3, OFFLINE]
     - [OCPS:1, OFFLINE]
-    """
-)
+    """)
 
 registry["sched_ocps_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # eas_enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [DREAM, OFFLINE]
     - [DSM:2, OFFLINE]
@@ -82,75 +77,64 @@ yaml_string = yaml.safe_load(
     - [ESS:205, OFFLINE]
     - [ESS:301, OFFLINE]
     - [WeatherForecast, OFFLINE]
-    """
-)
+    """)
 
 registry["eas_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # authorize_test42_sq_enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [Test:42, OFFLINE]
     - [ScriptQueue:1, OFFLINE]
     - [ScriptQueue:3, OFFLINE]
     - [ScriptQueue:2, OFFLINE]
-    """
-)
+    """)
 
 registry["sq_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # MTCS enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     ignore:
         - mtptg
         - mtrotator
-    """
-)
+    """)
 
 registry["mtcs_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # MainTel enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [MTAirCompressor:1, OFFLINE]
     - [MTAirCompressor:2, OFFLINE]
     - [LaserTracker:1, OFFLINE]
-    """
-)
+    """)
 
 registry["maintel_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # GenCam enabled_offline
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [GenericCamera:1, OFFLINE]
     - [GCHeaderService:1, OFFLINE]
-    """
-)
+    """)
 
 registry["gencam_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True
 )
 
 # ATBuilding
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     data:
     - [ATBuilding, OFFLINE]
-    """
-)
+    """)
 
 registry["atbuilding_enabled_offline"] = yaml.safe_dump(
     yaml_string, explicit_start=True, canonical=True

@@ -79,13 +79,11 @@ class CSCStateTransition(BaseScript):
         # Construct the full configuration needed for the
         # set_summary_state.py script.
         # Convert it to a properly formatted YAML document.
-        yaml_string = yaml.safe_load(
-            f"""
+        yaml_string = yaml.safe_load(f"""
             data:
             - [{config}]
             mute_alarms: {self.mute_alarms}
-            """
-        )
+            """)
         self.configs = (
             yaml.safe_dump(yaml_string, explicit_start=True, canonical=True),
         )

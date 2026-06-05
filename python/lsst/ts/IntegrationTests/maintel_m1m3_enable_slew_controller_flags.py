@@ -20,7 +20,10 @@
 #
 # You should have received a copy of the GNU General Public License
 
-__all__ = ["MainTelM1M3EnableSlewFlags", "maintel_m1m3_enable_slew_flags"]
+__all__ = [
+    "MainTelM1M3EnableSlewControllerFlags",
+    "maintel_m1m3_enable_slew_controller_flags",
+]
 
 import asyncio
 
@@ -29,12 +32,13 @@ from lsst.ts.IntegrationTests import BaseScript
 from .configs.config_registry import registry
 
 
-class MainTelM1M3EnableSlewFlags(BaseScript):
+class MainTelM1M3EnableSlewControllerFlags(BaseScript):
     """Execute the maintel/m1m3/enable_m1m3_slew_controller_flags.py
     standard script.
     """
 
-    configs: tuple = registry["m1m3_disable_slew_flags"]
+    index: int = 1
+    configs: tuple = (registry["m1m3_disable_slew_controller_flags"],)
     scripts: list = [
         ("maintel/m1m3/enable_m1m3_slew_controller_flags.py", BaseScript.is_standard),
     ]
@@ -43,12 +47,12 @@ class MainTelM1M3EnableSlewFlags(BaseScript):
         super().__init__()
 
 
-def maintel_m1m3_enable_slew_flags() -> None:
+def maintel_m1m3_enable_slew_controller_flags() -> None:
     # Ensure the invocation is correct.
     # If not, raise KeyError.
     # If it is correct, execute the raise.
     try:
-        script_class = MainTelM1M3EnableSlewFlags()
+        script_class = MainTelM1M3EnableSlewControllerFlags()
     except KeyError as ke:
         print(repr(ke))
     else:
