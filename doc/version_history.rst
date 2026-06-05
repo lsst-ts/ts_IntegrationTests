@@ -14,6 +14,15 @@ Version History
 
 .. towncrier release notes start
 
+v0.38.0 (2026-06-05)
+====================
+
+Bug Fixes
+---------
+
+- Fixes for the M1M3 Raise and Lower, and the M1M3 Enable SlewController Flags scripts (`OSW-2384 <https://rubinobs.atlassian.net//browse/OSW-2384>`_)
+
+
 v0.37.0 (2026-06-01)
 ====================
 
