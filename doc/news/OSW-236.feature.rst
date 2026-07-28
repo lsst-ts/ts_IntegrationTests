@@ -1,1 +1,0 @@
-Add lasertracker_align test script.
