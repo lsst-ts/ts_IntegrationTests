@@ -1,1 +1,0 @@
-Activate the actual auxtel_daytime_atpneumatics.py script.
