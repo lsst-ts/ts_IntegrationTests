@@ -14,6 +14,16 @@ Version History
 
 .. towncrier release notes start
 
+v0.39.0 (2026-07-28)
+====================
+
+New Features
+------------
+
+- Add lasertracker_align test script. (`OSW-236 <https://rubinobs.atlassian.net//browse/OSW-236>`_)
+- Activate the actual auxtel_daytime_atpneumatics.py script. (`OSW-2562 <https://rubinobs.atlassian.net//browse/OSW-2562>`_)
+
+
 v0.38.0 (2026-06-05)
 ====================
 
