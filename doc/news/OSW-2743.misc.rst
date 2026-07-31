@@ -1,1 +1,0 @@
-Update imaging configs to use empty_1 and OG550_65mm_1 as the filters since SDSSr_65mm was removed.
