@@ -29,50 +29,58 @@ from .config_registry import registry
 # script configurations to the registry.
 
 # auxtel_reset_offsets
-yaml_string = yaml.safe_load("""
+yaml_string = yaml.safe_load(
+    """
     component: "ATAOS"
     cmd: "enableCorrection"
     parameters:
       enableAll: True
-    """)
+    """
+)
 registry["auxtel_enable_all_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load("""
+yaml_string = yaml.safe_load(
+    """
     component: "ATAOS"
     cmd: "resetOffset"
     parameters:
       axis: "all"
-    """)
+    """
+)
 registry["auxtel_reset_offsets"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load("""
+yaml_string = yaml.safe_load(
+    """
     component: "ATAOS"
     cmd: "disableCorrection"
     parameters:
       disableAll: True
-    """)
+    """
+)
 registry["auxtel_disable_all_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load("""
+yaml_string = yaml.safe_load(
+    """
     component: "ATAOS"
     cmd: "enableCorrection"
     parameters:
       m1: True,
       hexapod: True,
       atspectrograph: True
-    """)
+    """
+)
 registry["auxtel_enable_m1_hex_atspect_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
@@ -84,7 +92,7 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
         "rot_type": "PhysicalSky",
-        "filter": "SDSSr_65mm",
+        "filter": "empty_1",
         "grating": "empty_1",
         "exposure_time": 5,
         "reason": "IntegrationTesting",
@@ -126,7 +134,7 @@ registry["auxtel_acquire_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
-        "acq_filter": "SDSSr_65mm",
+        "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "acq_exposure_time": 0.4,
         "target_pointing_tolerance": 6,
@@ -140,7 +148,7 @@ registry["auxtel_acquire_verify"] = yaml.safe_dump(
 )
 registry["auxtel_take_sequence_verify"] = yaml.safe_dump(
     {
-        "filter_sequence": ["SDSSr_65mm"],
+        "filter_sequence": ["empty_1"],
         "grating_sequence": ["empty_1"],
         "reason": "IntegrationTesting_VerifyConfiguration",
         "program": "IntegrationTesting_VerifyConfiguration",
@@ -154,7 +162,7 @@ registry["auxtel_acquire_nominal"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
-        "acq_filter": "SDSSr_65mm",
+        "acq_filter": "empty_1",
         "acq_grating": "empty_1",
         "target_pointing_tolerance": 5,
         "target_pointing_verification": False,
@@ -167,7 +175,7 @@ registry["auxtel_acquire_nominal"] = yaml.safe_dump(
 registry["auxtel_take_sequence_nominal"] = yaml.safe_dump(
     {
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
-        "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
+        "filter_sequence": ["empty_1", "OG550_65mm_1", "OG550_65mm_1"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "reason": "IntegrationTesting_NominalConfiguration",
         "program": "IntegrationTesting_NominalConfiguration",
@@ -190,7 +198,7 @@ registry["auxtel_acquire_test"] = yaml.safe_dump(
 registry["auxtel_take_sequence_test"] = yaml.safe_dump(
     {
         "grating_sequence": ["holo4_003", "holo4_003", "holo4_003"],
-        "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
+        "filter_sequence": ["empty_1", "empty_1", "empty_1"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "reason": "IntegrationTesting_TestConfiguration",
         "program": "IntegrationTesting_TestConfiguration",
