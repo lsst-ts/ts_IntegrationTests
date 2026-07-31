@@ -29,58 +29,50 @@ from .config_registry import registry
 # script configurations to the registry.
 
 # auxtel_reset_offsets
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATAOS"
     cmd: "enableCorrection"
     parameters:
       enableAll: True
-    """
-)
+    """)
 registry["auxtel_enable_all_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATAOS"
     cmd: "resetOffset"
     parameters:
       axis: "all"
-    """
-)
+    """)
 registry["auxtel_reset_offsets"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATAOS"
     cmd: "disableCorrection"
     parameters:
       disableAll: True
-    """
-)
+    """)
 registry["auxtel_disable_all_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
     canonical=True,
 )
 
-yaml_string = yaml.safe_load(
-    """
+yaml_string = yaml.safe_load("""
     component: "ATAOS"
     cmd: "enableCorrection"
     parameters:
       m1: True,
       hexapod: True,
       atspectrograph: True
-    """
-)
+    """)
 registry["auxtel_enable_m1_hex_atspect_corrections"] = yaml.safe_dump(
     yaml_string,
     explicit_start=True,
