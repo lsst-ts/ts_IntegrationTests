@@ -14,6 +14,15 @@ Version History
 
 .. towncrier release notes start
 
+v0.40.0 (2026-07-31)
+====================
+
+Other Changes and Additions
+---------------------------
+
+- Update imaging configs to use empty_1 and OG550_65mm_1 as the filters since SDSSr_65mm was removed. (`OSW-2743 <https://rubinobs.atlassian.net//browse/OSW-2743>`_)
+
+
 v0.39.0 (2026-07-28)
 ====================
 
