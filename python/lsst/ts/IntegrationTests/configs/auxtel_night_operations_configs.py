@@ -84,7 +84,7 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
         "rot_type": "PhysicalSky",
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "empty_1",
         "exposure_time": 5,
         "reason": "IntegrationTesting",
@@ -126,7 +126,7 @@ registry["auxtel_acquire_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
-        "acq_filter": "empty_1",
+        "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
         "acq_exposure_time": 0.4,
         "target_pointing_tolerance": 6,
@@ -140,7 +140,7 @@ registry["auxtel_acquire_verify"] = yaml.safe_dump(
 )
 registry["auxtel_take_sequence_verify"] = yaml.safe_dump(
     {
-        "filter_sequence": ["empty_1"],
+        "filter_sequence": ["SDSSr_65mm"],
         "grating_sequence": ["empty_1"],
         "reason": "IntegrationTesting_VerifyConfiguration",
         "program": "IntegrationTesting_VerifyConfiguration",
@@ -167,7 +167,7 @@ registry["auxtel_acquire_nominal"] = yaml.safe_dump(
 registry["auxtel_take_sequence_nominal"] = yaml.safe_dump(
     {
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
-        "filter_sequence": ["empty_1", "OG550_65mm_1", "OG550_65mm_1"],
+        "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "reason": "IntegrationTesting_NominalConfiguration",
         "program": "IntegrationTesting_NominalConfiguration",
@@ -190,7 +190,7 @@ registry["auxtel_acquire_test"] = yaml.safe_dump(
 registry["auxtel_take_sequence_test"] = yaml.safe_dump(
     {
         "grating_sequence": ["holo4_003", "holo4_003", "holo4_003"],
-        "filter_sequence": ["empty_1", "empty_1", "empty_1"],
+        "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "reason": "IntegrationTesting_TestConfiguration",
         "program": "IntegrationTesting_TestConfiguration",
