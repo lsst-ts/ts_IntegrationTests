@@ -120,7 +120,6 @@ registry["auxtel_take_sequence_pointing"] = yaml.safe_dump(
     canonical=True,
 )
 
-# latiss_acquire and latiss_take_sequence configs
 # verfiy
 registry["auxtel_acquire_verify"] = yaml.safe_dump(
     {
@@ -149,6 +148,35 @@ registry["auxtel_take_sequence_verify"] = yaml.safe_dump(
     canonical=True,
 )
 
+# reverfiy
+registry["auxtel_acquire_reverify"] = yaml.safe_dump(
+    {
+        "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
+        "acq_filter": "SDSSr_65mm",
+        "acq_grating": "empty_1",
+        "acq_exposure_time": 0.4,
+        "target_pointing_tolerance": 6,
+        "max_acq_iter": 3,
+        "do_reacquire": True,
+        "target_pointing_verification": True,
+        "reason": "IntegrationTesting_ReverifyConfiguration",
+        "program": "IntegrationTesting_ReverifyConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+registry["auxtel_take_sequence_reverify"] = yaml.safe_dump(
+    {
+        "filter_sequence": ["SDSSr_65mm"],
+        "grating_sequence": ["empty_1"],
+        "reason": "IntegrationTesting_ReverifyConfiguration",
+        "program": "IntegrationTesting_ReverifyConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+
 # nominal/standard
 registry["auxtel_acquire_nominal"] = yaml.safe_dump(
     {
@@ -166,6 +194,7 @@ registry["auxtel_acquire_nominal"] = yaml.safe_dump(
 )
 registry["auxtel_take_sequence_nominal"] = yaml.safe_dump(
     {
+        "do_check_ataos_corrections": True,
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
         "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],

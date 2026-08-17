@@ -83,7 +83,7 @@ class AuxTelNightOperationsTestCase(BaseTestClass):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
 
-    @parameterized.expand(["verify", "pointing", "nominal", "test"])
+    @parameterized.expand(["verify", "reverify", "pointing", "nominal", "test"])
     async def test_auxtel_latiss_acquire(self, sequence: str) -> None:
         """Execute the AuxTelLatissAcquire integration test scripts,
         which runs the
@@ -108,7 +108,7 @@ class AuxTelNightOperationsTestCase(BaseTestClass):
         # Assert scripts passed.
         self.assertEqual(script_class.script_states, [8])
 
-    @parameterized.expand(["verify", "pointing", "nominal", "test"])
+    @parameterized.expand(["verify", "reverify", "pointing", "nominal", "test"])
     async def test_auxtel_latiss_take_sequence(self, sequence: str) -> None:
         """Execute the AuxTelLatissTakeSequence integration test scripts,
         which runs the
