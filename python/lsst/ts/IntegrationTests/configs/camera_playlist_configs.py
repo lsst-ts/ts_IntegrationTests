@@ -46,6 +46,7 @@ atcamera_playlists = {
     "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal",
     "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing",
     "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
+    "reverify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
     "test": "latiss_acquire_and_take_sequence-test_take_sequence",
 }
 
