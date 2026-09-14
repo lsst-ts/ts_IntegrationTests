@@ -1,2 +1,2 @@
 @Library('JenkinsShared')_
-DevelopPipeline(name: "ts_IntegrationTests", idl_names: [], module_name: "lsst.ts.IntegrationTests", kickoff_jobs: [])
+DevelopPipeline(name: "ts_IntegrationTests", module_name: "lsst.ts.IntegrationTests")
