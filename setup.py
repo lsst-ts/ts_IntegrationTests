@@ -20,9 +20,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-#
+from importlib import metadata
 
+import setuptools
 import setuptools_scm
-from setuptools import setup
 
-setup(version=setuptools_scm.get_version())
+scm_version = metadata.version("setuptools_scm")
+
+setuptools.setup(
+    version=setuptools_scm.get_version(
+        write_to="python/lsst/ts/IntegrationTests/version.py",
+        local_scheme="no-local-version",
+    )
+)
