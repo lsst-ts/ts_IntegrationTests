@@ -1,0 +1,2 @@
+Add 'no-local-version' to setup.py to drop git-hash from dev version packages.
+Add license header to source files.
