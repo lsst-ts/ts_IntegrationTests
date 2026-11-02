@@ -14,6 +14,23 @@ Version History
 
 .. towncrier release notes start
 
+v0.41.0 (2026-11-02)
+====================
+
+Performance Enhancement
+-----------------------
+
+- Revert the filter name changes. The tests will use a override config to set the filters consistently. (`OSW-2770 <https://rubinobs.atlassian.net//browse/OSW-2770>`_)
+- Add WEP_Align specific playlist to camera_playlist_configs.py. (`SSW-3088 <https://rubinobs.atlassian.net//browse/SSW-3088>`_)
+
+
+Documentation
+-------------
+
+- Add 'no-local-version' to setup.py to drop git-hash from dev version packages.
+  Add license header to source files. (`OSW-2938 <https://rubinobs.atlassian.net//browse/OSW-2938>`_)
+
+
 v0.40.0 (2026-07-31)
 ====================
 
