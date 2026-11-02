@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -15,11 +16,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
 
@@ -84,7 +85,7 @@ registry["auxtel_wep_align"] = yaml.safe_dump(
     {
         "track_target": {"target_name": "HD164461"},
         "rot_type": "PhysicalSky",
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "empty_1",
         "exposure_time": 5,
         "reason": "IntegrationTesting",
@@ -120,13 +121,12 @@ registry["auxtel_take_sequence_pointing"] = yaml.safe_dump(
     canonical=True,
 )
 
-# latiss_acquire and latiss_take_sequence configs
 # verfiy
 registry["auxtel_acquire_verify"] = yaml.safe_dump(
     {
         "object_name": "HD164461",
         "rot_type": "PhysicalSky",
-        "acq_filter": "empty_1",
+        "acq_filter": "SDSSr_65mm",
         "acq_grating": "empty_1",
         "acq_exposure_time": 0.4,
         "target_pointing_tolerance": 6,
@@ -140,10 +140,39 @@ registry["auxtel_acquire_verify"] = yaml.safe_dump(
 )
 registry["auxtel_take_sequence_verify"] = yaml.safe_dump(
     {
-        "filter_sequence": ["empty_1"],
+        "filter_sequence": ["SDSSr_65mm"],
         "grating_sequence": ["empty_1"],
         "reason": "IntegrationTesting_VerifyConfiguration",
         "program": "IntegrationTesting_VerifyConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+
+# reverfiy
+registry["auxtel_acquire_reverify"] = yaml.safe_dump(
+    {
+        "object_name": "HD164461",
+        "rot_type": "PhysicalSky",
+        "acq_filter": "SDSSr_65mm",
+        "acq_grating": "empty_1",
+        "acq_exposure_time": 0.4,
+        "target_pointing_tolerance": 6,
+        "max_acq_iter": 3,
+        "do_reacquire": True,
+        "target_pointing_verification": True,
+        "reason": "IntegrationTesting_ReverifyConfiguration",
+        "program": "IntegrationTesting_ReverifyConfiguration",
+    },
+    explicit_start=True,
+    canonical=True,
+)
+registry["auxtel_take_sequence_reverify"] = yaml.safe_dump(
+    {
+        "filter_sequence": ["SDSSr_65mm"],
+        "grating_sequence": ["empty_1"],
+        "reason": "IntegrationTesting_ReverifyConfiguration",
+        "program": "IntegrationTesting_ReverifyConfiguration",
     },
     explicit_start=True,
     canonical=True,
@@ -166,8 +195,9 @@ registry["auxtel_acquire_nominal"] = yaml.safe_dump(
 )
 registry["auxtel_take_sequence_nominal"] = yaml.safe_dump(
     {
+        "do_check_ataos_corrections": True,
         "grating_sequence": ["holo4_003", "holo4_003", "empty_1"],
-        "filter_sequence": ["empty_1", "OG550_65mm_1", "OG550_65mm_1"],
+        "filter_sequence": ["empty_1", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [4.0, 4.0, 1.0],
         "reason": "IntegrationTesting_NominalConfiguration",
         "program": "IntegrationTesting_NominalConfiguration",
@@ -190,7 +220,7 @@ registry["auxtel_acquire_test"] = yaml.safe_dump(
 registry["auxtel_take_sequence_test"] = yaml.safe_dump(
     {
         "grating_sequence": ["holo4_003", "holo4_003", "holo4_003"],
-        "filter_sequence": ["empty_1", "empty_1", "empty_1"],
+        "filter_sequence": ["SDSSr_65mm", "SDSSr_65mm", "SDSSr_65mm"],
         "exposure_time_sequence": [5.0, 5.0, 5.0],
         "reason": "IntegrationTesting_TestConfiguration",
         "program": "IntegrationTesting_TestConfiguration",

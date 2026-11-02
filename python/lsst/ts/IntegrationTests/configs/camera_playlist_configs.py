@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -15,11 +16,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
 
@@ -43,9 +44,11 @@ atcamera_playlists = {
     "master_flat": "bias_dark_flat",
     "master_ptc": "bias_dark_ptc",
     "cwfs": "cwfs-test_take_sequence",
+    "wep_test": "latiss_wep_align-test",
     "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal",
     "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing",
     "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
+    "reverify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
     "test": "latiss_acquire_and_take_sequence-test_take_sequence",
 }
 

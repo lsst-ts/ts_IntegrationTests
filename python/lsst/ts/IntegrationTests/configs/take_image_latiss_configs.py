@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -15,11 +16,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
 
@@ -32,8 +33,8 @@ registry["auxtel_visit_config1"] = yaml.safe_dump(
         "nimages": 1,
         "exp_times": 5.0,
         "image_type": "OBJECT",
-        "filter": "empty_1",
-        "grating": "holo4_003",
+        "filter": "SDSSr_65mm",
+        "grating": "ronchi90lpmm",
         "linear_stage": None,
     },
     explicit_start=True,
@@ -45,8 +46,8 @@ registry["auxtel_visit_config2"] = yaml.safe_dump(
         "nimages": 1,
         "image_type": "OBJECT",
         "exp_times": 5.0,
-        "filter": "empty_1",
-        "grating": "holo4_003",
+        "filter": "SDSSr_65mm",
+        "grating": "ronchi90lpmm",
     },
     explicit_start=True,
     canonical=True,
@@ -57,7 +58,7 @@ registry["auxtel_visit_config3"] = yaml.safe_dump(
         "nimages": 1,
         "image_type": "OBJECT",
         "exp_times": 5.0,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "holo4_003",
     },
     explicit_start=True,
@@ -69,7 +70,7 @@ registry["auxtel_visit_config4"] = yaml.safe_dump(
         "nimages": 1,
         "image_type": "OBJECT",
         "exp_times": 5.0,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "holo4_003",
     },
     explicit_start=True,
@@ -81,7 +82,7 @@ registry["auxtel_visit_config5"] = yaml.safe_dump(
         "nimages": 1,
         "image_type": "OBJECT",
         "exp_times": 5.0,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "empty_1",
     },
     explicit_start=True,
@@ -93,7 +94,7 @@ registry["auxtel_visit_config6"] = yaml.safe_dump(
         "nimages": 1,
         "image_type": "OBJECT",
         "exp_times": 5.0,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "grating": "empty_1",
     },
     explicit_start=True,

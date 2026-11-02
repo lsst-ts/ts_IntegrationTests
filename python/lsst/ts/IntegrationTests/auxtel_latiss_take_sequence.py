@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -15,10 +16,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 __all__ = [
     "AuxTelLatissTakeSequence",
@@ -42,7 +44,7 @@ class AuxTelLatissTakeSequence(BaseScript):
     ----------
     sequence : `str`
         Defines which sequence to run.
-        Choices are ["verify", "pointing", "nominal", "test"].
+        Choices are ["verify", "reverify", "pointing", "nominal", "test"].
     """
 
     index: int = 2
@@ -62,7 +64,7 @@ def run_auxtel_latiss_take_sequence() -> None:
     parser.add_argument(
         "sequence",
         type=str,
-        choices=["verify", "pointing", "nominal", "test"],
+        choices=["verify", "reverify", "pointing", "nominal", "test"],
         help="Specify which sequence to run.",
     )
     args = parser.parse_args()

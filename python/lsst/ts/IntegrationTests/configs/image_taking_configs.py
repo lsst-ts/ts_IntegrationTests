@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file is part of ts_IntegrationTests.
 #
-# Developed for the Vera C. Rubin Observatory Telescope & Site Software system.
-# This product includes software developed by the Vera C. Rubin Observatory
-# Project (https://www.lsst.org).
+# Developed for the Vera C. Rubin Observatory Telescope and Site Systems.
+# This product includes software developed by the LSST Project
+# (https://www.lsst.org).
 # See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
@@ -15,11 +16,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import yaml
 
@@ -51,7 +52,7 @@ registry["latiss_calibrations_flat"] = yaml.safe_dump(
         "n_flat": 10,
         "exp_times_dark": 10,
         "exp_times_flat": 2,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "calib_collection": "LATISS/calib/u/integrationtester/daily.replace_me.calib_type",
         "generate_calibrations": True,
         "do_verify": True,
@@ -72,7 +73,7 @@ registry["latiss_calibrations_ptc"] = yaml.safe_dump(
         "n_dark": 10,
         "n_flat": 40,
         "exp_times_dark": 10,
-        "filter": "empty_1",
+        "filter": "SDSSr_65mm",
         "exp_times_flat": [
             0.2,
             0.2,
