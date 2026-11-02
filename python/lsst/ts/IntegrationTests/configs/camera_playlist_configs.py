@@ -44,6 +44,7 @@ atcamera_playlists = {
     "master_flat": "bias_dark_flat",
     "master_ptc": "bias_dark_ptc",
     "cwfs": "cwfs-test_take_sequence",
+    "wep_test": "latiss_wep_align-test",
     "nominal": "latiss_acquire_and_take_sequence-test_take_acquisition_nominal",
     "pointing": "latiss_acquire_and_take_sequence-test_take_acquisition_pointing",
     "verify": "latiss_acquire_and_take_sequence-test_take_acquisition_with_verification",
