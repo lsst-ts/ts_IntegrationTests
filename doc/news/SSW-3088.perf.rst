@@ -1,1 +1,0 @@
-Add WEP_Align specific playlist to camera_playlist_configs.py.
